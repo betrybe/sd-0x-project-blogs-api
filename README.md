@@ -10,7 +10,9 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
 Você vai desenvolver um app full-stack! Isso significa que você vai construir tanto a API quanto o front-end (Server Side Rendered 😃)!
 
-A aplicação a ser contruída é um "index" para vermos o preço do BitCoin em diferentes moedas (e poder editar ele, é claro).
+A aplicação a ser contruída é um "index" para vermos o preço do BitCoin em diferentes moedas.
+
+---
 
 ## Desenvolvimento
 
@@ -18,9 +20,11 @@ Começando pela API, você vai desenvolver alguns endpoints conectando APIs exte
 
 A API externa que vamos utilizar é a da **CoinDesk**. A [documentação está disponível aqui](https://www.coindesk.com/coindesk-api).
 
-O front-end, renderizado no servidor, vai basicamente servir como expositor para a API que você vai criar. São duas telas simples que você precisará desenvolver.
+O front-end, renderizado no servidor, vai basicamente servir como expositor para a API que você vai criar. São três telas simples que você precisará desenvolver.
 
-Você pode acessar um protótipo no das telas [neste link](https://www.figma.com/file/J2AicAJZNUoRf4C8TLp8Jh/Untitled?node-id=0%3A1).
+Você pode acessar um protótipo das telas [neste link]( https://www.figma.com/file/7TbyLzHSCpMRNxHEAN0QOi/Crypto-Index?node-id=0%3A1).
+
+---
 
 ## Requisitos do projeto
 
@@ -32,7 +36,7 @@ A API deve ser iniciada com o comando `node api` a partir da raiz da aplicação
 
 ### 2 - O endpoint `/login` deve receber uma requisição do tipo `POST`. O corpo da request deve conter um e-mail e uma senha válidos
 
-Um email será considerado válido se tiver o formato `<prefixo>@<dominio>`.
+Um email será considerado válido se tiver o formato `<prefixo>@<domínio>`.
 
 A senha deverá conter 6 caracteres, todos números.
 
@@ -45,7 +49,7 @@ O corpo da requisição deverá seguir o formato abaixo:
 }
 ```
 
-### 3 - Caso algum desses campos esteja inválido, retorne um código de status 400 com o corpo `{ message: "Campos inválidos" }`.
+### 3 - Caso algum desses campos seja inválido, retorne um código de status 400 com o corpo `{ message: "Campos inválidos" }`.
 
 ### 4 - Caso esteja tudo certo com o login, a resposta deve ser um token de 16 caracteres, contendo letras e números aleatórios
 
@@ -61,7 +65,7 @@ A resposta da requisição deve ter o seguinte formato:
 
 Esse endpoint deve receber uma requisição do tipo `GET` e retornar o mesmo objeto retornado por [este endpoint](https://api.coindesk.com/v1/bpi/currentprice/BTC.json) da API do CoinDesk. A única diferença é que você deverá adicionar algumas chaves na resposta.
 
-Na resposta desse endpoint, você vai adicionar as chaves `BRL`, `EUR` e `CAD` (Real, Euro e Dólar Canadense). O valor dessas moedas será calculado em relação à cotação delas em dólar e à cotação do dólar em Bitcoin. 
+Na resposta desse endpoint, você vai adicionar as chaves `BRL`, `EUR` e `CAD` (Real, Euro e Dólar Canadense). O valor dessas moedas será calculado em relação à cotação do dólar em relação a elas e à cotação do Bitcoin em dólares. 
 
 O valor da cotação do dólar nessas moedas **será fixo em um dado momento e deverá ser salvo em um arquivo** chamado `currencies.json` na sua API. Inicialmente, esse arquivo deverá ter o conteúdo abaixo:
 
@@ -76,17 +80,17 @@ O valor da cotação do dólar nessas moedas **será fixo em um dado momento e d
 
 Isso significa, por exemplo, que a cotação inicial do dólar será de 5,40 reais.
 
-O valor das chaves `rate` e `rate_float`, na resposta, devem ser calculados a partir dos valores no arquivo `currencies.json` e da cotação do Bitcoin em dólares retorando pela API do CoinDesk. Esses campos devem também respeitar a tipagem (`string` e `float`, respectivamente). Os valores dos demais campos podem ser vitos no exemplo abaixo.
+O valor das chaves `rate` e `rate_float`, na resposta, devem ser calculados a partir dos valores no arquivo `currencies.json` e da cotação do Bitcoin em dólares retorando pela API do CoinDesk. Esses campos devem também respeitar a tipagem (`string` e `float`, respectivamente). Os valores dos demais campos podem ser vistos no exemplo abaixo.
 
-O cálculo deverá ser realizado da seguinte forma, para cada as três moedas adicionais:
+O cálculo deverá ser realizado da seguinte forma, para cada uma das três moedas adicionais:
 
 - 1 dólar = 5,40 reais (salvo no arquivo);
 
-- 1 BTC = 6,506.6717 dólares (rate_float de USD no resultado da API)
+- 1 BTC = 6,506.6717 dólares (campo `rate_float` de USD no resultado da API)
 
-- 1 BTC = 5,40 (rate_float de BRL) * 6,506.6717 (rate_float de USD) = 35,136.02718 reais.
+- 1 BTC = 5,40 (`rate_float` de BRL) * 6,506.6717 ( `rate_float` de USD) = 35,136.02718 reais.
 
-Lembre-se que os retornos da API são no padrão americano.
+Lembre-se de que os retornos da API são no padrão americano.
 
 **Exemplo de retorno:**
 
@@ -157,7 +161,7 @@ A resposta de uma requisição feita com sucesso será da seguinte forma:
 }
 ```
 
-### 7 - Caso o passado para atualização no endpoint `/crypto/btc` seja inválido, o endpoint deve retornar um código 400
+### 7 - Caso o valor passado para atualização no endpoint `/crypto/btc` seja inválido, o endpoint deve retornar um código 400
 
 Se o valor de `currency` for inválido, o corpo da resposta deve ser `{ message: "Moeda inválida" }`.
 
@@ -165,9 +169,9 @@ Se o valor do campo `value` for inválido, o corpo da respost adeve ser `{ messa
 
 ### 8 - Requisições para o endpoint `/crypto/btc` devem conter um token no cabeçalho na chave `Authorization`
 
-A chave deve ser preenchida com o valor do token que foi fornecido ao usuário no login, da seguinte forma `Authorization: ${TOKEN_DO_LOGIN}`.
+A chave deve ser preenchida com o valor do token que foi fornecido ao usuário no login, da seguinte forma: `Authorization: <TOKEN_DO_LOGIN>`.
 
-Caso um token não esteja disponível ou seja inválido, deve ser retornado um erro 401 com o seguinte corpo:
+Caso um token não esteja disponível ou seja inválido, deve ser retornado um erro 401, com o seguinte corpo:
 
 ```json
 {
@@ -205,11 +209,11 @@ Caso contrário, a mensagem de erro deve ser exibida na tela.
 
 Consulte o [protótipo](https://www.figma.com/file/7TbyLzHSCpMRNxHEAN0QOi/Crypto-Index?node-id=0%3A1) para ter uma ideia de como sua tela deve se parecer.
 
-### 13 - Crie a página home
+### 13 - Crie a página home, com a cotação do Bitcoin em várias moedas
 
-Essa página de onde será possível ver a conversão de Bitcoin em outras moedas.
+Essa página é onde será possível ver a conversão de Bitcoin em outras moedas.
 
-Ao carregar, a página deve fazer uma requisição para o endpoint `/crypto/btc` para obter os valores de conversão.
+Ao carregar, a página deve fazer uma requisição `GET` para o endpoint `/crypto/btc` para obter os valores de conversão.
 
 A página deve conter um input onde será possível digitar um valor em Bitcoins e quatro campos com os valores correspondentes em `USD`, `BRL`, `EUR` e `CAD`. Ao digitar o valor no input, os quatros campos devem ser atualizados.
 
@@ -225,7 +229,7 @@ A página deverá conter:
 
 - Um input onde o novo valor de cotação poderá ser digitado;
 
-- Um botão "Atualizar". Ao clicar nesse botão, deve ser feita uma requisição `POST` para o endpoint `/crypto/btc`, com o novor valor da moeda selecionada. Caso a requisição seja bem sucedida, a página deverá ser redirecionada para a home. Caso contrário, a mensagem de erro retornada pela API deve ser exibida na página.
+- Um botão "Atualizar". Ao clicar nesse botão, deve ser feita uma requisição `POST` para o endpoint `/crypto/btc`, com o novo valor da moeda selecionada. Caso a requisição seja bem sucedida, a página deverá ser redirecionada para a home. Caso contrário, a mensagem de erro retornada pela API deve ser exibida na página;
 
 - Um botão "Voltar" que, quando clicado, redireciona para a home, sem atualizar o valor da moeda selecionada.
 
@@ -276,13 +280,13 @@ Consulte o [protótipo](https://www.figma.com/file/7TbyLzHSCpMRNxHEAN0QOi/Crypto
   - Usando o exemplo anterior: `git push -u origin joaozinho-crypto-index`
 
 6. Crie um novo `Pull Request` _(PR)_
-  - Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/betrybe/crypto-index-starter/pulls)
+  - Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/crypto-index-starter/pulls)
   - Clique no botão verde _"New pull request"_
   - Clique na caixa de seleção _"Compare"_ e escolha a sua branch **com atenção**
   - Clique no botão verde _"Create pull request"_
   - Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
   - **Não se preocupe em preencher mais nada por enquanto!**
-  - Volte até a [página de _Pull Requests_ do repositório](https://github.com/betrybe/crypto-index-starter/pulls) e confira que o seu _Pull Request_ está criado
+  - Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/crypto-index-starter/pulls) e confira que o seu _Pull Request_ está criado
 
 ---
 
