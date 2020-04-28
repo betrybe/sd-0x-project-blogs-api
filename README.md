@@ -22,7 +22,7 @@ A API externa que vamos utilizar é a da **CoinDesk**. A [documentação está d
 
 O front-end, renderizado no servidor, vai basicamente servir como expositor para a API que você vai criar. São três telas simples que você precisará desenvolver.
 
-Você pode acessar um protótipo das telas [neste link]( https://www.figma.com/file/7TbyLzHSCpMRNxHEAN0QOi/Crypto-Index?node-id=0%3A1).
+Você pode acessar um protótipo das telas [neste link](https://www.figma.com/file/7TbyLzHSCpMRNxHEAN0QOi/Crypto-Index?node-id=0%3A1).
 
 ---
 
@@ -65,7 +65,7 @@ A resposta da requisição deve ter o seguinte formato:
 
 Esse endpoint deve receber uma requisição do tipo `GET` e retornar o mesmo objeto retornado por [este endpoint](https://api.coindesk.com/v1/bpi/currentprice/BTC.json) da API do CoinDesk. A única diferença é que você deverá adicionar algumas chaves na resposta.
 
-Na resposta desse endpoint, você vai adicionar as chaves `BRL`, `EUR` e `CAD` (Real, Euro e Dólar Canadense). O valor dessas moedas será calculado em relação à cotação do dólar em relação a elas e à cotação do Bitcoin em dólares. 
+Na resposta desse endpoint, você vai adicionar as chaves `BRL`, `EUR` e `CAD` (Real, Euro e Dólar Canadense). O valor dessas moedas será calculado sobre à cotação do dólar em relação a elas e à cotação do Bitcoin em dólares. 
 
 O valor da cotação do dólar nessas moedas **será fixo em um dado momento e deverá ser salvo em um arquivo** chamado `currencies.json` na sua API. Inicialmente, esse arquivo deverá ter o conteúdo abaixo:
 
@@ -80,15 +80,15 @@ O valor da cotação do dólar nessas moedas **será fixo em um dado momento e d
 
 Isso significa, por exemplo, que a cotação inicial do dólar será de 5,40 reais.
 
-O valor das chaves `rate` e `rate_float`, na resposta, devem ser calculados a partir dos valores no arquivo `currencies.json` e da cotação do Bitcoin em dólares retorando pela API do CoinDesk. Esses campos devem também respeitar a tipagem (`string` e `float`, respectivamente). Os valores dos demais campos podem ser vistos no exemplo abaixo.
+O valor das chaves `rate` e `rate_float`, na resposta, devem ser calculados a partir dos valores no arquivo `currencies.json` e da cotação do Bitcoin em dólares retornado pela API do CoinDesk. Esses campos devem também respeitar a tipagem (`string` e `float`, respectivamente). Os valores dos demais campos podem ser vistos no exemplo abaixo.
 
 O cálculo deverá ser realizado da seguinte forma, para cada uma das três moedas adicionais:
 
 - 1 dólar = 5,40 reais (salvo no arquivo);
 
-- 1 BTC = 6,506.6717 dólares (campo `rate_float` de USD no resultado da API)
+- 1 BTC em dolares = 6,506.6717 dólares (campo `rate_float` de USD no resultado da API)
 
-- 1 BTC = 5,40 (`rate_float` de BRL) * 6,506.6717 ( `rate_float` de USD) = 35,136.02718 reais.
+- 1 BTC em reais = 5,40 (`rate_float` de BRL) * 6,506.6717 (`rate_float` de USD) = 35,136.02718 reais.
 
 Lembre-se de que os retornos da API são no padrão americano.
 
@@ -140,7 +140,7 @@ Lembre-se de que os retornos da API são no padrão americano.
 
 ### 6 - O endpoint `/crypto/btc` deve atualizar o valor da cotação das moedas `BRL`, `EUR` e `CAD`
 
-O endpoint deve aceitar requisições `POST` e **atualizar o valor da cotação da moedas no arquivo** `currencies.json`.
+O endpoint deve aceitar requisições `POST` e **atualizar o valor da cotação da moeda no arquivo** `currencies.json`.
 
 O corpo da requisição deverá ter o seguinte formato:
 
@@ -165,7 +165,7 @@ A resposta de uma requisição feita com sucesso será da seguinte forma:
 
 Se o valor de `currency` for inválido, o corpo da resposta deve ser `{ message: "Moeda inválida" }`.
 
-Se o valor do campo `value` for inválido, o corpo da respost adeve ser `{ message: "Valor inválido" }`.
+Se o valor do campo `value` for inválido, o corpo da resposta deve ser `{ message: "Valor inválido" }`.
 
 ### 8 - Requisições para o endpoint `/crypto/btc` devem conter um token no cabeçalho na chave `Authorization`
 
@@ -225,13 +225,13 @@ A página deverá conter:
 
 - Um select onde deverá ser possível selecionar a moeda cuja cotação se deseja atualizar. Os valores possíveis devem ser `BRL`, `EUR` e `CAD`;
 
-- Um texto mostrando o valor atual da cotação;
+- Após ter selecionado uma moeda, um texto deve mostrar o valor atual da cotação;
 
 - Um input onde o novo valor de cotação poderá ser digitado;
 
-- Um botão "Atualizar". Ao clicar nesse botão, deve ser feita uma requisição `POST` para o endpoint `/crypto/btc`, com o novo valor da moeda selecionada. Caso a requisição seja bem sucedida, a página deverá ser redirecionada para a home. Caso contrário, a mensagem de erro retornada pela API deve ser exibida na página;
+- Um botão "Atualizar". Ao clicar nesse botão, deve ser feita uma requisição `POST` para o endpoint `/crypto/btc`, com o novo valor da moeda selecionada. Caso a requisição seja bem sucedida, a página deverá ser redirecionada para a **home**. Caso contrário, a mensagem de erro retornada pela API deve ser exibida na página;
 
-- Um botão "Voltar" que, quando clicado, redireciona para a home, sem atualizar o valor da moeda selecionada.
+- Um botão "Voltar" que, quando clicado, redireciona para a **home**, sem atualizar o valor da moeda selecionada.
 
 Consulte o [protótipo](https://www.figma.com/file/7TbyLzHSCpMRNxHEAN0QOi/Crypto-Index?node-id=0%3A1) para ter uma ideia de como sua tela deve se parecer.
 
