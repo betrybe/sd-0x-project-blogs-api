@@ -1,4 +1,4 @@
-# Boas vindas ao projeto Crypto Index!
+# Boas vindas ao projeto Freelancers API!
 
 Você já usa o GitHub diariamente para desenvolver os exercícios, certo? Agora, para desenvolver os projetos, você deverá seguir as instruções a seguir. Fique atento a cada passo, e se tiver qualquer dúvida, nos envie por Slack! #vqv 🚀
 
@@ -8,21 +8,13 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
 ## O que deverá ser desenvolvido
 
-Você vai desenvolver um app full-stack! Isso significa que você vai construir tanto a API quanto o front-end (Server Side Rendered 😃)!
-
-A aplicação a ser contruída é um "index" para vermos o preço do BitCoin em diferentes moedas.
+Você vai arquiteturar e desenvolver uma API com um banco de dados, que pode ser SQL ou NoSQL, para uma plataforma de Freelancers.
 
 ---
 
 ## Desenvolvimento
 
-Começando pela API, você vai desenvolver alguns endpoints conectando APIs externas e arquivos JSON locais do projeto.
-
-A API externa que vamos utilizar é a da **CoinDesk**. A [documentação está disponível aqui](https://www.coindesk.com/coindesk-api).
-
-O front-end, renderizado no servidor, vai basicamente servir como expositor para a API que você vai criar. São três telas simples que você precisará desenvolver.
-
-Você pode acessar um protótipo das telas [neste link](https://www.figma.com/file/7TbyLzHSCpMRNxHEAN0QOi/Crypto-Index?node-id=0%3A1).
+Começando pela API, você vai desenvolver alguns endpoints (seguindo os principios do REST) que estarão conectados ao seu banco de dados. 
 
 ---
 
