@@ -97,6 +97,18 @@ A resposta da requisição deve ter o seguinte formato:
     budget
 }
 ```
+
+# 8 Status HTTTP:
+
+Todas as respostas devem respeitar os [status do protocolo HTTP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status) com base no que o REST prega.
+
+Alguns exemplos:
+```
+-- requisições que precisma de token mas não receberam, retornar um 401
+-- requisições que não seguem o padrão pedido pelo servidor, retornar 400
+-- um problema inesperado no servidor, retornar 500
+-- sucesso ao criar um recurso, retornar 201
+```
 ---
 
 ## Instruções para entregar seu projeto:
@@ -104,9 +116,9 @@ A resposta da requisição deve ter o seguinte formato:
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
 1. Clone o repositório
-  - `git clone git@github.com:tryber/sd-01-block29-crypto-index-starter.git`.
+  - `git clone git@github.com:tryber/sd-01-block31-freelancers-api-starter.git`.
   - Entre na pasta do repositório que você acabou de clonar:
-    - `cd sd-01-block29-crypto-index-starter`
+    - `cd sd-01-block31-freelancers-api-starter`
 
 2. Instale as dependências
   - `npm install`
@@ -118,7 +130,7 @@ A resposta da requisição deve ter o seguinte formato:
     - Exemplo: `git checkout master`
   - Agora crie uma branch à qual você vai submeter os `commits` do seu projeto
     - Você deve criar uma branch no seguinte formato: `nome-de-usuario-nome-do-projeto`
-    - Exemplo: `git checkout -b joaozinho-crypto-index`
+    - Exemplo: `git checkout -b joaozinho-freelancers-api`
 
 4. Adicione as mudanças ao _stage_ do Git e faça um `commit`
   - Verifique que as mudanças ainda não estão no _stage_
@@ -133,16 +145,16 @@ A resposta da requisição deve ter o seguinte formato:
       - `git status` (deve aparecer uma mensagem tipo _nothing to commit_ )
 
 5. Adicione a sua branch com o novo `commit` ao repositório remoto
-  - Usando o exemplo anterior: `git push -u origin joaozinho-crypto-index`
+  - Usando o exemplo anterior: `git push -u origin joaozinho-freelancers-api`
 
 6. Crie um novo `Pull Request` _(PR)_
-  - Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/crypto-index-starter/pulls)
+  - Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/freelancers-api-starter/pulls)
   - Clique no botão verde _"New pull request"_
   - Clique na caixa de seleção _"Compare"_ e escolha a sua branch **com atenção**
   - Clique no botão verde _"Create pull request"_
   - Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
   - **Não se preocupe em preencher mais nada por enquanto!**
-  - Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/crypto-index-starter/pulls) e confira que o seu _Pull Request_ está criado
+  - Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/freelancers-api-starter/pulls) e confira que o seu _Pull Request_ está criado
 
 ---
 
