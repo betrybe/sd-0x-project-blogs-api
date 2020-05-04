@@ -57,44 +57,139 @@ A resposta da requisição deve ter o seguinte formato:
 
 **Todos os endpoints marcado com * devem receber um token de autenticação nos headers, caso contrario, retornar um 401.**
 
+#### 5.1 POST* /job
+Deve receber um __Job__ no corpo da requisição e cria-lo no banco.
+
+#### 5.2 GET /jobs
+Deve listar todos os __Jobs__ e retorna-los na seguinte estrutura:
+
 ```javascript
--- POST* /job - cria um novo job
--- GET /jobs - lista todos os jobs disponiveis
--- POST* /job/:id/apply - aplica pra um job, deve receber o token do usuario nos headers para saber quem está aplicando.
--- GET job/:id - mostra os detalhes de um job especifico 
--- DELETE* job/:id - deleta um job especifico, somente quem criou o job pode deleta-lo. 
+[
+   {
+       title,
+       description,
+       skills,
+       budget,
+       publisher: {
+          name,
+          email,
+          phone,
+          description,
+          hourlyPrice,
+          skills: ['Java', 'Spring MVC', 'MySQL']
+       }
+   }
+]
 ```
+
+#### 5.3 POST* /job/:id/apply
+Permite que um usuário aplique para um __Job__. Isso deve gerar uma nova __Application__.
+
+Deve conter um token na requisição para saber quem é o usuário aplicando.
+
+O corpo da resposta deve ser o seguinte:
+
+```javascript
+{
+   job, // job com o id da URL
+   user,  // dono do token
+   createdDate // data de criação da application 
+}
+```
+
+#### 5.4 GET job/:id
+Retorna os detalhes de um __Job__.
+
+```javascript
+{
+    title,
+    description,
+    skills,
+    budget
+}
+```
+
+#### 5.5 DELETE* job/:id
+Deleta o recurso. Só deve ser permitido para o usuário que criou o __Job__.
+
+Caso uma pessoa diferente ou uma requisição sem token tente deleta-lo, retornar um 401.
 
 ### 6 Os endpoints de _User_ devem ser os seguinte:
 
+**Todos os endpoints marcado com * devem receber um token de autenticação nos headers, caso contrario, retornar um 401.**
+
+#### 6.1 GET /users
+Deve listar todos os __Users__ e retorna-los na seguinte estrutura:
+
 ```javascript
--- GET /users - lista todos os usuarios disponiveis
--- POST /user - cria um novo usuário (signup), recebendo todos os atributos de um _user_ no corpo da requisição
--- GET /user/:id - mostra os detalhes de um usuário especifico
--- DELETE* /user/:id - deleta um usuário especifico, somente o próprio usuário pode deleta-lo. 
+[
+    {
+        name,
+        email,
+        phone,
+        description,
+        hourlyPrice,
+        skills: ['Java', 'Spring MVC', 'MySQL']
+    }
+]
 ```
+#### 6.2 POST /user
+Cria um novo __User__. Deve receber um __User__ no corpo da requisição.
+
+Caso exista uma pessoa com o mesmo e-mail na base, retornar o seguinte erro:
+
+```javascript
+{
+    message: 'Usuário já existe'
+}
+```
+
+Caso contrário, retornar a mesma resposta do endpoint de `/login`
+
+#### 6.3 GET /user/:id
+Retorna os detalhes do usuário baseado no ID da rota.
+
+#### 6.4 DELETE* /user/:id
+Deleta um __User__. Somente o recurso com o mesmo id a ser deletado pode performar essa operação.
+
+Caso uma pessoa diferente ou uma requisição sem token tente deleta-lo, retornar um 401.
 
 ### 7 Os modelos devem seguir a seguinte especificação:
 
 ```javascript
 // user
 {
-    name,
-    email,
-    phone,
-    description,
-    hourlyPrice,
-    skills: ['Java', 'Spring MVC', 'MySQL']
+   title,
+   description,
+   skills,
+   budget,
+   publisher: {
+      name,
+      email,
+      phone,
+      description,
+      hourlyPrice,
+      skills: ['Java', 'Spring MVC', 'MySQL']
+   }
 }
 ```
 
 ```javascript
-// model
+// job
 {
     title,
     description,
     skills,
     budget
+}
+```
+
+```javascript
+// application (esse modelo pode variar dependendo da arquitetura do banco)
+{
+    job,
+    user,
+    createdDate
 }
 ```
 
