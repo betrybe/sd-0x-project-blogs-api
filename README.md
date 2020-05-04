@@ -66,11 +66,13 @@ Deve listar todos os __Jobs__ e retorna-los na seguinte estrutura:
 ```javascript
 [
    {
+       id,
        title,
        description,
        skills,
        budget,
        publisher: {
+          id,
           name,
           email,
           phone,
@@ -91,9 +93,10 @@ O corpo da resposta deve ser o seguinte:
 
 ```javascript
 {
+   id,
    job, // job com o id da URL
    user,  // dono do token
-   createdDate // data de criação da application 
+   createdDate // data de criação da application
 }
 ```
 
@@ -102,6 +105,7 @@ Retorna os detalhes de um __Job__.
 
 ```javascript
 {
+    id,
     title,
     description,
     skills,
@@ -124,6 +128,7 @@ Deve listar todos os __Users__ e retorna-los na seguinte estrutura:
 ```javascript
 [
     {
+        id,
         name,
         email,
         phone,
@@ -159,39 +164,46 @@ Caso uma pessoa diferente ou uma requisição sem token tente deleta-lo, retorna
 ```javascript
 // user
 {
-   title,
-   description,
-   skills,
-   budget,
-   publisher: {
-      name,
-      email,
-      phone,
-      description,
-      hourlyPrice,
-      skills: ['Java', 'Spring MVC', 'MySQL']
-   }
+    id,
+    name,
+    email,
+    phone,
+    description,
+    hourlyPrice,
+    skills: ['Java', 'Spring MVC', 'MySQL']
 }
 ```
 
 ```javascript
 // job
 {
+    id,
     title,
     description,
     skills,
-    budget
+    budget,
+    publisher: { // user
+       id,
+       name,
+       email,
+       phone,
+       description,
+       hourlyPrice,
+       skills: ['Java', 'Spring MVC', 'MySQL']
+    }
 }
 ```
 
 ```javascript
 // application (esse modelo pode variar dependendo da arquitetura do banco)
 {
+    id,
     job,
     user,
     createdDate
 }
 ```
+
 
 # 8 Status HTTTP:
 
