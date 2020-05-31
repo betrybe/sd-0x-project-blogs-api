@@ -1,4 +1,4 @@
-# Boas vindas ao projeto Freelancers API!
+# Boas vindas ao projeto TryBlog API!
 
 Você já usa o GitHub diariamente para desenvolver os exercícios, certo? Agora, para desenvolver os projetos, você deverá seguir as instruções a seguir. Fique atento a cada passo, e se tiver qualquer dúvida, nos envie por Slack! #vqv 🚀
 
@@ -8,13 +8,13 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
 ## O que deverá ser desenvolvido
 
-Você vai arquiteturar e desenvolver uma API com um banco de dados, que pode ser SQL ou NoSQL, para uma plataforma de Freelancers.
+Você vai arquiteturar, desenvolver e testar uma API com um banco de dados (com ORM), que pode ser SQL ou NoSQL, para um Blog.
 
 ---
 
 ## Desenvolvimento
 
-Começando pela API, você vai desenvolver alguns endpoints (seguindo os principios do REST) que estarão conectados ao seu banco de dados. 
+Começando pela API, você vai desenvolver alguns endpoints (seguindo os principios do REST) que estarão conectados ao seu banco de dados.
 
 ---
 
@@ -53,92 +53,98 @@ A resposta da requisição deve ter o seguinte formato:
 }
 ```
 
-### 5 Os endpoints de _Jobs_ devem ser os seguintes
+### 5 Os endpoints de _BlogPosts_ devem ser os seguintes
 
 **Todos os endpoints marcado com * devem receber um token de autenticação nos headers, caso contrario, retornar um 401.**
 
-#### 5.1 POST* /job
-Deve receber um __Job__ no corpo da requisição e cria-lo no banco.
+#### 5.1 POST* /post
+Deve receber um __BlogPost__ no corpo da requisição e cria-lo no banco.
 
-#### 5.2 GET /jobs
-Deve listar todos os __Jobs__ e retorna-los na seguinte estrutura:
+Caso o post não contenha todas as informações necessárias (todos os campos de __BlogPost__ são obrigátorios), retornar um 500.
 
-```javascript
-[
-   {
-       id,
-       title,
-       description,
-       skills,
-       budget,
-       publisher: {
-          id,
-          name,
-          email,
-          phone,
-          description,
-          hourlyPrice,
-          skills: ['Java', 'Spring MVC', 'MySQL']
-       }
-   }
-]
-```
+#### 5.2 GET /posts
+Deve listar todos os __BlogPosts__ e retorna-los na seguinte estrutura:
 
-#### 5.3 POST* /job/:id/apply
-Permite que um usuário aplique para um __Job__. Isso deve gerar uma nova __Application__.
-
-Deve conter um token na requisição para saber quem é o usuário aplicando.
-
-O corpo da resposta deve ser o seguinte:
-
-```javascript
-{
-   id,
-   job, // job com o id da URL
-   user,  // dono do token
-   createdDate // data de criação da application
-}
-```
-
-#### 5.4 GET job/:id
-Retorna os detalhes de um __Job__.
-
-```javascript
-{
-    id,
-    title,
-    description,
-    skills,
-    budget
-}
-```
-
-#### 5.5 DELETE* job/:id
-Deleta o recurso. Só deve ser permitido para o usuário que criou o __Job__.
-
-Caso uma pessoa diferente ou uma requisição sem token tente deleta-lo, retornar um 401.
-
-### 6 Os endpoints de _User_ devem ser os seguinte:
-
-**Todos os endpoints marcado com * devem receber um token de autenticação nos headers, caso contrario, retornar um 401.**
-
-#### 6.1 GET /users
-Deve listar todos os __Users__ e retorna-los na seguinte estrutura:
-
-```javascript
+```json
 [
     {
-        id,
-        name,
-        email,
-        phone,
-        description,
-        hourlyPrice,
-        skills: ['Java', 'Spring MVC', 'MySQL']
+      "id": "7706273476706534553",
+      "published": "2011-08-01T19:58:00.000Z",
+      "updated": "2011-08-01T19:58:51.947Z",
+      "title": "Latest updates, August 1st",
+      "content": "The whole text for the blog post goes here in this key",
+      "user": { // esse usuário é o autor do post
+        "id": "401465483996",
+        "displayName": "Brett Wiltshire",
+        "email": "brett@email.com",
+        "image": {
+          "url": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
+         }
+      },
+      "comments": {
+        "totalItems": "1", // o total de comentários dentro da chave `items`
+        "items": [
+          {
+            "author": "John Smith",
+            "text": "Awesome blog post! Loved it",
+            "published": "2011-08-01T19:58:00.000Z"
+          } 
+        ]
+      }
     }
 ]
 ```
-#### 6.2 POST /user
+
+#### 5.1 POST* /post/:id
+Deve receber um __BlogPost__ que ira sobreescrever o original com o ID especificado na URL. Só deve ser permitido para o usuário que criou o __BlogPost__.
+
+Caso uma pessoa diferente ou uma requisição sem token tente deleta-lo, retornar um 401.
+
+Caso o post não contenha todas as informações necessárias (todos os campos de __BlogPost__ são obrigátorios), retornar um 500.
+
+#### 5.3 GET post/:id
+Retorna um __BlogPost__ como id especificado.
+
+#### 5.4 GET posts/search?q=:searchTerm
+Retorna um __BlogPost__ que contenha o termo pesquisado no ``queryParam`` da URL dentro da chave `content`.
+
+#### 5.5 DELETE* post/:id
+Deleta o recurso. Só deve ser permitido para o usuário que criou o __BlogPost__.
+
+Caso uma pessoa diferente ou uma requisição sem token tente deleta-lo, retornar um 401.
+
+### 6 Os endpoints de _Comments_ devem ser os seguinte:
+
+#### 6.1 POST /post/:id/comment
+Deve receber um __Comment__ no corpo da requisição e adiciona-lo na estrutura de comments dentro do __BlogPost__ com o ID pasado na URL.
+
+Caso esse endpoint receba um token, o `author` deve ser a pessoa dona do token. Caso nenhum token for passado, o `author` deve ser `null` (comentário anonimo) 
+
+#### 6.2 DELETE* post/:id/comment/:commentId
+Deleta o recurso. Só deve ser permitido para o usuário que criou o __BlogPost__ ou o usuário que criou o __Comment__.
+
+Caso uma pessoa diferente ou uma requisição sem token tente deleta-lo, retornar um 401.
+
+### 7 Os endpoints de _User_ devem ser os seguinte:
+
+**Todos os endpoints marcado com * devem receber um token de autenticação nos headers, caso contrario, retornar um 401.**
+
+#### 7.1 GET /users
+Deve listar todos os __Users__ e retorna-los na seguinte estrutura:
+
+```json
+[
+  {
+    "id": "401465483996",
+    "displayName": "Brett Wiltshire",
+    "email": "brett@email.com",
+    "image": {
+      "url": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
+     }
+  }
+]
+```
+#### 7.2 POST /user
 Cria um novo __User__. Deve receber um __User__ no corpo da requisição.
 
 Caso exista uma pessoa com o mesmo e-mail na base, retornar o seguinte erro:
@@ -151,57 +157,70 @@ Caso exista uma pessoa com o mesmo e-mail na base, retornar o seguinte erro:
 
 Caso contrário, retornar a mesma resposta do endpoint de `/login`
 
-#### 6.3 GET /user/:id
+#### 7.3 GET /user/:id
 Retorna os detalhes do usuário baseado no ID da rota.
 
-#### 6.4 DELETE* /user/:id
+#### 7.4 DELETE* /user/:id
 Deleta um __User__. Somente o recurso com o mesmo id a ser deletado pode performar essa operação.
 
 Caso uma pessoa diferente ou uma requisição sem token tente deleta-lo, retornar um 401.
 
-### 7 Os modelos devem seguir a seguinte especificação:
+### 8 Os modelos devem seguir a seguinte especificação:
 
-```javascript
-// user
+* **User**
+```json
 {
-    id,
-    name,
-    email,
-    phone,
-    description,
-    hourlyPrice,
-    skills: ['Java', 'Spring MVC', 'MySQL']
-}
-```
-
-```javascript
-// job
-{
-    id,
-    title,
-    description,
-    skills,
-    budget,
-    publisher: { // user
-       id,
-       name,
-       email,
-       phone,
-       description,
-       hourlyPrice,
-       skills: ['Java', 'Spring MVC', 'MySQL']
+    "id": "401465483996",
+    "displayName": "Brett Wiltshire",
+    "email": "brett@email.com",
+    "image": {
+    "url": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
     }
 }
 ```
 
-```javascript
-// application (esse modelo pode variar dependendo da arquitetura do banco)
+* **BlogPost**
+```json
 {
-    id,
-    job,
-    user,
-    createdDate
+  "id": "7706273476706534553",
+  "published": "2011-08-01T19:58:00.000Z",
+  "updated": "2011-08-01T19:58:51.947Z",
+  "title": "Latest updates, August 1st",
+  "content": "The whole text for the blog post goes here in this key",
+  "user": { // esse usuário é o autor do post
+    "id": "401465483996",
+    "displayName": "Brett Wiltshire",
+    "email": "brett@email.com",
+    "image": {
+      "url": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
+     }
+  },
+  "comments": {
+    "totalItems": "1", // o total de comentários dentro da chave `items`
+    "items": [
+      {
+        "author": "John Smith",
+        "text": "Awesome blog post! Loved it",
+        "published": "2011-08-01T19:58:00.000Z"
+      } 
+    ]
+  }
 }
+```
+
+* **Comment**
+```json
+{
+    "author": "John Smith",
+    "text": "Awesome blog post! Loved it",
+    "published": "2011-08-01T19:58:00.000Z"
+}
+// caso seja anonimo
+{
+    "author": null,
+    "text": "Awesome blog post! Loved it",
+    "published": "2011-08-01T19:58:00.000Z"
+} 
 ```
 
 
