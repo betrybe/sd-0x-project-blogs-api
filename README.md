@@ -223,8 +223,7 @@ Caso uma pessoa diferente ou uma requisição sem token tente deleta-lo, retorna
 } 
 ```
 
-
-# 8 Status HTTTP:
+### 9 Status HTTTP:
 
 Todas as respostas devem respeitar os [status do protocolo HTTP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status) com base no que o REST prega.
 
@@ -235,6 +234,13 @@ Alguns exemplos:
 -- um problema inesperado no servidor, retornar 500
 -- sucesso ao criar um recurso, retornar 201
 ```
+
+## Bônus
+
+Escrever testes unitários é um padrão para seus projetos, então vamos nos aventurar com **testes de integração usando Supertest** como um bônus para esse módulo.
+
+Além disso, fazer um deploy da sua aplicação também entra como um bônus.  
+
 ---
 
 ## Instruções para entregar seu projeto:
@@ -242,9 +248,9 @@ Alguns exemplos:
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
 1. Clone o repositório
-  - `git clone git@github.com:tryber/sd-01-block31-freelancers-api-starter.git`.
+  - `git clone git@github.com:tryber/sd-01-block33-tryblog-api.git`.
   - Entre na pasta do repositório que você acabou de clonar:
-    - `cd sd-01-block31-freelancers-api-starter`
+    - `cd sd-01-block33-tryblog-api`
 
 2. Instale as dependências
   - `npm install`
@@ -256,7 +262,7 @@ Alguns exemplos:
     - Exemplo: `git checkout master`
   - Agora crie uma branch à qual você vai submeter os `commits` do seu projeto
     - Você deve criar uma branch no seguinte formato: `nome-de-usuario-nome-do-projeto`
-    - Exemplo: `git checkout -b joaozinho-freelancers-api`
+    - Exemplo: `git checkout -b joaozinho-tryblog-api`
 
 4. Adicione as mudanças ao _stage_ do Git e faça um `commit`
   - Verifique que as mudanças ainda não estão no _stage_
@@ -267,7 +273,7 @@ Alguns exemplos:
       - `git status` (deve aparecer listado o arquivo adicionado em verde)
   - Faça o `commit` inicial
     - Exemplo:
-      - `git commit -m 'iniciando o projeto Crypto Index'` (fazendo o primeiro commit)
+      - `git commit -m 'iniciando o projeto TryBlog'` (fazendo o primeiro commit)
       - `git status` (deve aparecer uma mensagem tipo _nothing to commit_ )
 
 5. Adicione a sua branch com o novo `commit` ao repositório remoto
