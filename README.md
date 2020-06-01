@@ -95,20 +95,22 @@ Deve listar todos os __BlogPosts__ e retorna-los na seguinte estrutura:
 ]
 ```
 
-#### 5.1 POST* /post/:id
+#### 5.3 POST* /post/:id
 Deve receber um __BlogPost__ que ira sobreescrever o original com o ID especificado na URL. Só deve ser permitido para o usuário que criou o __BlogPost__.
 
 Caso uma pessoa diferente ou uma requisição sem token tente deleta-lo, retornar um 401.
 
 Caso o post não contenha todas as informações necessárias (todos os campos de __BlogPost__ são obrigátorios), retornar um 500.
 
-#### 5.3 GET post/:id
+#### 5.4 GET post/:id
 Retorna um __BlogPost__ como id especificado.
 
-#### 5.4 GET posts/search?q=:searchTerm
+#### 5.5 GET posts/search?q=:searchTerm
 Retorna um __BlogPost__ que contenha o termo pesquisado no ``queryParam`` da URL dentro da chave `content`.
 
-#### 5.5 DELETE* post/:id
+Caso nenhum __BlogPost__ satisfaça a busca, retornar um array vazio.
+
+#### 5.6 DELETE* post/:id
 Deleta o recurso. Só deve ser permitido para o usuário que criou o __BlogPost__.
 
 Caso uma pessoa diferente ou uma requisição sem token tente deleta-lo, retornar um 401.
@@ -277,16 +279,16 @@ Além disso, fazer um deploy da sua aplicação também entra como um bônus.
       - `git status` (deve aparecer uma mensagem tipo _nothing to commit_ )
 
 5. Adicione a sua branch com o novo `commit` ao repositório remoto
-  - Usando o exemplo anterior: `git push -u origin joaozinho-freelancers-api`
+  - Usando o exemplo anterior: `git push -u origin joaozinho-tryblog-api`
 
 6. Crie um novo `Pull Request` _(PR)_
-  - Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/freelancers-api-starter/pulls)
+  - Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/betrybe/tryblog-api/pulls)
   - Clique no botão verde _"New pull request"_
   - Clique na caixa de seleção _"Compare"_ e escolha a sua branch **com atenção**
   - Clique no botão verde _"Create pull request"_
   - Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
   - **Não se preocupe em preencher mais nada por enquanto!**
-  - Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/freelancers-api-starter/pulls) e confira que o seu _Pull Request_ está criado
+  - Volte até a [página de _Pull Requests_ do repositório](https://github.com/betrybe/tryblog-api/pulls) e confira que o seu _Pull Request_ está criado
 
 ---
 
