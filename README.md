@@ -1,4 +1,4 @@
-# Boas vindas ao projeto API de Blog!
+# Boas vindas ao projeto API de Blogs!
 
 Você já usa o GitHub diariamente para desenvolver os exercícios, certo? Agora, para desenvolver o projeto, você deverá seguir as instruções abaixo. Tenha atenção a cada passo e, se tiver qualquer dúvida, nos envie por Slack! #vqv 🚀
 
