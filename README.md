@@ -14,26 +14,68 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
 
 ## Requisitos do projeto
 
-### 1 - Sua aplicação deve ter o endpoint POST `/login`
+### 1 - Os modelos dos seus dados no banco devem seguir a seguinte especificação
 
 #### Os seguintes pontos serão avaliados:
 
-- Um email será considerado válido se tiver o formato `<prefixo>@<domínio>`. Ele é obrigatório.
+- O seu projeto deverá usar um `ORM` para criar e atualizar o seu banco. A clonagem do projeto seguida de um comando de migrate deve deixá-lo em sua forma esperada.
 
-- A senha deverá conter 6 caracteres, todos números. Ela é obrigatória.
-
-- O corpo da requisição deverá seguir o formato abaixo:
+- Deve ter uma tabela chamada **Users**, contendo os seguinte dados:
 
   ```json
   {
-    "email": "email@mail.com",
-    "password": "135982"
+    "id": "401465483996",
+    "displayName": "Brett Wiltshire",
+    "email": "brett@email.com",
+    "password": 123456,
+    "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
   }
   ```
 
-- Caso algum desses campos seja inválido, retorne um código de status 400 com o corpo `{ message: "Campos inválidos" }`.
+- Deve ter uma tabela chamada **BlogPosts**, contendo os seguinte dados:
 
-- Caso esteja tudo certo com o login, a resposta deve ser um token de 16 caracteres, contendo letras e números aleatórios, no seguinte formato:
+  ```json
+  {
+    "id": "7706273476706534553",
+    "published": "2011-08-01T19:58:00.000Z",
+    "updated": "2011-08-01T19:58:51.947Z",
+    "title": "Latest updates, August 1st",
+    "content": "The whole text for the blog post goes here in this key",
+    "user_id": "401465483996" // esse usuário é o autor do post
+  }
+  ```
+
+### 2 - Sua aplicação deve ter o endpoint POST `/user`
+
+#### Os seguintes pontos serão avaliados:
+
+- O endpoint deve ser capaz de adicionar um novo user a sua tabela no banco de dados;
+
+- O corpo da requisição deverá ter o seguinte formato:
+
+  ```json
+  {
+    "displayName": "Brett Wiltshire",
+    "email": "brett@email.com",
+    "password": 123456,
+    "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
+  }
+  ```
+- O campo `displayName` deverá ser uma string com no mínimo de 8 caracteres;
+
+- O campo `email` será considerado válido se tiver o formato `<prefixo>@<domínio>` e se for único. Ele é obrigatório.
+
+- A senha deverá conter 6 caracteres, todos números. Ela é obrigatória.
+
+- Caso exista uma pessoa com o mesmo email na base, deve-se retornar o seguinte erro:
+
+  ```json
+  {
+    "message": "Usuário já existe"
+  }
+  ```
+
+- Caso contrário, retornar a mesma resposta do endpoint de `/login`, um token `JWT`:
 
   ```json
   {
@@ -41,9 +83,84 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
   }
   ```
 
-Use o `JWT` para a token.
+### 3 - Sua aplicação deve ter o endpoint GET `/user`
 
-### 2 - Sua aplicação deve ter o endpoint POST `/post`
+#### Os seguintes pontos serão avaliados:
+
+- Deve listar todos os **Users** e retorná-los na seguinte estrutura:
+
+  ```json
+  [
+    {
+      "id": "401465483996",
+      "displayName": "Brett Wiltshire",
+      "email": "brett@email.com",
+      "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
+    }
+  ]
+  ```
+
+- A requisição deve ter token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
+
+### 4 - Sua aplicação deve ter o endpoint GET `/user/:id`
+
+#### Os seguintes pontos serão avaliados:
+
+- Retorna os detalhes do usuário baseado no `id` da rota. Os dados devem ter o seguinte formato:
+
+  ```json
+  {
+    "id": "401465483996",
+    "displayName": "Brett Wiltshire",
+    "email": "brett@email.com",
+    "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
+  }
+  ```
+
+- A requisição deve ter token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
+
+### 5 - Sua aplicação deve ter o endpoint DELETE `/user/:id`
+
+#### Os seguintes pontos serão avaliados:
+
+- Deleta um **User**. Somente o recurso com o mesmo id a ser deletado pode performar essa operação.
+
+- Caso uma pessoa diferente ou uma requisição sem token tente deletá-lo, deve-se retornar um código de `status 401`.
+
+### 6 - O seu controller de User deve ser testado num arquivo `UserController.test.js`
+
+#### Os seguintes pontos serão avaliados:
+
+- O adereçamento dos requisitos do controller deve ser garantido em seus testes.
+
+- Se qualquer uma das funções do seu controller tiver o conteúdo apagado os seus testes devem quebrar.
+
+- Se qualquer uma das _strings_ de seu controller for apagada seus testes devem quebrar.
+
+### 7 - Sua aplicação deve ter o endpoint POST `/login`
+
+#### Os seguintes pontos serão avaliados:
+
+- O corpo da requisição deverá seguir o formato abaixo:
+
+  ```json
+  {
+    "email": "email@mail.com",
+    "password": 135982
+  }
+  ```
+
+- Caso algum desses campos seja inválido ou não exista um usuário correspondente no banco de dados, retorne um código de status 400 com o corpo `{ message: "Campos inválidos" }`.
+
+- Caso esteja tudo certo com o login, a resposta deve ser um token `JWT`, no seguinte formato:
+
+  ```json
+  {
+    "token": "token-aqui"
+  }
+  ```
+
+### 8 - Sua aplicação deve ter o endpoint POST `/post`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -56,11 +173,11 @@ Use o `JWT` para a token.
   }
   ```
 
-- Caso o post não contenha o `title` e/ou o `content` a API deve retornar um erro de `status 500`.
+- Caso o post não contenha o `title` e/ou o `content` a API deve retornar um erro de `status 400`.
 
 - A requisição deve ter o token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
-### 3 - Sua aplicação deve ter o endpoint GET `/posts`
+### 9 - Sua aplicação deve ter o endpoint GET `/post`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -78,15 +195,13 @@ Use o `JWT` para a token.
         "id": "401465483996",
         "displayName": "Brett Wiltshire",
         "email": "brett@email.com",
-        "image": {
-          "url": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
-        }
+        "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
       }
     }
   ]
   ```
 
-### 4 - Sua aplicação deve ter o endpoint POST `/post/:id`
+### 10 - Sua aplicação deve ter o endpoint PUT `/post/:id`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -103,11 +218,9 @@ Use o `JWT` para a token.
 
 - Caso uma pessoa diferente de quem criou ou caso uma requisição sem token seja recebida, deve-se retornar um código de `status 401`.
 
-- Caso o post não contenha o `title` e/ou o `content` a API deve retornar um erro de `status 500`.
+- Caso o post não contenha o `title` e/ou o `content` a API deve retornar um erro de `status 400`.
 
-- A requisição deve ter token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
-
-### 5 - Sua aplicação deve ter o endpoint GET `post/:id`
+### 11 - Sua aplicação deve ter o endpoint GET `post/:id`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -124,14 +237,12 @@ Use o `JWT` para a token.
       "id": "401465483996",
       "displayName": "Brett Wiltshire",
       "email": "brett@email.com",
-      "image": {
-        "url": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
-      }
+      "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png",
     }
   }
   ```
 
-### 6 - Sua aplicação deve ter o endpoint GET `posts/search?q=:searchTerm`
+### 12 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -149,9 +260,7 @@ Use o `JWT` para a token.
         "id": "401465483996",
         "displayName": "Brett Wiltshire",
         "email": "brett@email.com",
-        "image": {
-          "url": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
-        }
+        "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
       }
     }
   ]
@@ -159,7 +268,7 @@ Use o `JWT` para a token.
 
 - Caso nenhum **BlogPost** satisfaça a busca, retorne um array vazio.
 
-### 7 - Sua aplicação deve ter o endpoint DELETE `post/:id`
+### 13 - Sua aplicação deve ter o endpoint DELETE `post/:id`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -169,7 +278,7 @@ Use o `JWT` para a token.
 
 - Caso o post referido não exista, deve-se retornar um código de `status 404`.
 
-### 8 - O seu controller de BlogPosts deve ser testado num arquivo `BlogPostController.test.js`
+### 14 - O seu controller de BlogPosts deve ser testado num arquivo `BlogPostController.test.js`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -180,116 +289,6 @@ Use o `JWT` para a token.
 - Se qualquer uma das _strings_ de seu controller for apagada seus testes devem quebrar
 do projeto
 
-### 9 - Sua aplicação deve ter o endpoint GET `/users`
-
-#### Os seguintes pontos serão avaliados:
-
-- Deve listar todos os **Users** e retorná-los na seguinte estrutura:
-
-  ```json
-  [
-    {
-      "id": "401465483996",
-      "displayName": "Brett Wiltshire",
-      "email": "brett@email.com",
-      "image": {
-        "url": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
-      }
-    }
-  ]
-  ```
-
-- A requisição deve ter token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
-
-### 10 - Sua aplicação deve ter o endpoint POST `/user`
-
-#### Os seguintes pontos serão avaliados:
-
-- Cria um novo **User**. Deve receber um **User** no corpo da requisição.
-
-- Caso exista uma pessoa com o mesmo email na base, deve-se retornar o seguinte erro:
-
-  ```json
-  {
-    "message": "Usuário já existe"
-  }
-  ```
-
-- Caso contrário, retornar a mesma resposta do endpoint de `/login`, um token de 16 caracteres, contendo letras e números aleatórios, no seguinte formato:
-
-  ```json
-  {
-    "token": "token-aqui"
-  }
-  ```
-
-### 11 - Sua aplicação deve ter o endpoint GET `/user/:id`
-
-#### Os seguintes pontos serão avaliados:
-
-- Retorna os detalhes do usuário baseado no `id` da rota. Os dados devem ter o seguinte formato:
-
-  ```json
-  {
-    "id": "401465483996",
-    "displayName": "Brett Wiltshire",
-    "email": "brett@email.com",
-    "image": {
-      "url": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
-    }
-  }
-  ```
-
-### 12 - Sua aplicação deve ter o endpoint DELETE `/user/:id`
-
-#### Os seguintes pontos serão avaliados:
-
-- Deleta um **User**. Somente o recurso com o mesmo id a ser deletado pode performar essa operação.
-
-- Caso uma pessoa diferente ou uma requisição sem token tente deletá-lo, deve-se retornar um código de `status 401`.
-
-### 13 - O seu controller de User deve ser testado num arquivo `UserController.test.js`
-
-#### Os seguintes pontos serão avaliados:
-
-- O adereçamento dos requisitos do controller deve ser garantido em seus testes.
-
-- Se qualquer uma das funções do seu controller tiver o conteúdo apagado os seus testes devem quebrar.
-
-- Se qualquer uma das _strings_ de seu controller for apagada seus testes devem quebrar
-
-
-### 14 - Os modelos dos seus dados no banco devem seguir a seguinte especificação
-
-#### Os seguintes pontos serão avaliados:
-
-- O seu projeto deverá usar um `ORM` para criar e atualizar o seu banco. A clonagem do projeto seguida de um comando de migrate deve deixá-lo em sua forma esperada.
-
-- Deve ter uma tabela chamada **User**, contendo os seguinte dados:
-
-  ```json
-  {
-    "id": "401465483996",
-    "displayName": "Brett Wiltshire",
-    "email": "brett@email.com",
-    "image": {
-    "url": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
-  }
-  ```
-## Dicas
-
-- Deve ter uma tabela chamada **BlogPost**, contendo os seguinte dados:
-
-  ```json
-  {
-    "id": "7706273476706534553",
-    "published": "2011-08-01T19:58:00.000Z",
-    "updated": "2011-08-01T19:58:51.947Z",
-    "title": "Latest updates, August 1st",
-    "content": "The whole text for the blog post goes here in this key",
-    "user_id": "401465483996" // esse usuário é o autor do post
-  }
-  ```
 
 ## Requisitos Bônus
 
