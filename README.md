@@ -27,7 +27,7 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
     "id": "401465483996",
     "displayName": "Brett Wiltshire",
     "email": "brett@email.com",
-    "password": 123456,
+    "password": "123456",
     "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
   }
   ```
@@ -65,7 +65,7 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
 
 - O campo `email` será considerado válido se tiver o formato `<prefixo>@<domínio>` e se for único. Ele é obrigatório.
 
-- A senha deverá conter 6 caracteres, todos números. Ela é obrigatória.
+- A senha deverá conter 6 caracteres. Ela é obrigatória.
 
 - Caso exista uma pessoa com o mesmo email na base, deve-se retornar o seguinte erro:
 
@@ -119,13 +119,11 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
 
 - A requisição deve ter token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
-### 5 - Sua aplicação deve ter o endpoint DELETE `/user/:id`
+### 5 - Sua aplicação deve ter o endpoint DELETE `/user/me`
 
 #### Os seguintes pontos serão avaliados:
 
-- Deleta um **User**. Somente o recurso com o mesmo id a ser deletado pode performar essa operação.
-
-- Caso uma pessoa diferente ou uma requisição sem token tente deletá-lo, deve-se retornar um código de `status 401`.
+- Utilizando o token de autenticação nos headers, o usuário correspondente deve ser apagado. 
 
 ### 6 - O seu controller de User deve ser testado num arquivo `UserController.test.js`
 
@@ -146,7 +144,7 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
   ```json
   {
     "email": "email@mail.com",
-    "password": 135982
+    "password": "123456"
   }
   ```
 
@@ -216,7 +214,9 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
   }
   ```
 
-- Caso uma pessoa diferente de quem criou ou caso uma requisição sem token seja recebida, deve-se retornar um código de `status 401`.
+- Caso uma pessoa diferente de quem criou faça a requisição, deve retornar um código `status 403`.
+
+- Caso uma requisição sem token seja recebida, deve-se retornar um código de `status 401`.
 
 - Caso o post não contenha o `title` e/ou o `content` a API deve retornar um erro de `status 400`.
 
@@ -274,7 +274,9 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
 
 - Deleta o post com o `id` especificado. Só deve ser permitido para o usuário que criou o **BlogPost**.
 
-- Caso uma pessoa diferente ou uma requisição sem token tente deletá-lo, deve-se retornar um código de `status 401`.
+- Caso uma pessoa diferente de quem criou faça a requisição, deve retornar um código `status 403`.
+
+- Caso uma requisição sem token seja recebida, deve-se retornar um código de `status 401`.
 
 - Caso o post referido não exista, deve-se retornar um código de `status 404`.
 
