@@ -20,7 +20,7 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
 
 - O seu projeto deverá usar um `ORM` para criar e atualizar o seu banco. A clonagem do projeto seguida de um comando de migrate deve deixá-lo em sua forma esperada.
 
-- Deve ter uma tabela chamada **Users**, contendo os seguinte dados:
+- Deve conter uma tabela chamada **Users**, contendo os seguinte dados:
 
   ```json
   {
@@ -32,7 +32,7 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
   }
   ```
 
-- Deve ter uma tabela chamada **BlogPosts**, contendo os seguinte dados:
+- Deve conter uma tabela chamada **BlogPosts**, contendo os seguinte dados:
 
   ```json
   {
@@ -41,7 +41,7 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
     "updated": "2011-08-01T19:58:51.947Z",
     "title": "Latest updates, August 1st",
     "content": "The whole text for the blog post goes here in this key",
-    "user_id": "401465483996" // esse usuário é o autor do post
+    "user_id": "401465483996" // esse é o id que referência usuário que é o autor do post
   }
   ```
 
