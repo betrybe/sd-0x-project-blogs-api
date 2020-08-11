@@ -8,7 +8,11 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
 ## O que deverá ser desenvolvido
 
-Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (com o sequelize). Começando pela API, você vai desenvolver alguns endpoints (seguindo os principios do REST) que estarão conectados ao seu banco de dados. Tudo, é claro, devidamente testado!
+Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (com o sequelize). Começando pela API, você vai desenvolver alguns endpoints (seguindo os principios do REST) que estarão conectados ao seu banco de dados. Lembre-se de aplicar os princípios SOLID!
+
+Primeiro, você irá criar uma tabela para os usuários que desejam se cadastrar na aplicação. Após isso, a tabela blogPost será seu foco, guardando todas as informações dos posts realizados na plataforma. Essa é apenas uma recomendação!
+
+Para manter a integridade e segurança de uma aplicação, nada melhor do que testar! Portanto, será necessário criar testes para todos os endpoints do projeto.
 
 ---
 
@@ -83,6 +87,8 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
   }
   ```
 
+- O endpoint deverá ser testado.
+
 ### 3 - Sua aplicação deve ter o endpoint GET `/user`
 
 #### Os seguintes pontos serão avaliados:
@@ -102,6 +108,8 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
 
 - A requisição deve ter token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
+- O endpoint deverá ser testado.
+
 ### 4 - Sua aplicação deve ter o endpoint GET `/user/:id`
 
 #### Os seguintes pontos serão avaliados:
@@ -119,23 +127,17 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
 
 - A requisição deve ter token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
+- O endpoint deverá ser testado.
+
 ### 5 - Sua aplicação deve ter o endpoint DELETE `/user/me`
 
 #### Os seguintes pontos serão avaliados:
 
-- Utilizando o token de autenticação nos headers, o usuário correspondente deve ser apagado. 
+- Utilizando o token de autenticação nos headers, o usuário correspondente deve ser apagado.
 
-### 6 - O seu controller de User deve ser testado num arquivo `UserController.test.js`
+- O endpoint deverá ser testado.
 
-#### Os seguintes pontos serão avaliados:
-
-- O adereçamento dos requisitos do controller deve ser garantido em seus testes.
-
-- Se qualquer uma das funções do seu controller tiver o conteúdo apagado os seus testes devem quebrar.
-
-- Se qualquer uma das _strings_ de seu controller for apagada seus testes devem quebrar.
-
-### 7 - Sua aplicação deve ter o endpoint POST `/login`
+### 6 - Sua aplicação deve ter o endpoint POST `/login`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -158,7 +160,9 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
   }
   ```
 
-### 8 - Sua aplicação deve ter o endpoint POST `/post`
+- O endpoint deverá ser testado.
+
+### 7 - Sua aplicação deve ter o endpoint POST `/post`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -175,7 +179,9 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
 
 - A requisição deve ter o token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
-### 9 - Sua aplicação deve ter o endpoint GET `/post`
+- O endpoint deverá ser testado.
+
+### 8 - Sua aplicação deve ter o endpoint GET `/post`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -199,7 +205,9 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
   ]
   ```
 
-### 10 - Sua aplicação deve ter o endpoint PUT `/post/:id`
+- O endpoint deverá ser testado.
+
+### 9 - Sua aplicação deve ter o endpoint PUT `/post/:id`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -220,7 +228,9 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
 
 - Caso o post não contenha o `title` e/ou o `content` a API deve retornar um erro de `status 400`.
 
-### 11 - Sua aplicação deve ter o endpoint GET `post/:id`
+- O endpoint deverá ser testado.
+
+### 10 - Sua aplicação deve ter o endpoint GET `post/:id`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -242,7 +252,9 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
   }
   ```
 
-### 12 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`
+- O endpoint deverá ser testado.
+
+### 11 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -268,7 +280,9 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
 
 - Caso nenhum **BlogPost** satisfaça a busca, retorne um array vazio.
 
-### 13 - Sua aplicação deve ter o endpoint DELETE `post/:id`
+- O endpoint deverá ser testado.
+
+### 12 - Sua aplicação deve ter o endpoint DELETE `post/:id`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -280,91 +294,7 @@ Você vai arquiteturar, desenvolver e testar uma API de um CRUD posts de blog (c
 
 - Caso o post referido não exista, deve-se retornar um código de `status 404`.
 
-### 14 - O seu controller de BlogPosts deve ser testado num arquivo `BlogPostController.test.js`
-
-#### Os seguintes pontos serão avaliados:
-
-- O adereçamento dos requisitos do controller deve ser garantido em seus testes.
-
-- Se qualquer uma das funções do seu controller tiver o conteúdo apagado os seus testes devem quebrar.
-
-- Se qualquer uma das _strings_ de seu controller for apagada seus testes devem quebrar
-do projeto
-
-
-## Requisitos Bônus
-
-### 15 - Sua aplicação deve ser organizada segundo o _Domain Driven Design_ e seguindo os princípios do SOLID aprendidos
-
-#### Os seguintes pontos serão avaliados:
-
-- A estrutura esperada para a sua aplicação é similar a essa:
-
-  ```md
-  └── application
-  │   └── user
-  │   │   └── userController.js
-  │   │   └── blogPostsController.js
-  └── domain
-  │   └── user.js
-  │   └── blogPost.js
-  └── infrastructure
-  │   └── database
-  │   │   └── config
-  │   │   │   └── config.json
-  │   │   └── migrations
-  │   │   │   └── [timestamp]-create-user-table.js
-  │   │   │   └── ...
-  │   │   └── models
-  │   │   │   ├── index.js
-  │   │   │   └── User.js
-  │   │   │   └── BlogPost.js
-  │   └── user
-  │   │   ├── UserMapper.js
-  │   │   └── UserRepository.js
-  │   │   ├── BlogPostMapper.js
-  │   │   └── BlogPostRepository.js
-  ```
-
-- Seguir os seguintes princípios:
-  
-  - Single responsibility principle (Princípio da responsabilidade única);
-
-  - Open/Closed principle (Princípio aberto/fechado);
-
-  - Dependency inversion principle (Princípio da inversão da dependência).
-
-- A URL base da API deve ser `localhost:3000` para todos os endpoints. A API deve ser iniciada com o comando `node api` a partir da raiz da aplicação.
-
-### 16 - O seu mapper e repository de BlogPosts devem ser testados num arquivo `BlogPostMapper.test.js` e `BlogPostRepository.test.js`
-
-#### Os seguintes pontos serão avaliados:
-
-- O adereçamento dos requisitos do seu _mapper_ e _repository_ deve ser garantido em seus testes.
-
-- Se qualquer uma das funções do seu controller tiver o conteúdo apagado os seus testes devem quebrar.
-
-- Se qualquer uma das _strings_ de seu controller for apagada seus testes devem quebrar
-
-### 17 - O seu mapper e repository de User devem ser testados num arquivo `BlogPostMapper.test.js` e `BlogPostRepository.test.js`, respectivamente
-
-#### Os seguintes pontos serão avaliados:
-
-- O adereçamento dos requisitos do seu _mapper_ e _repository_ deve ser garantido em seus testes.
-
-- Se qualquer uma das funções do seu controller tiver o conteúdo apagado os seus testes devem quebrar.
-
-- Se qualquer uma das _strings_ de seu controller for apagada seus testes devem quebrar.
-
-### 18 - Os seus modelos de BlogPosts e de User devem ser testados em arquivos de nome `BlogPostsModel.test.js` e `UserModel.test.js`, respectivamente
-
-#### Os seguintes pontos serão avaliados:
-
-- O adereçamento dos requisitos dos modelos deve ser garantido em seus testes.
-
-- Se qualquer uma das funções de seus modelos tiver o conteúdo apagado, os seus respectivos testes devem quebrar.
-
-- Se qualquer uma das _strings_ de seus modelos for apagada, os seus respectivos testes devem quebrar.
+- O endpoint deverá ser testado.
 
 ## Dicas
 
