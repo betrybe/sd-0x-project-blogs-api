@@ -85,8 +85,6 @@ O projeto tem até a seguinte data: `DD/MM/YYYY - 14:00h`. Para ser entregue a a
 
 O não cumprimento de um requisito, total ou parcialmente, impactará em sua avaliação.
 
-### 1 - Os modelos dos seus dados no banco devem seguir a seguinte especificação
-
 #### Os seguintes pontos serão avaliados:
 
 - O seu projeto deverá usar um `ORM` para criar e atualizar o seu banco. A clonagem do projeto seguida de um comando de migrate deve deixá-lo em sua forma esperada.
@@ -108,16 +106,16 @@ O não cumprimento de um requisito, total ou parcialmente, impactará em sua ava
   ```json
   {
     "id": "7706273476706534553",
-    "published": "2011-08-01T19:58:00.000Z",
-    "updated": "2011-08-01T19:58:51.947Z",
     "title": "Latest updates, August 1st",
     "content": "The whole text for the blog post goes here in this key",
-    "user_id": "401465483996" // esse é o id que referência usuário que é o autor do post
+    "user_id": "401465483996", // esse é o id que referência usuário que é o autor do post
+    "published": "2011-08-01T19:58:00.000Z",
+    "updated": "2011-08-01T19:58:51.947Z",
   }
   ```
   OBS: os testes iram gerar dados atraves do seu migrates e seeds, entao fique bem atento se estiver errado nao ira funcionar
 
-### 2 - Sua aplicação deve ter o endpoint POST `/user`
+### 1 - Sua aplicação deve ter o endpoint POST `/user`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -213,7 +211,7 @@ Se o usuário cadastrar o campo "email" com um email que já existe, o resultado
 
 ![Usuário Existente](./public/usuariojaexistente.png)
 
-### 3 - Sua aplicação deve ter o endpoint POST `/login`
+### 2 - Sua aplicação deve ter o endpoint POST `/login`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -280,7 +278,7 @@ Se o login for com usuário inexistente o resultado retornado deverá ser confor
 
 ![Login com sucesso](./public/usuarionaoexiste.png)
 
-### 4 - Sua aplicação deve ter o endpoint GET `/user`
+### 3 - Sua aplicação deve ter o endpoint GET `/user`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -303,8 +301,23 @@ Se o login for com usuário inexistente o resultado retornado deverá ser confor
 
 ### Além disso, as seguintes verificações serão feitas:
 
-**[]**
-**[]**
+**[Será validado que é possível listar todos os usuários]**
+
+Ao listar usuários com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+
+![Login com sucesso](./public/listarusuarios.png)
+
+**[Será validado que não é possível listar usuários sem o token na requisição]**
+
+Se o token for inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![Login com sucesso](./public/tokenvazio.png)
+
+**[Será validado que não é possível listar usuários com o token inválido]**
+
+Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![Login com sucesso](./public/tokeninvalido.png)
 
 ### 5 - Sua aplicação deve ter o endpoint GET `/user/:id`
 
