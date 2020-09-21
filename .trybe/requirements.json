@@ -5,7 +5,7 @@
       "bonus": false
     },
     {
-      "description": "",
+      "description": "Sua aplicação deve ter o endpoint GET `/user`",
       "bonus": false
     },
     {

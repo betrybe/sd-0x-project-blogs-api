@@ -188,7 +188,7 @@ Se o usuário tiver o campo "email" com o formato `email: @gmail.com` o resultad
 
 **[Será validado que o campo `email` é obrigatório]**
 
-Se o usuário tiver não tiver campo "email" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+Se o usuário não tiver campo "email" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
 
 ![Email obrigatório](./public/emailobrigatorio.png)
 (As contrabarras `\` estão escapando as aspas de dentro da string)
@@ -202,7 +202,7 @@ Se o usuário tiver o campo "password" menor que 6 caracteres o resultado retorn
 
 **[Será validado que o campo `password` é obrigatório]**
 
-Se o usuário tiver não tiver campo "password" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+Se o usuário não tiver campo "password" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
 
 ![Senha Obrigatória](./public/semsenha.png)
 (As contrabarras `\` estão escapando as aspas de dentro da string)
@@ -213,7 +213,74 @@ Se o usuário cadastrar o campo "email" com um email que já existe, o resultado
 
 ![Usuário Existente](./public/usuariojaexistente.png)
 
-### 3 - Sua aplicação deve ter o endpoint GET `/user`
+### 3 - Sua aplicação deve ter o endpoint POST `/login`
+
+#### Os seguintes pontos serão avaliados:
+
+- O corpo da requisição deverá seguir o formato abaixo:
+
+  ```json
+  {
+    "email": "email@mail.com",
+    "password": "123456"
+  }
+  ```
+
+- Caso algum desses campos seja inválido ou não exista um usuário correspondente no banco de dados, retorne um código de status 400 com o corpo `{ message: "Campos inválidos" }`.
+
+- Caso esteja tudo certo com o login, a resposta deve ser um token `JWT`, no seguinte formato:
+
+  ```json
+  {
+    "token": "token-aqui"
+  }
+  ```
+
+- O endpoint deverá ser testado.
+
+### Além disso, as seguintes verificações serão feitas:
+
+**[Será validado que é possível fazer login com sucesso]**
+
+Se o login foi feito com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+
+![Login com sucesso](./public/logincomsucesso.png)
+
+**[Será validado que não é possível fazer login sem o campo `email`]**
+
+Se o login não tiver o campo "email" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![Login com sucesso](./public/sememaillogin.png)
+(As contrabarras `\` estão escapando as aspas de dentro da string)
+
+**[Será validado que não é possível fazer login sem o campo `password`]**
+
+Se o login não tiver o campo "password" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![Login com sucesso](./public/semsenhalogin.png)
+(As contrabarras `\` estão escapando as aspas de dentro da string)
+
+**[Será validado que não é possível fazer login com o campo `email` em branco]**
+
+Se o login tiver o campo "email" em branco o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![Login com sucesso](./public/emailbrancologin.png)
+(As contrabarras `\` estão escapando as aspas de dentro da string)
+
+**[Será validado que não é possível fazer login com o campo `password` em branco]**
+
+Se o login tiver o campo "password" em branco o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![Login com sucesso](./public/senhabrancologin.png)
+(As contrabarras `\` estão escapando as aspas de dentro da string)
+
+**[Será validado que não é possível fazer login com um usuário que não existe]**
+
+Se o login for com usuário inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![Login com sucesso](./public/usuarionaoexiste.png)
+
+### 4 - Sua aplicação deve ter o endpoint GET `/user`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -239,7 +306,7 @@ Se o usuário cadastrar o campo "email" com um email que já existe, o resultado
 **[]**
 **[]**
 
-### 4 - Sua aplicação deve ter o endpoint GET `/user/:id`
+### 5 - Sua aplicação deve ter o endpoint GET `/user/:id`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -263,41 +330,11 @@ Se o usuário cadastrar o campo "email" com um email que já existe, o resultado
 **[]**
 **[]**
 
-### 5 - Sua aplicação deve ter o endpoint DELETE `/user/me`
+### 6 - Sua aplicação deve ter o endpoint DELETE `/user/me`
 
 #### Os seguintes pontos serão avaliados:
 
 - Utilizando o token de autenticação nos headers, o usuário correspondente deve ser apagado.
-
-- O endpoint deverá ser testado.
-
-### Além disso, as seguintes verificações serão feitas:
-
-**[]**
-**[]**
-
-### 6 - Sua aplicação deve ter o endpoint POST `/login`
-
-#### Os seguintes pontos serão avaliados:
-
-- O corpo da requisição deverá seguir o formato abaixo:
-
-  ```json
-  {
-    "email": "email@mail.com",
-    "password": "123456"
-  }
-  ```
-
-- Caso algum desses campos seja inválido ou não exista um usuário correspondente no banco de dados, retorne um código de status 400 com o corpo `{ message: "Campos inválidos" }`.
-
-- Caso esteja tudo certo com o login, a resposta deve ser um token `JWT`, no seguinte formato:
-
-  ```json
-  {
-    "token": "token-aqui"
-  }
-  ```
 
 - O endpoint deverá ser testado.
 
