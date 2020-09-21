@@ -248,35 +248,35 @@ Se o login foi feito com sucesso o resultado retornado deverá ser conforme exib
 
 Se o login não tiver o campo "email" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
 
-![Login com sucesso](./public/sememaillogin.png)
+![Sem login](./public/sememaillogin.png)
 (As contrabarras `\` estão escapando as aspas de dentro da string)
 
 **[Será validado que não é possível fazer login sem o campo `password`]**
 
 Se o login não tiver o campo "password" o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
 
-![Login com sucesso](./public/semsenhalogin.png)
+![Sem senha](./public/semsenhalogin.png)
 (As contrabarras `\` estão escapando as aspas de dentro da string)
 
 **[Será validado que não é possível fazer login com o campo `email` em branco]**
 
 Se o login tiver o campo "email" em branco o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
 
-![Login com sucesso](./public/emailbrancologin.png)
+![Email em branco](./public/emailbrancologin.png)
 (As contrabarras `\` estão escapando as aspas de dentro da string)
 
 **[Será validado que não é possível fazer login com o campo `password` em branco]**
 
 Se o login tiver o campo "password" em branco o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
 
-![Login com sucesso](./public/senhabrancologin.png)
+![Senha em branco](./public/senhabrancologin.png)
 (As contrabarras `\` estão escapando as aspas de dentro da string)
 
 **[Será validado que não é possível fazer login com um usuário que não existe]**
 
 Se o login for com usuário inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
 
-![Login com sucesso](./public/usuarionaoexiste.png)
+![Usuário não existe](./public/usuarionaoexiste.png)
 
 ### 3 - Sua aplicação deve ter o endpoint GET `/user`
 
@@ -305,21 +305,21 @@ Se o login for com usuário inexistente o resultado retornado deverá ser confor
 
 Ao listar usuários com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
 
-![Login com sucesso](./public/listarusuarios.png)
+![Listar usuários](./public/listarusuarios.png)
 
 **[Será validado que não é possível listar usuários sem o token na requisição]**
 
 Se o token for inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
-![Login com sucesso](./public/tokenvazio.png)
+![Token Vazio](./public/tokenvazio.png)
 
 **[Será validado que não é possível listar usuários com o token inválido]**
 
 Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
-![Login com sucesso](./public/tokeninvalido.png)
+![Token inválido](./public/tokeninvalido.png)
 
-### 5 - Sua aplicação deve ter o endpoint GET `/user/:id`
+### 4 - Sua aplicação deve ter o endpoint GET `/user/:id`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -340,8 +340,22 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ### Além disso, as seguintes verificações serão feitas:
 
-**[]**
-**[]**
+**[Será validado que é possível fazer login com sucesso]**
+
+Ao listar um usuário com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+
+![Listar um usuário](./public/listarumusuario.png)
+
+**[Será validado que não é possível listar um determinado usuário sem o token na requisição]**
+
+Se o token for inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![Sem token](./public/semtokenumusuario.png)
+**[Será validado que não é possível listar um determinado usuário com o token inválido]**
+
+Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![Token inválido](./public/tokeninvalidoumusuario.png)
 
 ### 6 - Sua aplicação deve ter o endpoint DELETE `/user/me`
 
