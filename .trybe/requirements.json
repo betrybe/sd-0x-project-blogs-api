@@ -5,15 +5,15 @@
       "bonus": false
     },
     {
+      "description": "Sua aplicação deve ter o endpoint POST `/login`",
+      "bonus": false
+    },
+    {
       "description": "Sua aplicação deve ter o endpoint GET `/user`",
       "bonus": false
     },
     {
-      "description": "",
-      "bonus": false
-    },
-    {
-      "description": "",
+      "description": "Sua aplicação deve ter o endpoint GET `/user/:id",
       "bonus": false
     },
     {
