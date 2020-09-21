@@ -1,0 +1,40 @@
+{
+  "requirements": [
+    {
+      "description": "Sua aplicação deve ter o endpoint POST `/user`",
+      "bonus": false
+    },
+    {
+      "description": "",
+      "bonus": false
+    },
+    {
+      "description": "",
+      "bonus": false
+    },
+    {
+      "description": "",
+      "bonus": false
+    },
+    {
+      "description": "",
+      "bonus": false
+    },
+    {
+      "description": "",
+      "bonus": false
+    },
+    {
+      "description": "",
+      "bonus": false
+    },
+    {
+      "description": "",
+      "bonus": false
+    },
+    {
+      "description": "",
+      "bonus": true
+    }
+  ]
+}
