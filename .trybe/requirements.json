@@ -17,7 +17,7 @@
       "bonus": false
     },
     {
-      "description": "",
+      "description": "Sua aplicação deve ter o endpoint DELETE `/user/me`",
       "bonus": false
     },
     {

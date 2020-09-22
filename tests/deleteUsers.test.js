@@ -3,7 +3,7 @@ const shell = require('shelljs');
 
 const url = 'http://localhost:3000';
 
-describe('Sua aplicação deve ter o endpoint GET `/user/:id', () => {
+describe('Sua aplicação deve ter o endpoint DELETE `/user/me`', () => {
   beforeEach(() => {
     shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate $');
     shell.exec('npx sequelize-cli db:seed:all $');
@@ -13,7 +13,7 @@ describe('Sua aplicação deve ter o endpoint GET `/user/:id', () => {
     shell.exec('npx sequelize-cli db:drop');
   });
 
-  it('Será validado que é possível fazer login com sucesso', async () => {
+  it('Será validado que é possível excluir meu usuário com sucesso', async () => {
     let token;
     await frisby
       .post(`${url}/login`,
@@ -37,19 +37,29 @@ describe('Sua aplicação deve ter o endpoint GET `/user/:id', () => {
           },
         },
       })
-      .get(`${url}/user/1`)
-      .expect('status', 200)
+      .delete(`${url}/user/me`)
+      .expect('status', 204);
+  });
+
+  it('Será validado que não é possivel excluir meu usuário com token inválido', async () => {
+    await frisby
+      .setup({
+        request: {
+          headers: {
+            Authorization: 'nhfur53sbyf84',
+            'Content-Type': 'application/json',
+          },
+        },
+      })
+      .delete(`${url}/user/me`)
+      .expect('status', 401)
       .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.id).toBe(1);
-        expect(result.displayName).toBe('Lewis Hamilton');
-        expect(result.email).toBe('lewishamilton@gmail.com');
-        expect(result.image).toBe('https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg');
+        const { json } = response;
+        expect(json.message).toBe('Token expirado ou inválido');
       });
   });
 
-  it('Será validado que não é possível listar um determinado usuário sem o token na requisição', async () => {
+  it('Será validado que não é possivel excluir meu usuário sem o token', async () => {
     await frisby
       .setup({
         request: {
@@ -59,29 +69,11 @@ describe('Sua aplicação deve ter o endpoint GET `/user/:id', () => {
           },
         },
       })
-      .get(`${url}/user/1`)
+      .delete(`${url}/user/me`)
       .expect('status', 401)
-      .then((responseSales) => {
-        const { json } = responseSales;
+      .then((response) => {
+        const { json } = response;
         expect(json.message).toBe('Token não encontrado');
-      });
-  });
-
-  it('Será validado que não é possível listar um determinado usuário com o token inválido', async () => {
-    await frisby
-      .setup({
-        request: {
-          headers: {
-            Authorization: 'mo3183bfbahaf',
-            'Content-Type': 'application/json',
-          },
-        },
-      })
-      .get(`${url}/user/1`)
-      .expect('status', 401)
-      .then((responseSales) => {
-        const { json } = responseSales;
-        expect(json.message).toBe('Token expirado ou inválido');
       });
   });
 });
