@@ -33,7 +33,7 @@
       "bonus": false
     },
     {
-      "description": "",
+      "description": "Sua aplicação deve ter o endpoint PUT `/post/:id`",
       "bonus": false
     },
     {

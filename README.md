@@ -554,7 +554,7 @@ Se o id do post for inválido o resultado retornado deverá ser conforme exibido
   }
   ```
 
-- Caso uma pessoa diferente de quem criou faça a requisição, deve retornar um código `status 403`.
+- Caso uma pessoa diferente de quem criou faça a requisição, deve retornar um código `status 401`.
 
 - Caso uma requisição sem token seja recebida, deve-se retornar um código de `status 401`.
 
@@ -564,8 +564,39 @@ Se o id do post for inválido o resultado retornado deverá ser conforme exibido
 
 ### Além disso, as seguintes verificações serão feitas:
 
-**[]**
-**[]**
+**[Será validado que é possível editar um blogpost com sucesso]**
+
+Se editar um blogpost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+
+![blogpost com token inválido](./public/editarpostcomsucesso.png)
+
+**[Será validado que não é possível editar um blogpost com outro usuário]**
+
+![blogpost com token inválido](./public/editarcomoutrousuario.png)
+
+**[Será validado que não possível editar um blogpost sem token]**
+
+Se não conter o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/editarsemtoken.png)
+
+**[Será validado que não possível editar um blogpost com token inválido]**
+
+Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/editartokeninvalido.png)
+
+**[Será validado que não possível editar um blogpost sem o campo `title`]**
+
+Se não conter o campo `title` o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![blogpost com token inválido](./public/editarsemtitle.png)
+
+**[Será validado que não possível editar um blogpost sem o campo `content`]**
+
+Se não conter o campo `content` o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![blogpost com token inválido](./public/editarsemcontent.png)
 
 ### 11 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`
 
