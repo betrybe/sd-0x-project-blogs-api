@@ -386,7 +386,7 @@ Se não conter o token o resultado retornado deverá ser conforme exibido abaixo
 
 ![Deletar sem token](./public/deletarsemtoken.png)
 
-### 7 - Sua aplicação deve ter o endpoint POST `/post`
+### 6 - Sua aplicação deve ter o endpoint POST `/post`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -407,8 +407,35 @@ Se não conter o token o resultado retornado deverá ser conforme exibido abaixo
 
 ### Além disso, as seguintes verificações serão feitas:
 
-**[]**
-**[]**
+**[Será validado que é possível cadastrar um blogpost com sucesso]**
+
+Se cadastrar um blopost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![Criar blogspot com sucesso](./public/criarblogpost.png)
+
+**[Será validado que não é possível cadastrar um blogpost sem o campo `title`]**
+
+Se não conter o campo `title` o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![blogpost sem content](./public/camposemtitle.png)
+
+**[Será validado que não é possível cadastrar um blogpost sem o campo `content`]**
+
+Se não conter o campo `content` o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![blogpost sem content](./public/semcampocontent.png)
+
+**[Será validado que não é possível cadastrar um blogpost sem o token]**
+
+Se não conter o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost sem token ](./public/criarpostsemtoken.png)
+
+**[Será validado que não é possível cadastrar um blogpost com o token inválido]**
+
+Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/criarposttokeninvalido.png)
 
 ### 8 - Sua aplicação deve ter o endpoint GET `/post`
 

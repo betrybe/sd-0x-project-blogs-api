@@ -21,7 +21,7 @@
       "bonus": false
     },
     {
-      "description": "",
+      "description": "Sua aplicação deve ter o endpoint POST `/post`",
       "bonus": false
     },
     {
