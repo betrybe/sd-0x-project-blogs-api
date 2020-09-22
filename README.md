@@ -473,7 +473,7 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 **[Será validado que é possível listar posts com sucesso]**
 
-Se listar um blogpost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+Se listar os blogpost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
 
 ![Criar blogspot com sucesso](./public/listarumblogpost.png)
 
@@ -515,8 +515,30 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ### Além disso, as seguintes verificações serão feitas:
 
-**[]**
-**[]**
+**[Será validado que é possível listar um post com sucesso]**
+
+Se listar um blogpost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+
+![Listar um post com sucesso](./public/listarumpostcomsucesso.png)
+
+**[Será validado que não é possível listar um post sem token]**
+
+Se não conter o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/listaumpostsemtoken.png)
+
+**[Será validado que não é possível listar um post com token inválido]**
+
+Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/listaumposttokeninvalido.png)
+
+**[Será validado que não é possível listar um post inexistente]**
+
+Se o id do post for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `404`:
+
+![Listar um post inexistente](./public/listarumpostinexistente.png)
+
 
 ### 9 - Sua aplicação deve ter o endpoint PUT `/post/:id`
 
