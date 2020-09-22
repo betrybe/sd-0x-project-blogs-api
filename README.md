@@ -665,7 +665,7 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 ![blogpost com token inválido](./public/buscarpostcomtokeninvalido.png)
 
 
-### 12 - Sua aplicação deve ter o endpoint DELETE `post/:id`
+### 11 - Sua aplicação deve ter o endpoint DELETE `post/:id`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -681,8 +681,35 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ### Além disso, as seguintes verificações serão feitas:
 
-**[]**
-**[]**
+**[Será validado que é possível deletar um blogpost com sucesso]**
+
+Se deletar blogpost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `204`:
+
+![blogpost com token inválido](./public/deletarpostcomsucesso.png)
+
+**[Será validado que não é possível deletar um blogpost com outro usuário]**
+
+Se não for o dono do blogpost o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/deletarpostcomoutrousuario.png)
+
+**[Será validado que não é possível deletar um blogpost inexistente]**
+
+Se o blogpost nao existir o resultado retornado deverá ser conforme exibido abaixo, com um status http `404`:
+
+![blogpost com token inválido](./public/deletarpostquenaoexiste.png)
+
+**[Será validado que não é possível deletar um blogpost sem o token]**
+
+Se não contém o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/deletarpostsemtoken.png)
+
+**[Será validado que não é possível deletar um blogpost com o token inválido]**
+
+Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/deletarpostcomtokeninvalido.png)
 
 ## Dicas
 
