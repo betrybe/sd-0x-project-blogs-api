@@ -340,11 +340,17 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ### Além disso, as seguintes verificações serão feitas:
 
-**[Será validado que é possível fazer login com sucesso]**
+**[Será validado que é possível listar um usuario específico com sucesso]**
 
 Ao listar um usuário com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
 
 ![Listar um usuário](./public/listarumusuario.png)
+
+**[Será validado que não é possível listar um usuário inexistente]**
+
+Se o usuário for inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `404`:
+
+![Listar um usuário inexistente](./public/usuarioinexistente.png)
 
 **[Será validado que não é possível listar um determinado usuário sem o token na requisição]**
 
@@ -409,7 +415,7 @@ Se não conter o token o resultado retornado deverá ser conforme exibido abaixo
 
 **[Será validado que é possível cadastrar um blogpost com sucesso]**
 
-Se cadastrar um blopost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+Se cadastrar um blopost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `201`:
 
 ![Criar blogspot com sucesso](./public/criarblogpost.png)
 
@@ -437,7 +443,7 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ![blogpost com token inválido](./public/criarposttokeninvalido.png)
 
-### 8 - Sua aplicação deve ter o endpoint GET `/post`
+### 7 - Sua aplicação deve ter o endpoint GET `/post`
 
 #### Os seguintes pontos serão avaliados:
 
