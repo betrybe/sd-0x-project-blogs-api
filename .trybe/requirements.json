@@ -37,7 +37,7 @@
       "bonus": false
     },
     {
-      "description": "",
+      "description": "Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`",
       "bonus": false
     },
     {
