@@ -471,25 +471,25 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ### Além disso, as seguintes verificações serão feitas:
 
-**[Será validado que é possível listar um post com sucesso]**
+**[Será validado que é possível listar posts com sucesso]**
 
 Se listar um blogpost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
 
 ![Criar blogspot com sucesso](./public/listarumblogpost.png)
 
-**[Será validado que não é possível listar um post sem token]**
+**[Será validado que não é possível listar posts sem token]**
 
 Se não conter o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
 ![blogpost sem token ](./public/listarpostsemtoken.png)
 
-**[Será validado que não é possível listar um post com token inválido]**
+**[Será validado que não é possível listar posts com token inválido]**
 
 Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
 ![blogpost com token inválido](./public/listarposttokeninvalido.png)
 
-### 10 - Sua aplicação deve ter o endpoint GET `post/:id`
+### 8 - Sua aplicação deve ter o endpoint GET `post/:id`
 
 #### Os seguintes pontos serão avaliados:
 

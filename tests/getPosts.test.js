@@ -13,7 +13,7 @@ describe('Sua aplicação deve ter o endpoint GET `/post`', () => {
     shell.exec('npx sequelize-cli db:drop');
   });
 
-  it('Será validado que é possível listar um post com sucesso', async () => {
+  it('Será validado que é possível listar posts com sucesso', async () => {
     let token;
     await frisby
       .post(`${url}/login`,
@@ -37,25 +37,25 @@ describe('Sua aplicação deve ter o endpoint GET `/post`', () => {
           },
         },
       })
-      .get(`${url}/post/1`)
+      .get(`${url}/post`)
       .expect('status', 200)
       .then((response) => {
         const { body } = response;
         const result = JSON.parse(body);
         console.log(result);
-        expect(result.id).toBe(1);
-        expect(result.title).toBe('Post do Ano');
-        expect(result.content).toBe('Melhor post do ano');
-        expect(result.published).toBe('2011-08-01T19:58:00.000Z'); // ver se contem apenas
-        expect(result.updated).toBe('2011-08-01T19:58:51.000Z'); // ver se contem apenas
-        expect(result.user.id).toBe(1);
-        expect(result.user.displayName).toBe('Lewis Hamilton');
-        expect(result.user.email).toBe('lewishamilton@gmail.com');
-        expect(result.user.image).toBe('https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg');
+        expect(result[0].id).toBe(1);
+        expect(result[0].title).toBe('Post do Ano');
+        expect(result[0].content).toBe('Melhor post do ano');
+        expect(result[0].published).toBe('2011-08-01T19:58:00.000Z'); // ver se contem apenas
+        expect(result[0].updated).toBe('2011-08-01T19:58:51.000Z'); // ver se contem apenas
+        expect(result[0].user.id).toBe(1);
+        expect(result[0].user.displayName).toBe('Lewis Hamilton');
+        expect(result[0].user.email).toBe('lewishamilton@gmail.com');
+        expect(result[0].user.image).toBe('https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg');
       });
   });
 
-  it('Será validado que não é possível listar um post sem token', async () => {
+  it('Será validado que não é possível listar posts sem token', async () => {
     await frisby
       .setup({
         request: {
@@ -65,7 +65,7 @@ describe('Sua aplicação deve ter o endpoint GET `/post`', () => {
           },
         },
       })
-      .get(`${url}/post/1`)
+      .get(`${url}/post`)
       .expect('status', 401)
       .then((response) => {
         const { body } = response;
@@ -75,7 +75,7 @@ describe('Sua aplicação deve ter o endpoint GET `/post`', () => {
       });
   });
 
-  it('Será validado que não é possível listar um post com token inválido', async () => {
+  it('Será validado que não é possível listar posts com token inválido', async () => {
     await frisby
       .setup({
         request: {
@@ -85,7 +85,7 @@ describe('Sua aplicação deve ter o endpoint GET `/post`', () => {
           },
         },
       })
-      .get(`${url}/post/1`)
+      .get(`${url}/post`)
       .expect('status', 401)
       .then((response) => {
         const { body } = response;
