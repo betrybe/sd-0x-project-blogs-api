@@ -415,7 +415,7 @@ Se não conter o token o resultado retornado deverá ser conforme exibido abaixo
 
 **[Será validado que é possível cadastrar um blogpost com sucesso]**
 
-Se cadastrar um blopost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `201`:
+Se cadastrar um blogpost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `201`:
 
 ![Criar blogspot com sucesso](./public/criarblogpost.png)
 
@@ -471,6 +471,50 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ### Além disso, as seguintes verificações serão feitas:
 
+**[Será validado que é possível listar um post com sucesso]**
+
+Se listar um blogpost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+
+![Criar blogspot com sucesso](./public/listarumblogpost.png)
+
+**[Será validado que não é possível listar um post sem token]**
+
+Se não conter o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost sem token ](./public/listarpostsemtoken.png)
+
+**[Será validado que não é possível listar um post com token inválido]**
+
+Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/listarposttokeninvalido.png)
+
+### 10 - Sua aplicação deve ter o endpoint GET `post/:id`
+
+#### Os seguintes pontos serão avaliados:
+
+- Retorna um **BlogPost** com o `id` especificado. O retorno deve ter os seguinte formato:
+
+  ```json
+  {
+    "id": "7706273476706534553",
+    "published": "2011-08-01T19:58:00.000Z",
+    "updated": "2011-08-01T19:58:51.947Z",
+    "title": "Latest updates, August 1st",
+    "content": "The whole text for the blog post goes here in this key",
+    "user": { // esse usuário é o autor do post
+      "id": "401465483996",
+      "displayName": "Brett Wiltshire",
+      "email": "brett@email.com",
+      "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png",
+    }
+  }
+  ```
+
+- O endpoint deverá ser testado.
+
+### Além disso, as seguintes verificações serão feitas:
+
 **[]**
 **[]**
 
@@ -494,35 +538,6 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 - Caso uma requisição sem token seja recebida, deve-se retornar um código de `status 401`.
 
 - Caso o post não contenha o `title` e/ou o `content` a API deve retornar um erro de `status 400`.
-
-- O endpoint deverá ser testado.
-
-### Além disso, as seguintes verificações serão feitas:
-
-**[]**
-**[]**
-
-### 10 - Sua aplicação deve ter o endpoint GET `post/:id`
-
-#### Os seguintes pontos serão avaliados:
-
-- Retorna um **BlogPost** com o `id` especificado. O retorno deve ter os seguinte formato:
-
-  ```json
-  {
-    "id": "7706273476706534553",
-    "published": "2011-08-01T19:58:00.000Z",
-    "updated": "2011-08-01T19:58:51.947Z",
-    "title": "Latest updates, August 1st",
-    "content": "The whole text for the blog post goes here in this key",
-    "user": { // esse usuário é o autor do post
-      "id": "401465483996",
-      "displayName": "Brett Wiltshire",
-      "email": "brett@email.com",
-      "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png",
-    }
-  }
-  ```
 
 - O endpoint deverá ser testado.
 
