@@ -13,7 +13,7 @@ describe('Sua aplicação deve ter o endpoint GET `/post`', () => {
     shell.exec('npx sequelize-cli db:drop');
   });
 
-  it('Será validado que é possível listar posts com sucesso', async () => {
+  it('Será validado que é possível listar blogpost com sucesso', async () => {
     let token;
     await frisby
       .post(`${url}/login`,
@@ -55,7 +55,7 @@ describe('Sua aplicação deve ter o endpoint GET `/post`', () => {
       });
   });
 
-  it('Será validado que não é possível listar posts sem token', async () => {
+  it('Será validado que não é possível listar blogpost sem token', async () => {
     await frisby
       .setup({
         request: {
@@ -75,7 +75,7 @@ describe('Sua aplicação deve ter o endpoint GET `/post`', () => {
       });
   });
 
-  it('Será validado que não é possível listar posts com token inválido', async () => {
+  it('Será validado que não é possível listar blogpost com token inválido', async () => {
     await frisby
       .setup({
         request: {
