@@ -10,10 +10,6 @@ describe('Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`', 
     shell.exec('npx sequelize-cli db:seed:all $');
   });
 
-  afterEach(() => {
-    shell.exec('npx sequelize-cli db:drop');
-  });
-
   it('Será validado que é possível buscar um blogpost pelo `title`', async () => {
     let token;
     await frisby

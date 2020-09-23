@@ -85,6 +85,50 @@ O projeto tem até a seguinte data: `DD/MM/YYYY - 14:00h`. Para ser entregue a a
 
 O não cumprimento de um requisito, total ou parcialmente, impactará em sua avaliação.
 
+**Você irá precisar configurar as variáveis globais do MySQL.** Você pode usar esse [Conteúdo de variáveis de ambiente com NodeJS](https://blog.rocketseat.com.br/variaveis-ambiente-nodejs/) como referência.
+
+**Faça essas configurações também para as variáveis de ambiente usadas nesses arquivo:**
+
+`sd-0x-project-blogs-api/config/config.js`
+
+```
+module.exports = {
+  "development": {
+    "username": process.env.MYSQL_USER,
+    "password": process.env.MYSQL_PASSWORD, 
+    "database": 'blogs_api', 
+    "host": process.env.HOSTNAME,
+    "dialect": 'mysql',
+  },
+  "test": {
+    "username": process.env.MYSQL_USER,
+    "password": process.env.MYSQL_PASSWORD,
+    "database": 'blogs_api',
+    "host": process.env.HOSTNAME,
+    "dialect": "mysql",
+  },
+  "production": {
+    "username": process.env.MYSQL_USER,
+    "password": process.env.MYSQL_PASSWORD,
+    "database": 'blogs_api',
+    "host": process.env.HOSTNAME,
+    "dialect": 'mysql',
+  },
+};
+```
+
+**(Neste arquivo e obrigatório deixar o nome do database como `"database": 'blogs_api'`)**
+
+**É essencial usar essas 3 variávies no arquivo acima:**
+
+Variáveis:
+
+`host: process.env.HOSTNAME`
+`user: process.env.MYSQL_USER`
+`password: process.env.MYSQL_PASSWORD`
+
+**Com elas que iremos conseguir conectar ao banco do avaliador automático**
+
 #### Os seguintes pontos serão avaliados:
 
 - O seu projeto deverá usar um `ORM` para criar e atualizar o seu banco. A clonagem do projeto seguida de um comando de migrate deve deixá-lo em sua forma esperada.
@@ -113,7 +157,18 @@ O não cumprimento de um requisito, total ou parcialmente, impactará em sua ava
     "updated": "2011-08-01T19:58:51.947Z",
   }
   ```
-  OBS: os testes iram gerar dados atraves do seu migrates e seeds, entao fique bem atento se estiver errado nao ira funcionar
+  
+  **OBS: Os testes irão rodar atráves do seu migrate usando os seguintes comandos:**
+
+  "drop": "npx sequelize-cli db:drop $" -- Dropa o banco
+
+  "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate $" -- Cria o banco e gera as tabelas
+
+  "seed": "npx sequelize-cli db:seed:all $", -- Insere dados na tabela
+
+  **Então preste bastante atenção se estiver errado o avaliador não irá funcionar**
+
+  **Haverá um arquivo na pasta `/seeders` dentro dela irá conter as querys para inserir no banco `não remova ela o avaliador irá usar ela`.
 
 ### 1 - Sua aplicação deve ter o endpoint POST `/user`
 
@@ -152,8 +207,6 @@ O não cumprimento de um requisito, total ou parcialmente, impactará em sua ava
     "token": "token-aqui"
   }
   ```
-
-- O endpoint deverá ser testado.
 
 ### Além disso, as seguintes verificações serão feitas:
 
@@ -234,8 +287,6 @@ Se o usuário cadastrar o campo "email" com um email que já existe, o resultado
   }
   ```
 
-- O endpoint deverá ser testado.
-
 ### Além disso, as seguintes verificações serão feitas:
 
 **[Será validado que é possível fazer login com sucesso]**
@@ -297,8 +348,6 @@ Se o login for com usuário inexistente o resultado retornado deverá ser confor
 
 - A requisição deve ter token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
-- O endpoint deverá ser testado.
-
 ### Além disso, as seguintes verificações serão feitas:
 
 **[Será validado que é possível listar todos os usuários]**
@@ -336,8 +385,6 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 - A requisição deve ter token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
-- O endpoint deverá ser testado.
-
 ### Além disso, as seguintes verificações serão feitas:
 
 **[Será validado que é possível listar um usuario específico com sucesso]**
@@ -369,8 +416,6 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 #### Os seguintes pontos serão avaliados:
 
 - Utilizando o token de autenticação nos headers, o usuário correspondente deve ser apagado.
-
-- O endpoint deverá ser testado.
 
 ### Além disso, as seguintes verificações serão feitas:
 
@@ -408,8 +453,6 @@ Se não conter o token o resultado retornado deverá ser conforme exibido abaixo
 - Caso o post não contenha o `title` e/ou o `content` a API deve retornar um erro de `status 400`.
 
 - A requisição deve ter o token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
-
-- O endpoint deverá ser testado.
 
 ### Além disso, as seguintes verificações serão feitas:
 
@@ -467,8 +510,6 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
   ]
   ```
 
-- O endpoint deverá ser testado.
-
 ### Além disso, as seguintes verificações serão feitas:
 
 **[Será validado que é possível listar blogpost com sucesso]**
@@ -510,8 +551,6 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
     }
   }
   ```
-
-- O endpoint deverá ser testado.
 
 ### Além disso, as seguintes verificações serão feitas:
 
@@ -559,8 +598,6 @@ Se o id do post for inválido o resultado retornado deverá ser conforme exibido
 - Caso uma requisição sem token seja recebida, deve-se retornar um código de `status 401`.
 
 - Caso o post não contenha o `title` e/ou o `content` a API deve retornar um erro de `status 400`.
-
-- O endpoint deverá ser testado.
 
 ### Além disso, as seguintes verificações serão feitas:
 
@@ -624,8 +661,6 @@ Se não conter o campo `content` o resultado retornado deverá ser conforme exib
 
 - Caso nenhum **BlogPost** satisfaça a busca, retorne um array vazio.
 
-- O endpoint deverá ser testado.
-
 ### Além disso, as seguintes verificações serão feitas:
 
 **[Será validado que é possível buscar um blogpost pelo `title`]**
@@ -664,20 +699,17 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ![blogpost com token inválido](./public/buscarpostcomtokeninvalido.png)
 
-
 ### 11 - Sua aplicação deve ter o endpoint DELETE `post/:id`
 
 #### Os seguintes pontos serão avaliados:
 
 - Deleta o post com o `id` especificado. Só deve ser permitido para o usuário que criou o **BlogPost**.
 
-- Caso uma pessoa diferente de quem criou faça a requisição, deve retornar um código `status 403`.
+- Caso uma pessoa diferente de quem criou faça a requisição, deve retornar um código `status 401`.
 
 - Caso uma requisição sem token seja recebida, deve-se retornar um código de `status 401`.
 
 - Caso o post referido não exista, deve-se retornar um código de `status 404`.
-
-- O endpoint deverá ser testado.
 
 ### Além disso, as seguintes verificações serão feitas:
 

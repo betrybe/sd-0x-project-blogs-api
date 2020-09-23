@@ -10,10 +10,6 @@ describe('Sua aplicação deve ter o endpoint DELETE `post/:id`', () => {
     shell.exec('npx sequelize-cli db:seed:all $');
   });
 
-  afterEach(() => {
-    shell.exec('npx sequelize-cli db:drop');
-  });
-
   it('Será validado que é possível deletar um blogpost com sucesso', async () => {
     let token;
     await frisby
