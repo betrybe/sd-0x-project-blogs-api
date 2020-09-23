@@ -84,7 +84,6 @@ describe('Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        console.log(json.message);
         expect(json.message).toBe('"email" is required');
       });
   });
@@ -101,7 +100,6 @@ describe('Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        console.log(json.message);
         expect(json.message).toBe('"password" length must be 6 characters long');
       });
   });
@@ -117,7 +115,6 @@ describe('Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        console.log(json.message);
         expect(json.message).toBe('"password" is required');
       });
   });
