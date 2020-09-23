@@ -85,6 +85,14 @@ O projeto tem até a seguinte data: `DD/MM/YYYY - 14:00h`. Para ser entregue a a
 
 O não cumprimento de um requisito, total ou parcialmente, impactará em sua avaliação.
 
+Há um arquivo `index.js` no repositório. Não remova, nele, o seguinte trecho de código:
+
+```javascript
+app.get('/', (request, response) => {
+  response.send();
+});
+```
+
 **Você irá precisar configurar as variáveis globais do MySQL.** Você pode usar esse [Conteúdo de variáveis de ambiente com NodeJS](https://blog.rocketseat.com.br/variaveis-ambiente-nodejs/) como referência.
 
 **Faça essas configurações também para as variáveis de ambiente usadas nesses arquivo:**
@@ -124,7 +132,9 @@ module.exports = {
 Variáveis:
 
 `host: process.env.HOSTNAME`
+
 `user: process.env.MYSQL_USER`
+
 `password: process.env.MYSQL_PASSWORD`
 
 **Com elas que iremos conseguir conectar ao banco do avaliador automático**
@@ -157,7 +167,7 @@ Variáveis:
     "updated": "2011-08-01T19:58:51.947Z",
   }
   ```
-  
+
   **OBS: Os testes irão rodar atráves do seu migrate usando os seguintes comandos:**
 
   "drop": "npx sequelize-cli db:drop $" -- Dropa o banco
