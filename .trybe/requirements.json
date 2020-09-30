@@ -13,7 +13,7 @@
       "bonus": false
     },
     {
-      "description": "Sua aplicação deve ter o endpoint GET `/user/:id",
+      "description": "Sua aplicação deve ter o endpoint GET `/user/:id`",
       "bonus": false
     },
     {
