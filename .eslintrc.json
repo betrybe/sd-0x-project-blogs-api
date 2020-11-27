@@ -9,6 +9,7 @@
   },
   "extends": "airbnb-base",
   "parserOptions": { "ecmaVersion": 11 },
+  "ignorePatterns": ["models/index.js"],
   "rules": {
     "no-console": "off",
     "no-alert": "off",
