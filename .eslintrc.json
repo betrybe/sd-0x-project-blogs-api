@@ -10,6 +10,12 @@
   "extends": "airbnb-base",
   "parserOptions": { "ecmaVersion": 11 },
   "rules": {
+    "max-params": [1, 5],
+    "max-lines:": 250,
+    "sonarjs/cognitive-complexity": 5,
+    "max-lines-per-function": 25,
+    "max-depth": [1, 4],
+    "sonarjs/no-identical-functions": 1,
     "no-console": "off",
     "no-alert": "off",
     "arrow-parens": [2, "always"],
