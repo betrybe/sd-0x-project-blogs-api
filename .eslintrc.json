@@ -1,26 +1,40 @@
 {
   "root": true,
   "env": {
-      "browser": true,
-      "commonjs": true,
-      "es2020": true,
-      "node": true,
-      "jest": true
+    "browser": true,
+    "commonjs": true,
+    "es2020": true,
+    "node": true,
+    "jest": true
   },
   "extends": "airbnb-base",
-  "parserOptions": { "ecmaVersion": 11 },
+  "parserOptions": {
+    "ecmaVersion": 11
+  },
+  "plugins": [
+    "sonarjs"
+  ],
   "rules": {
-    "max-params": [1, 5],
-    "max-lines:": 250,
-    "sonarjs/cognitive-complexity": 5,
-    "max-lines-per-function": 25,
-    "max-depth": [1, 4],
-    "sonarjs/no-identical-functions": 1,
+    "max-params": 2,
+    "max-lines": [2, 250],
+    "sonarjs/cognitive-complexity": 2,
+    "max-lines-per-function": 2,
+    "max-depth": [
+      1,
+      4
+    ],
+    "sonarjs/no-identical-functions": "error",
     "no-console": "off",
     "no-alert": "off",
-    "arrow-parens": [2, "always"],
+    "arrow-parens": [
+      2,
+      "always"
+    ],
     "jsx-a11y/label-has-associated-control": 0,
-    "quotes": [2, "single"],
+    "quotes": [
+      2,
+      "single"
+    ],
     "implicit-arrow-linebreak": "off",
     "consistent-return": "off",
     "no-unused-vars": [

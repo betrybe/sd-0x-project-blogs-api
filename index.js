@@ -1,10 +1,11 @@
 const express = require('express');
 
 const app = express();
+const testt = [122, 3];
+const test = () => testt;
+const test1 = () => testt;
 
-const test = () =>  1
-const test1 = () => 1
-
+console.log(test1 + test);
 
 app.listen(3000, () => console.log('ouvindo porta 3000!'));
 
