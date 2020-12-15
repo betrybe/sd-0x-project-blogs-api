@@ -1,3 +1,9 @@
+### Termos e acordos
+
+Ao iniciar este projeto, você concorda com as diretrizes do Código de Ética e Conduta e do Manual da Pessoa Estudante da Trybe.
+
+---
+
 # Boas vindas ao repositório do API de Blogs!
 
 Você já usa o GitHub diariamente para desenvolver os exercícios, certo? Agora, para desenvolver os projetos, você deverá seguir as instruções a seguir. Fique atento a cada passo, e se tiver qualquer dúvida, nos envie por Slack! #vqv 🚀
@@ -6,7 +12,75 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
 ---
 
-## Instruções para entregar seu projeto:
+# Sumário
+
+- [Habilidades](#habilidades)
+- [Entregáveis](#entregáveis)
+  - [O que deverá ser desenvolvido](#o-que-deverá-ser-desenvolvido)
+  - [Desenvolvimento](#desenvolvimento)
+  - [Data de entrega](#data-de-entrega)
+- [Instruções para entregar seu projeto](#instruções-para-entregar-seu-projeto)
+  - [Antes de começar a desenvolver](#antes-de-começar-a-desenvolver)
+  - [Durante o desenvolvimento](#durante-o-desenvolvimento)
+  - [Execução de testes unitários](#execução-de-testes-unitários)
+- [Como desenvolver](#como-desenvolver)
+  - [Linter](#linter)
+- [Requisitos do projeto](#requisitos-do-projeto)
+  - [Observações importantes](👀-Observações-importantes)
+    - [Dicas](#dicas)
+  - [Lista de Requisitos](#lista-de-requisitos)
+    - [1 - Sua aplicação deve ter o endpoint POST `/user`](#1---Sua-aplicação-deve-ter-o-endpoint-POST-/user)
+    - [2 - Sua aplicação deve ter o endpoint POST `/login`](#2---Sua-aplicação-deve-ter-o-endpoint-POST-`/login`)
+    - [3 - Sua aplicação deve ter o endpoint GET `/user`](#3---Sua-aplicação-deve-ter-o-endpoint-GET-`/user``)
+    - [4 - Sua aplicação deve ter o endpoint GET `/user/:id`](#4---Sua-aplicação-deve-ter-o-endpoint-GET-`/user/:id`)
+    - [5 - Sua aplicação deve ter o endpoint DELETE `/user/me`](#5---Sua-aplicação-deve-ter-o-endpoint-DELETE-`/user/me`)
+    - [6 - Sua aplicação deve ter o endpoint POST `/post`](#6---Sua-aplicação-deve-ter-o-endpoint-POST-`/post`)
+    - [7 - Sua aplicação deve ter o endpoint GET `/post`](#7---Sua-aplicação-deve-ter-o-endpoint-GET-`/post`)
+    - [8 - Sua aplicação deve ter o endpoint GET `post/:id`](#8---Sua-aplicação-deve-ter-o-endpoint-GET-`post/:id`)
+    - [9 - Sua aplicação deve ter o endpoint PUT `/post/:id`](#9---Sua-aplicação-deve-ter-o-endpoint-PUT-`/post/:id`)
+    - [10 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`](#10---Sua-aplicação-deve-ter-o-endpoint-GET-`post/search?q=:searchTerm`)
+    - [11 - Sua aplicação deve ter o endpoint DELETE `post/:id`](#11---Sua-aplicação-deve-ter-o-endpoint-DELETE-`post/:id`)
+  - [Antes de começar](#antes-de-começar)
+  - [Lista de requisitos](#lista-de-requisitos)
+- [Avisos Finais](#avisos-finais)
+
+# Habilidades 
+
+Nesse projeto, você vai construir um back-end usando `ORM` com o pacote `sequelize` do `npm`, e será capaz de:
+ - Criar e associar tabelas usando `models` do `sequelize`
+ - Construir endpoints para consumir os models que criar 
+ - Fazer um `CRUD` com o `ORM`
+
+# Entregáveis
+
+Para entregar o seu projeto você deverá criar um Pull Request neste repositório.
+
+Lembre-se que você pode consultar nosso conteúdo sobre [Git & GitHub](https://course.betrybe.com/intro/git/) sempre que precisar!
+
+---
+
+## O que deverá ser desenvolvido
+
+Você vai arquiteturar, desenvolver uma API de um CRUD posts de blog (com o sequelize). Começando pela API, você vai desenvolver alguns endpoints (seguindo os princípios do REST) que estarão conectados ao seu banco de dados. Lembre-se de aplicar os princípios SOLID!
+
+Primeiro, você irá criar uma tabela para os usuários que desejam se cadastrar na aplicação. Após isso, a tabela blogPost será seu foco, guardando todas as informações dos posts realizados na plataforma. Essa é apenas uma recomendação!
+
+---
+
+## Desenvolvimento
+
+Você deve desenvolver uma aplicação em `Node.js` usando o pacote `sequelize` para fazer um `CRUD` de posts.
+
+Para fazer um post é necessário usuário e login, portanto será trabalhada a **relação entre** `user` e `post`.
+ 
+### Data de Entrega
+
+O projeto tem até a seguinte data: `DD/MM/YYYY - 14:00h`. Para ser entregue a avaliação final.
+
+---
+
+# Instruções para entregar seu projeto:
+
 
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
@@ -53,31 +127,71 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
 ---
 
-# Entregáveis
+### DURANTE O DESENVOLVIMENTO
 
-Para entregar o seu projeto você deverá criar um Pull Request neste repositório.
+* Faça `commits` das alterações que você fizer no código regularmente
 
-Lembre-se que você pode consultar nosso conteúdo sobre [Git & GitHub](https://course.betrybe.com/intro/git/) sempre que precisar!
+* Lembre-se de sempre após um (ou alguns) `commits` atualizar o repositório remoto
 
----
-
-## O que deverá ser desenvolvido
-
-Você vai arquiteturar, desenvolver uma API de um CRUD posts de blog (com o sequelize). Começando pela API, você vai desenvolver alguns endpoints (seguindo os principios do REST) que estarão conectados ao seu banco de dados. Lembre-se de aplicar os princípios SOLID!
-
-Primeiro, você irá criar uma tabela para os usuários que desejam se cadastrar na aplicação. Após isso, a tabela blogPost será seu foco, guardando todas as informações dos posts realizados na plataforma. Essa é apenas uma recomendação!
-
----
-
-### Data de Entrega
-
-O projeto tem até a seguinte data: `DD/MM/YYYY - 14:00h`. Para ser entregue a avaliação final.
+* Os comandos que você utilizará com mais frequência são:
+  1. `git status` _(para verificar o que está em vermelho - fora do stage - e o que está em verde - no stage)_
+  2. `git add` _(para adicionar arquivos ao stage do Git)_
+  3. `git commit` _(para criar um commit com os arquivos que estão no stage do Git)_
+  4. `git push -u nome-da-branch` _(para enviar o commit para o repositório remoto na primeira vez que fizer o `push` de uma nova branch)_
+  5. `git push` _(para enviar o commit para o repositório remoto após o passo anterior)_
 
 ---
 
-## Requisitos Obrigatórios:
+### DEPOIS DE TERMINAR O DESENVOLVIMENTO (OPCIONAL)
 
-## ⚠️ Leia-os atentamente e siga à risca o que for pedido. ⚠️
+Para sinalizar que o seu projeto está pronto para o _"Code Review"_ dos seus colegas, faça o seguinte:
+
+* Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas:
+
+  * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**;
+
+  * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**;
+
+  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-0x`.
+
+Caso tenha alguma dúvida, [aqui tem um video explicativo](https://vimeo.com/362189205).
+
+---
+
+### Execução de testes unitários
+
+Vamos usar o Jest para executar os testes, use o comando a seguir para executar todos os testes: 
+
+```sh
+npm test
+```
+
+Caso queria executar só um arquivo de test use o seguinte comando, considerado que quer testar o arquivo `tests/createPost.test.js`:
+
+```sh
+npm test tests/createPost.test.js
+```
+
+
+---
+
+# Como desenvolver
+## Linter
+
+Para garantir a qualidade do código, vamos utilizar neste projeto o linter ESLint. Assim o código estará alinhado com as boas práticas de desenvolvimento, sendo mais legível e de fácil manutenção! Para rodar o *linter* localmente no projeto, execute o comando abaixo: 
+
+`npm run lint`
+
+⚠ PULL REQUESTS COM ISSUES DE LINTER NÃO SERÃO AVALIADAS. ATENTE-SE PARA RESOLVÊ-LAS ANTES DE FINALIZAR O DESENVOLVIMENTO! ⚠
+
+Aqui encontram-se os requisitos do projeto. Em cada requisito você encontrara uma imagem de um protótipo de como sua aplicação deve ficar. Estilo da página não será avaliado.
+
+---
+
+# Requisitos do projeto:
+
+## Antes de começar
+### ⚠️ Leia-os atentamente e siga à risca o que for pedido. ⚠️
 
 ### 👀 Observações importantes:
 
@@ -127,7 +241,7 @@ module.exports = {
 
 **É essencial usar essas 3 variávies no arquivo acima:**
 
-Variáveis:
+#### Variáveis:
 
 `host: process.env.HOSTNAME`
 
@@ -136,6 +250,24 @@ Variáveis:
 `password: process.env.MYSQL_PASSWORD`
 
 **Com elas que iremos conseguir conectar ao banco do avaliador automático**
+
+### Dicas
+
+#### Status HTTP
+
+Tenha em mente que todas as "respostas" devem respeitar os [status do protocolo HTTP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status) com base no que o REST prega.
+
+Alguns exemplos:
+
+  - Requisições que precisam de token mas não o receberam devem retornar um código de `status 401`;
+
+  - Requisições que não seguem o formato pedido pelo servidor devem retornar um código de `status 400`;
+
+  - Um problema inesperado no servidor deve retornar um código de `status 500`;
+
+  - Um acesso ao criar um recurso, no nosso caso usuário ou post, deve retornar um código de `status 201`.
+
+---
 
 #### Os seguintes pontos serão avaliados:
 
@@ -177,6 +309,8 @@ Variáveis:
   **Então preste bastante atenção se estiver errado o avaliador não irá funcionar**
 
   **Haverá um arquivo na pasta `/seeders` dentro dela irá conter as querys para inserir no banco `não remova ela o avaliador irá usar ela`.
+
+## Lista de Requisitos:
 
 ### 1 - Sua aplicação deve ter o endpoint POST `/user`
 
@@ -643,7 +777,7 @@ Se não conter o campo `content` o resultado retornado deverá ser conforme exib
 
 ![blogpost com token inválido](./public/editarsemcontent.png)
 
-### 10  - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`
+### 10 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -751,57 +885,14 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ![blogpost com token inválido](./public/deletarpostcomtokeninvalido.png)
 
-## Dicas
-
-### Status HTTP
-
-Tenha em mente que todas as "respostas" devem respeitar os [status do protocolo HTTP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status) com base no que o REST prega.
-
-Alguns exemplos:
-
-  - Requisições que precisam de token mas não o receberam devem retornar um código de `status 401`;
-
-  - Requisições que não seguem o formato pedido pelo servidor devem retornar um código de `status 400`;
-
-  - Um problema inesperado no servidor deve retornar um código de `status 500`;
-
-  - Um acesso ao criar um recurso, no nosso caso usuário ou post, deve retornar um código de `status 201`.
-
----
-
-### DURANTE O DESENVOLVIMENTO
-
-* Faça `commits` das alterações que você fizer no código regularmente
-
-* Lembre-se de sempre após um (ou alguns) `commits` atualizar o repositório remoto
-
-* Os comandos que você utilizará com mais frequência são:
-  1. `git status` _(para verificar o que está em vermelho - fora do stage - e o que está em verde - no stage)_
-  2. `git add` _(para adicionar arquivos ao stage do Git)_
-  3. `git commit` _(para criar um commit com os arquivos que estão no stage do Git)_
-  4. `git push -u nome-da-branch` _(para enviar o commit para o repositório remoto na primeira vez que fizer o `push` de uma nova branch)_
-  5. `git push` _(para enviar o commit para o repositório remoto após o passo anterior)_
-
----
-
-### DEPOIS DE TERMINAR O DESENVOLVIMENTO (OPCIONAL)
-
-Para sinalizar que o seu projeto está pronto para o _"Code Review"_ dos seus colegas, faça o seguinte:
-
-* Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas:
-
-  * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**;
-
-  * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**;
-
-  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-0x`.
-
-Caso tenha alguma dúvida, [aqui tem um video explicativo](https://vimeo.com/362189205).
-
----
+--- 
 
 ### REVISANDO UM PULL REQUEST
 
 Use o conteúdo sobre [Code Review](https://course.betrybe.com/real-life-engineer/code-review/) para te ajudar a revisar os _Pull Requests_.
 
 #VQV
+
+# Avisos Finais
+
+Ao finalizar e submeter o projeto, não se esqueça de avaliar sua experiência preenchendo o formulário. Leva menos de 3 minutos!
