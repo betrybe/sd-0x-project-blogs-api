@@ -24,7 +24,7 @@
     "no-console": "off",
     "no-alert": "off",
     "arrow-parens": [
-      2,
+      "error",
       "always"
     ],
     "jsx-a11y/label-has-associated-control": 0,
@@ -40,5 +40,8 @@
       }
     ],
     "object-curly-newline": "off"
+  },
+  "globals": {
+    "db":"writable"
   }
 }
