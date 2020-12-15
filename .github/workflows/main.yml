@@ -25,7 +25,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Evaluator step
         id: evaluator
-        uses: betrybe/jest-evaluator-action@v6
+        uses: betrybe/jest-evaluator-action@v7
         with:
           repository-test-name: 'betrybe/sd-0x-project-blogs-api-tests'
           repository-test-branch: 'master'
