@@ -26,7 +26,7 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 - [Como desenvolver](#como-desenvolver)
   - [Linter](#linter)
 - [Requisitos do projeto](#requisitos-do-projeto)
-  - [Observações importantes](👀-Observações-importantes)
+  - [Observações importantes](#👀-Observações-importantes)
     - [Dicas](#dicas)
   - [Lista de Requisitos](#lista-de-requisitos)
     - [1 - Sua aplicação deve ter o endpoint POST `/user`](#1---Sua-aplicação-deve-ter-o-endpoint-POST-/user)
