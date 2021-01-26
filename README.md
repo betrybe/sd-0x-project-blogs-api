@@ -85,7 +85,7 @@ O projeto tem até a seguinte data: `DD/MM/YYYY - 14:00h`. Para ser entregue a a
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
 1. Clone o repositório
-  * `git clone https://github.com/betrybe/sd-0x-project-blogs-api.git`.
+  * `git clone https://github.com/tryber/sd-0x-project-blogs-api.git`.
   * Entre na pasta do repositório que você acabou de clonar:
     * `cd sd-0x-project-blogs-api`
 
