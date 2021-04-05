@@ -38,7 +38,7 @@ describe('1 - Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"displayName" deve ter no mínimo 8 caracteres');
+        expect(json.message).toBe('"displayName" length must be at least 8 characters long');
       });
   });
 
@@ -54,7 +54,7 @@ describe('1 - Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"email" deve estar em um formato válido');
+        expect(json.message).toBe('"email" must be a valid email');
       });
   });
 
@@ -70,7 +70,7 @@ describe('1 - Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"email" deve estar em um formato válido');
+        expect(json.message).toBe('"email" must be a valid email');
       });
   });
 
@@ -85,7 +85,7 @@ describe('1 - Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"email" é obrigatório');
+        expect(json.message).toBe('"email" is required');
       });
   });
 
@@ -101,7 +101,7 @@ describe('1 - Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"password" deve ter no mínimo 6 caracteres');
+        expect(json.message).toBe('"password" length must be 6 characters long');
       });
   });
 
@@ -116,7 +116,7 @@ describe('1 - Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"password" é obrigatório');
+        expect(json.message).toBe('"password" is required');
       });
   });
 
