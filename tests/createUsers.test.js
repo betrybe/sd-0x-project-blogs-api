@@ -22,6 +22,7 @@ describe('1 - Sua aplicação deve ter o endpoint POST `/user`', () => {
       .then((response) => {
         const { json } = response;
         expect(json.token).not.toBeNull();
+        expect(json.token).not.toBeUndefined();
       });
   });
 
@@ -37,7 +38,7 @@ describe('1 - Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"displayName" length must be at least 8 characters long');
+        expect(json.message).toBe('"displayName" deve ter no mínimo 8 caracteres');
       });
   });
 
@@ -53,7 +54,7 @@ describe('1 - Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"email" must be a valid email');
+        expect(json.message).toBe('"email" deve estar em um formato válido');
       });
   });
 
@@ -69,7 +70,7 @@ describe('1 - Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"email" must be a valid email');
+        expect(json.message).toBe('"email" deve estar em um formato válido');
       });
   });
 
@@ -84,7 +85,7 @@ describe('1 - Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"email" is required');
+        expect(json.message).toBe('"email" é obrigatório');
       });
   });
 
@@ -100,7 +101,7 @@ describe('1 - Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"password" length must be 6 characters long');
+        expect(json.message).toBe('"password" deve ter no mínimo 6 caracteres');
       });
   });
 
@@ -115,7 +116,7 @@ describe('1 - Sua aplicação deve ter o endpoint POST `/user`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"password" is required');
+        expect(json.message).toBe('"password" é obrigatório');
       });
   });
 
