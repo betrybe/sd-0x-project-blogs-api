@@ -74,7 +74,11 @@ Para fazer um post é necessário usuário e login, portanto será trabalhada a 
  
 ### Data de Entrega
 
-O projeto tem até a seguinte data: `DD/MM/YYYY - 14:00h`. Para ser entregue a avaliação final.
+  - Projeto individual.
+
+  - Serão `X` dias de projeto.
+
+  - Data de entrega para avaliação final do projeto: `DD/MM/YYYY - 14:00h`.
 
 ---
 
@@ -159,24 +163,31 @@ npm test tests/createPost.test.js
 ---
 
 # Como desenvolver
+
 ## Linter
 
-Para garantir a qualidade do código, vamos utilizar neste projeto o linter ESLint. Assim o código estará alinhado com as boas práticas de desenvolvimento, sendo mais legível e de fácil manutenção! Para rodar o *linter* localmente no projeto, execute o comando abaixo: 
+Para garantir a qualidade do código, usaremos o [ESLint](https://eslint.org/) para fazer a sua análise estática.
 
-`npm run lint`
+Este projeto já vem com as dependências relacionadas ao _linter_ configuradas nos arquivos `package.json` nos seguintes caminhos:
+
+- `sd-0x-project-blogs-api/package.json`
+
+Para poder rodar os `ESLint` em um projeto basta executar o comando `npm install` dentro do projeto e depois `npm run lint`. Se a análise do `ESLint` encontrar problemas no seu código, tais problemas serão mostrados no seu terminal. Se não houver problema no seu código, nada será impresso no seu terminal.
+
+Você também pode instalar o plugin do `ESLint` no `VSCode`, bastar ir em extensions e baixar o [plugin `ESLint`](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
 ⚠ PULL REQUESTS COM ISSUES DE LINTER NÃO SERÃO AVALIADAS. ATENTE-SE PARA RESOLVÊ-LAS ANTES DE FINALIZAR O DESENVOLVIMENTO! ⚠
 
-Aqui encontram-se os requisitos do projeto. Em cada requisito você encontrara uma imagem de um protótipo de como sua aplicação deve ficar. Estilo da página não será avaliado.
-
 ---
-
 # Requisitos do projeto:
 
-## Antes de começar
+## Antes de começar:
+
 ### ⚠️ Leia-os atentamente e siga à risca o que for pedido. ⚠️
 
 ### 👀 Observações importantes:
+
+Em cada requisito você encontrara uma imagem de um protótipo de como sua aplicação deve ficar. Estilo da página não será avaliado.
 
 O não cumprimento de um requisito, total ou parcialmente, impactará em sua avaliação.
 
@@ -192,7 +203,7 @@ app.get('/', (request, response) => {
 
 **Faça essas configurações também para as variáveis de ambiente usadas nesses arquivo:**
 
-`sd-0x-project-blogs-api-rubric/config/config.js`
+`sd-0x-project-blogs-api/config/config.js`
 
 ```
 module.exports = {
@@ -233,6 +244,12 @@ module.exports = {
 `password: process.env.MYSQL_PASSWORD`
 
 **Com elas que iremos conseguir conectar ao banco do avaliador automático**
+
+#### Variável JWT (opcional):
+
+`JWT_SECRET`
+
+**Também poderá ser utilizado esta variável de ambiente para o SECRET do JWT**
 
 ### Dicas
 
