@@ -37,7 +37,7 @@ describe('7 - Sua aplicação deve ter o endpoint POST `/post`', () => {
       .post(`${url}/post`, {
         title: 'Fórmula 1',
         content: 'O campeão do ano!',
-        categoryId: [1],
+        categoryIds: [1],
       })
       .expect('status', 201)
       .then((response) => {
@@ -75,7 +75,7 @@ describe('7 - Sua aplicação deve ter o endpoint POST `/post`', () => {
       })
       .post(`${url}/post`, {
         content: 'O campeão do ano!',
-        categoryId: [1]
+        categoryIds: [1]
       })
       .expect('status', 400)
       .then((response) => {
@@ -110,7 +110,7 @@ describe('7 - Sua aplicação deve ter o endpoint POST `/post`', () => {
       })
       .post(`${url}/post`, {
         title: 'O campeão do ano!',
-        categoryId: [1],
+        categoryIds: [1],
       })
       .expect('status', 400)
       .then((response) => {
@@ -119,7 +119,7 @@ describe('7 - Sua aplicação deve ter o endpoint POST `/post`', () => {
       });
   });
 
-  it('Será validado que não é possível cadastrar um blogpost sem o campo `categoryId`', async () => {
+  it('Será validado que não é possível cadastrar um blogpost sem o campo `categoryIds`', async () => {
     let token;
     await frisby
       .post(`${url}/login`,
@@ -150,7 +150,7 @@ describe('7 - Sua aplicação deve ter o endpoint POST `/post`', () => {
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"categoryId" is required');
+        expect(json.message).toBe('"categoryIds" is required');
       });
   });
 
@@ -181,12 +181,12 @@ describe('7 - Sua aplicação deve ter o endpoint POST `/post`', () => {
       .post(`${url}/post`, {
         title: "Carros elétricos vão dominar o mundo?",
         content: "Já é possivel encontrar diversos carros elétricos em todo o mundo, será esse nosso futuro?",
-        categoryId: [3],
+        categoryIds: [3],
       })
       .expect('status', 400)
       .then((response) => {
         const { json } = response;
-        expect(json.message).toBe('"categoryId" not found');
+        expect(json.message).toBe('"categoryIds" not found');
       });
   });
 
@@ -203,7 +203,7 @@ describe('7 - Sua aplicação deve ter o endpoint POST `/post`', () => {
       .post(`${url}/post`, {
         title: 'Fórmula 1',
         content: 'O campeão do ano!',
-        categoryId: [1],
+        categoryIds: [1],
       })
       .expect('status', 401)
       .then((response) => {
@@ -225,7 +225,7 @@ describe('7 - Sua aplicação deve ter o endpoint POST `/post`', () => {
       .post(`${url}/post`, {
         title: 'Fórmula 1',
         content: 'O campeão do ano!',
-        categoryId: [1],
+        categoryIds: [1],
 
       })
       .expect('status', 401)
