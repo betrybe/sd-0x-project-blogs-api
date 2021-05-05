@@ -42,6 +42,7 @@ describe('7 - Sua aplicação deve ter o endpoint POST `/post`', () => {
       .expect('status', 201)
       .then((response) => {
         const { json } = response;
+        expect(json.id).toBe(3);
         expect(json.title).toBe('Fórmula 1');
         expect(json.content).toBe('O campeão do ano!');
         expect(json.userId).toBe(1);

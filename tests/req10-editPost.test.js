@@ -45,6 +45,8 @@ describe('10 - Sua aplicação deve ter o endpoint PUT `/post/:id`', () => {
         expect(json.title).toBe('Fórmula 1 editado');
         expect(json.content).toBe('O campeão do ano! editado');
         expect(json.userId).toBe(1);
+        expect(json.categories[0].id).toBe(1);
+        expect(json.categories[0].name).toBe("Inovação");
       });
   });
 
