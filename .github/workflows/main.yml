@@ -28,12 +28,13 @@ jobs:
         uses: betrybe/jest-evaluator-action@v7
         with:
           repository-test-name: 'betrybe/sd-0x-project-blogs-api-tests'
-          repository-test-branch: 'master'
+          repository-test-branch: 'teste-novo-blogs-api'
           npm-start: true
         env:
           MYSQL_USER: 'root'
           MYSQL_PASSWORD: 'password'
           HOSTNAME: 'mysql'
+          JWT_SECRET: 'secretJWT'
       - name: Store evaluation step
         uses: betrybe/store-evaluation-action@v2
         with:
