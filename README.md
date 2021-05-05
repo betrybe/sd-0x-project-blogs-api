@@ -291,7 +291,7 @@ Alguns exemplos:
   ```json
   {
     "id": "83063123",
-    "name": "Typescript"
+    "name": "Escola"
   }
   ```
 
@@ -357,7 +357,7 @@ Alguns exemplos:
 
   ```json
   {
-    "message": "Usuário já existe"
+    "message": "User already registered"
   }
   ```
 
@@ -365,9 +365,10 @@ Alguns exemplos:
 
   ```json
   {
-    "token": "token-aqui"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjo1LCJkaXNwbGF5TmFtZSI6InVzdWFyaW8gZGUgdGVzdGUiLCJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsImltYWdlIjoibnVsbCJ9LCJpYXQiOjE2MjAyNDQxODcsImV4cCI6MTYyMDY3NjE4N30.Roc4byj6mYakYqd9LTCozU1hd9k_Vw5IWKGL4hcCVG8"
   }
   ```
+  _O token anterior é fictício_
 
 ### Além disso, as seguintes verificações serão feitas:
 
@@ -444,9 +445,10 @@ Se o usuário cadastrar o campo "email" com um email que já existe, o resultado
 
   ```json
   {
-    "token": "token-aqui"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjo1LCJkaXNwbGF5TmFtZSI6InVzdWFyaW8gZGUgdGVzdGUiLCJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsImltYWdlIjoibnVsbCJ9LCJpYXQiOjE2MjAyNDQxODcsImV4cCI6MTYyMDY3NjE4N30.Roc4byj6mYakYqd9LTCozU1hd9k_Vw5IWKGL4hcCVG8"
   }
   ```
+  _O token anterior é fictício_
 
 ### Além disso, as seguintes verificações serão feitas:
 
@@ -580,7 +582,7 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
  ```json
   {
-    "name": "Typescript",
+    "name": "Inovação"
   }
   ```
 
@@ -623,11 +625,11 @@ Se o token for inexistente o resultado retornado deverá ser conforme exibido ab
 [
   {
     "id": 1,
-    "name": "Typescript"
+    "name": "Escola"
   },
   {
     "id": 2,
-    "name": "Javascript"
+    "name": "Inovação"
   }
 ]
 ```
@@ -690,6 +692,12 @@ Se não conter o campo `content` o resultado retornado deverá ser conforme exib
 
 ![blogpost sem content](./public/semcampocontent.png)
 
+**[Será validado que não é possível cadastrar um blogpost sem o campo `categoryId`]**
+
+Se não conter o campo `categoryId` o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![blogpost sem categoryId](./public/semcampocategoryid.png)
+
 **[Será validado que não é possível cadastrar um blogpost sem o token]**
 
 Se não conter o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
@@ -708,23 +716,30 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 - Esse endpoint deve listar todos os _BlogPosts_ e retorná-los na seguinte estrutura:
 
-  ```json
-  [
-    {
-      "id": "7706273476706534553",
-      "published": "2011-08-01T19:58:00.000Z",
-      "updated": "2011-08-01T19:58:51.947Z",
-      "title": "Latest updates, August 1st",
-      "content": "The whole text for the blog post goes here in this key",
-      "user": { // esse usuário é o autor do post
-        "id": "401465483996",
-        "displayName": "Brett Wiltshire",
-        "email": "brett@email.com",
-        "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
+```json
+[
+  {
+    "id": 1,
+    "title": "Post do Ano",
+    "content": "Melhor post do ano",
+    "userId": 1,
+    "published": "2011-08-01T19:58:00.000Z",
+    "updated": "2011-08-01T19:58:51.000Z",
+    "user": {
+      "id": 1,
+      "displayName": "Lewis Hamilton",
+      "email": "lewishamilton@gmail.com",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg"
+    },
+    "categories": [
+      {
+        "id": 1,
+        "name": "Inovação"
       }
-    }
-  ]
-  ```
+    ]
+  }
+]
+```
 
 ### Além disso, as seguintes verificações serão feitas:
 
@@ -752,21 +767,28 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 - Retorna um **BlogPost** com o `id` especificado. O retorno deve ter os seguinte formato:
 
-  ```json
+```json
   {
-    "id": "7706273476706534553",
-    "published": "2011-08-01T19:58:00.000Z",
-    "updated": "2011-08-01T19:58:51.947Z",
-    "title": "Latest updates, August 1st",
-    "content": "The whole text for the blog post goes here in this key",
-    "user": { // esse usuário é o autor do post
-      "id": "401465483996",
-      "displayName": "Brett Wiltshire",
-      "email": "brett@email.com",
-      "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png",
+  "id": 1,
+  "title": "Post do Ano",
+  "content": "Melhor post do ano",
+  "userId": 1,
+  "published": "2011-08-01T19:58:00.000Z",
+  "updated": "2011-08-01T19:58:51.000Z",
+  "user": {
+    "id": 1,
+    "displayName": "Lewis Hamilton",
+    "email": "lewishamilton@gmail.com",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg"
+  },
+  "categories": [
+    {
+      "id": 1,
+      "name": "Inovação"
     }
-  }
-  ```
+  ]
+}
+```
 
 ### Além disso, as seguintes verificações serão feitas:
 
@@ -799,6 +821,8 @@ Se o id do post for inválido o resultado retornado deverá ser conforme exibido
 #### Os seguintes pontos serão avaliados:
 
 - O endpoint deve receber um **BlogPost** que irá sobrescrever o original com o `id` especificado na URL. Só deve ser permitido para o usuário que criou o **BlogPost**.
+
+- A(s) categoria(s) do post **não** podem ser editadas, somente o `title` e `content`.
 
 - O corpo da requisição deve ter a seguinte estrutura:
 
@@ -927,22 +951,29 @@ Se não conter o token o resultado retornado deverá ser conforme exibido abaixo
 
 - Retorna uma array de **BlogPosts** que contenham em seu título, ou conteúdo, o termo pesquisado no `queryParam` da URL. O retorno deve ter o seguinte formato:
 
-  ```json
-  [
-    {
-      "id": "7706273476706534553",
-      "published": "2011-08-01T19:58:00.000Z",
-      "updated": "2011-08-01T19:58:51.947Z",
-      "title": "Latest updates, August 1st",
-      "content": "The whole text for the blog post goes here in this key",
-      "user": { // esse usuário é o autor do post
-        "id": "401465483996",
-        "displayName": "Brett Wiltshire",
-        "email": "brett@email.com",
-        "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
+```json
+[
+  {
+    "id": 2,
+    "title": "Vamos que vamos",
+    "content": "Foguete não tem ré",
+    "userId": 1,
+    "published": "2011-08-01T19:58:00.000Z",
+    "updated": "2011-08-01T19:58:51.000Z",
+    "user": {
+      "id": 1,
+      "displayName": "Lewis Hamilton",
+      "email": "lewishamilton@gmail.com",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg"
+    },
+    "categories": [
+      {
+        "id": 2,
+        "name": "Escola"
       }
-    }
-  ]
+    ]
+  }
+]
   ```
 
 - Caso nenhum **BlogPost** satisfaça a busca, retorne um array vazio.
