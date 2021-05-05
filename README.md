@@ -34,13 +34,15 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
     - [2 - Sua aplicação deve ter o endpoint POST `/login`](#2---sua-aplicação-deve-ter-o-endpoint-post-login)
     - [3 - Sua aplicação deve ter o endpoint GET `/user`](#3---sua-aplicação-deve-ter-o-endpoint-get-user)
     - [4 - Sua aplicação deve ter o endpoint GET `/user/:id`](#4---sua-aplicação-deve-ter-o-endpoint-get-userid)
-    - [5 - Sua aplicação deve ter o endpoint DELETE `/user/me`](#5---sua-aplicação-deve-ter-o-endpoint-delete-userme)
-    - [6 - Sua aplicação deve ter o endpoint POST `/post`](#6---sua-aplicação-deve-ter-o-endpoint-post-post)
-    - [7 - Sua aplicação deve ter o endpoint GET `/post`](#7---sua-aplicação-deve-ter-o-endpoint-get-post)
-    - [8 - Sua aplicação deve ter o endpoint GET `post/:id`](#8---sua-aplicação-deve-ter-o-endpoint-get-postid)
-    - [9 - Sua aplicação deve ter o endpoint PUT `/post/:id`](#9---sua-aplicação-deve-ter-o-endpoint-put-postid)
-    - [10 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`](#10---sua-aplicação-deve-ter-o-endpoint-get-postsearchqsearchterm)
+    - [5 - Sua aplicação deve ter o endpoint POST `/categories`](#5---sua-aplicação-deve-ter-o-endpoint-post-categories)
+    - [6 - Sua aplicação deve ter o endpoint GET `/categories`](#6---sua-aplicação-deve-ter-o-endpoint-get-categories)
+    - [7 - Sua aplicação deve ter o endpoint POST `/post`](#7---sua-aplicação-deve-ter-o-endpoint-post-post)
+    - [8 - Sua aplicação deve ter o endpoint GET `/post`](#8---sua-aplicação-deve-ter-o-endpoint-get-post)
+    - [9 - Sua aplicação deve ter o endpoint GET `post/:id`](#9---sua-aplicação-deve-ter-o-endpoint-get-postid)
+    - [10 - Sua aplicação deve ter o endpoint PUT `/post/:id`](#10---sua-aplicação-deve-ter-o-endpoint-put-postid)
     - [11 - Sua aplicação deve ter o endpoint DELETE `post/:id`](#11---sua-aplicação-deve-ter-o-endpoint-delete-postid)
+    - [12 - Sua aplicação deve ter o endpoint DELETE `/user/me`](#12---sua-aplicação-deve-ter-o-endpoint-delete-userme)
+    - [13 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`](#13---sua-aplicação-deve-ter-o-endpoint-get-postsearchqsearchterm)
 - [Avisos Finais](#avisos-finais)
 
 # Habilidades 
@@ -74,7 +76,11 @@ Para fazer um post é necessário usuário e login, portanto será trabalhada a 
  
 ### Data de Entrega
 
-O projeto tem até a seguinte data: `DD/MM/YYYY - 14:00h`. Para ser entregue a avaliação final.
+  - Projeto individual.
+
+  - Serão `X` dias de projeto.
+
+  - Data de entrega para avaliação final do projeto: `DD/MM/YYYY - 14:00h`.
 
 ---
 
@@ -149,34 +155,41 @@ Vamos usar o Jest para executar os testes, use o comando a seguir para executar 
 npm test
 ```
 
-Caso queria executar só um arquivo de test use o seguinte comando, considerado que quer testar o arquivo `tests/createPost.test.js`:
+Caso queria executar só um arquivo de test use o seguinte comando, considerado que quer testar o arquivo `tests/req7-createPost.test.js`:
 
 ```sh
-npm test tests/createPost.test.js
+npm test tests/req7-createPost.test.js
 ```
 
 
 ---
 
 # Como desenvolver
+
 ## Linter
 
-Para garantir a qualidade do código, vamos utilizar neste projeto o linter ESLint. Assim o código estará alinhado com as boas práticas de desenvolvimento, sendo mais legível e de fácil manutenção! Para rodar o *linter* localmente no projeto, execute o comando abaixo: 
+Para garantir a qualidade do código, usaremos o [ESLint](https://eslint.org/) para fazer a sua análise estática.
 
-`npm run lint`
+Este projeto já vem com as dependências relacionadas ao _linter_ configuradas nos arquivos `package.json` nos seguintes caminhos:
+
+- `sd-0x-project-blogs-api/package.json`
+
+Para poder rodar os `ESLint` em um projeto basta executar o comando `npm install` dentro do projeto e depois `npm run lint`. Se a análise do `ESLint` encontrar problemas no seu código, tais problemas serão mostrados no seu terminal. Se não houver problema no seu código, nada será impresso no seu terminal.
+
+Você também pode instalar o plugin do `ESLint` no `VSCode`, bastar ir em extensions e baixar o [plugin `ESLint`](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
 ⚠ PULL REQUESTS COM ISSUES DE LINTER NÃO SERÃO AVALIADAS. ATENTE-SE PARA RESOLVÊ-LAS ANTES DE FINALIZAR O DESENVOLVIMENTO! ⚠
 
-Aqui encontram-se os requisitos do projeto. Em cada requisito você encontrara uma imagem de um protótipo de como sua aplicação deve ficar. Estilo da página não será avaliado.
-
 ---
-
 # Requisitos do projeto:
 
-## Antes de começar
+## Antes de começar:
+
 ### ⚠️ Leia-os atentamente e siga à risca o que for pedido. ⚠️
 
 ### 👀 Observações importantes:
+
+Em cada requisito você encontrara uma imagem de um protótipo de como sua aplicação deve ficar. Estilo da página não será avaliado.
 
 O não cumprimento de um requisito, total ou parcialmente, impactará em sua avaliação.
 
@@ -192,7 +205,7 @@ app.get('/', (request, response) => {
 
 **Faça essas configurações também para as variáveis de ambiente usadas nesses arquivo:**
 
-`sd-0x-project-blogs-api-rubric/config/config.js`
+`sd-0x-project-blogs-api/config/config.js`
 
 ```
 module.exports = {
@@ -234,6 +247,12 @@ module.exports = {
 
 **Com elas que iremos conseguir conectar ao banco do avaliador automático**
 
+#### Variável JWT (opcional):
+
+`JWT_SECRET`
+
+**Também poderá ser utilizado esta variável de ambiente para o SECRET do JWT**
+
 ### Dicas
 
 #### Status HTTP
@@ -265,6 +284,23 @@ Alguns exemplos:
     "email": "brett@email.com", // tem quer ser único
     "password": "123456",
     "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
+  }
+  ```
+- Deve conter uma tabela chamada **Categories**, contendo dados com a seguinte estrutura::
+
+  ```json
+  {
+    "id": "83063123",
+    "name": "Typescript"
+  }
+  ```
+
+- Deve conter uma tabela chamada **PostsCategories**, contendo dados com a seguinte estrutura::
+
+  ```json
+  {
+    "postId": "123",
+    "categoryId": "321"
   }
   ```
 
@@ -536,33 +572,88 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ![Listar um usuário com token inválido](./public/tokeninvalidoumusuario.png)
 
-### 5 - Sua aplicação deve ter o endpoint DELETE `/user/me`
+### 5 - Sua aplicação deve ter o endpoint POST `/categories`
 
 #### Os seguintes pontos serão avaliados:
 
-- Utilizando o token de autenticação nos headers, o usuário correspondente deve ser apagado.
+- Esse endpoint deve receber uma _Categoria_ no corpo da requisição e criá-la no banco. O corpo da requisição deve ter a seguinte estrutura:
+
+ ```json
+  {
+    "name": "Typescript",
+  }
+  ```
+
+- Caso a Categoria não contenha o `name` a API deve retornar um erro de `status 400`.
+
+- A requisição deve ter o token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
 ### Além disso, as seguintes verificações serão feitas:
 
-**[Será validado que é possível excluir meu usuário com sucesso]**
+**[Será validado que é possível cadastrar uma categoria com sucesso]**
 
-Ao deletar um usuário com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `204`:
+Se cadastrar uma categoria com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `201`:
 
-![Deletar com sucesso](./public/deletarcomsucesso.png)
+![Criar categoria com sucesso](./public/cadastrarCategoria.png)
 
-**[Será validado que não é possivel excluir meu usuário com token inválido]**
+**[Será validado que não é possível cadastrar uma categoria sem o campo name]**
+
+Se ao tentar cadastrar uma categoria sem o campo name o resultado retornado deverá ser conformo exibido abaixo, com um status http 400:
+![Criar categoria com sucesso](./public/cadastrarCategoriaSemName.png)
+
+**[Será validado que não é possível cadastrar uma determinada categoria com o token inválido]**
 
 Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
-![Deletar com token inválido](./public/deletarcomtokeninvalido.png)
+![Cadastrar uma categoria com token inválido](./public/cadastrarcategoriacomtokeninvalido.png)
 
-**[Será validado que não é possivel excluir meu usuário sem o token]**
+**[Será validado que não é possível cadastrar uma determinada categoria sem o token na requisição]**
 
-Se não conter o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+Se o token for inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
-![Deletar sem token](./public/deletarsemtoken.png)
+![Cadastrar uma categoria sem token](./public/cadastrarcategoriasemtoken.png)
 
-### 6 - Sua aplicação deve ter o endpoint POST `/post`
+### 6 - Sua aplicação deve ter o endpoint GET `/categories`
+
+#### Os seguintes pontos serão avaliados:
+
+- Esse endpoint deve listar todas as Categorias e retorná-las na seguinte estrutura:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Typescript"
+  },
+  {
+    "id": 2,
+    "name": "Javascript"
+  }
+]
+```
+
+Além disso, as seguintes verificações serão feitas:
+[Será validado que é possível listar todas as categoria com sucesso]
+
+Se buscar todas as categorias com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http 200:
+
+![Buscar todas as categoria com sucesso](./public/buscartodascategoriascomsucesso.png)
+
+
+**[Será validado que não é possível listar as categorias com o token inválido]**
+
+Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![Buscar uma categoria com token inválido](./public/buscarcategoriacomtokeninvalido.png)
+
+**[Será validado que não é possível cadastrar uma determinada categoria sem o token na requisição]**
+
+Se o token for inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![Buscar uma categoria sem token](./public/buscarcategoriasemtoken.png)
+
+
+### 7 - Sua aplicação deve ter o endpoint POST `/post`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -611,7 +702,7 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ![blogpost com token inválido](./public/criarposttokeninvalido.png)
 
-### 7 - Sua aplicação deve ter o endpoint GET `/post`
+### 8 - Sua aplicação deve ter o endpoint GET `/post`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -655,7 +746,7 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ![blogpost com token inválido](./public/listarposttokeninvalido.png)
 
-### 8 - Sua aplicação deve ter o endpoint GET `post/:id`
+### 9 - Sua aplicação deve ter o endpoint GET `post/:id`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -703,7 +794,7 @@ Se o id do post for inválido o resultado retornado deverá ser conforme exibido
 
 ![Listar um post inexistente](./public/listarumpostinexistente.png)
 
-### 9 - Sua aplicação deve ter o endpoint PUT `/post/:id`
+### 10 - Sua aplicação deve ter o endpoint PUT `/post/:id`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -760,7 +851,77 @@ Se não conter o campo `content` o resultado retornado deverá ser conforme exib
 
 ![blogpost com token inválido](./public/editarsemcontent.png)
 
-### 10 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`
+### 11 - Sua aplicação deve ter o endpoint DELETE `post/:id`
+
+#### Os seguintes pontos serão avaliados:
+
+- Deleta o post com o `id` especificado. Só deve ser permitido para o usuário que criou o **BlogPost**.
+
+- Caso uma pessoa diferente de quem criou faça a requisição, deve retornar um código `status 401`.
+
+- Caso uma requisição sem token seja recebida, deve-se retornar um código de `status 401`.
+
+- Caso o post referido não exista, deve-se retornar um código de `status 404`.
+
+### Além disso, as seguintes verificações serão feitas:
+
+**[Será validado que é possível deletar um blogpost com sucesso]**
+
+Se deletar blogpost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `204`:
+
+![blogpost com token inválido](./public/deletarpostcomsucesso.png)
+
+**[Será validado que não é possível deletar um blogpost com outro usuário]**
+
+Se não for o dono do blogpost o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/deletarpostcomoutrousuario.png)
+
+**[Será validado que não é possível deletar um blogpost inexistente]**
+
+Se o blogpost nao existir o resultado retornado deverá ser conforme exibido abaixo, com um status http `404`:
+
+![blogpost com token inválido](./public/deletarpostquenaoexiste.png)
+
+**[Será validado que não é possível deletar um blogpost sem o token]**
+
+Se não contém o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/deletarpostsemtoken.png)
+
+**[Será validado que não é possível deletar um blogpost com o token inválido]**
+
+Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/deletarpostcomtokeninvalido.png)
+
+### 12 - Sua aplicação deve ter o endpoint DELETE `/user/me`
+
+#### Os seguintes pontos serão avaliados:
+
+- Utilizando o token de autenticação nos headers, o usuário correspondente deve ser apagado.
+
+### Além disso, as seguintes verificações serão feitas:
+
+**[Será validado que é possível excluir meu usuário com sucesso]**
+
+Ao deletar um usuário com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `204`:
+
+![Deletar com sucesso](./public/deletarcomsucesso.png)
+
+**[Será validado que não é possivel excluir meu usuário com token inválido]**
+
+Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![Deletar com token inválido](./public/deletarcomtokeninvalido.png)
+
+**[Será validado que não é possivel excluir meu usuário sem o token]**
+
+Se não conter o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![Deletar sem token](./public/deletarsemtoken.png)
+
+### 13 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -823,50 +984,6 @@ Se não contém o token o resultado retornado deverá ser conforme exibido abaix
 Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
 ![blogpost com token inválido](./public/buscarpostcomtokeninvalido.png)
-
-### 11 - Sua aplicação deve ter o endpoint DELETE `post/:id`
-
-#### Os seguintes pontos serão avaliados:
-
-- Deleta o post com o `id` especificado. Só deve ser permitido para o usuário que criou o **BlogPost**.
-
-- Caso uma pessoa diferente de quem criou faça a requisição, deve retornar um código `status 401`.
-
-- Caso uma requisição sem token seja recebida, deve-se retornar um código de `status 401`.
-
-- Caso o post referido não exista, deve-se retornar um código de `status 404`.
-
-### Além disso, as seguintes verificações serão feitas:
-
-**[Será validado que é possível deletar um blogpost com sucesso]**
-
-Se deletar blogpost com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `204`:
-
-![blogpost com token inválido](./public/deletarpostcomsucesso.png)
-
-**[Será validado que não é possível deletar um blogpost com outro usuário]**
-
-Se não for o dono do blogpost o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
-
-![blogpost com token inválido](./public/deletarpostcomoutrousuario.png)
-
-**[Será validado que não é possível deletar um blogpost inexistente]**
-
-Se o blogpost nao existir o resultado retornado deverá ser conforme exibido abaixo, com um status http `404`:
-
-![blogpost com token inválido](./public/deletarpostquenaoexiste.png)
-
-**[Será validado que não é possível deletar um blogpost sem o token]**
-
-Se não contém o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
-
-![blogpost com token inválido](./public/deletarpostsemtoken.png)
-
-**[Será validado que não é possível deletar um blogpost com o token inválido]**
-
-Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
-
-![blogpost com token inválido](./public/deletarpostcomtokeninvalido.png)
 
 --- 
 
