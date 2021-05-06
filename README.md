@@ -65,7 +65,7 @@ Lembre-se que você pode consultar nosso conteúdo sobre [Git & GitHub](https://
 
 Você vai arquiteturar, desenvolver uma API de um CRUD posts de blog (com o sequelize). Começando pela API, você vai desenvolver alguns endpoints (seguindo os princípios do REST) que estarão conectados ao seu banco de dados. Lembre-se de aplicar os princípios SOLID!
 
-Primeiro, você irá criar uma tabela para os usuários que desejam se cadastrar na aplicação. Após isso, a tabela blogPost será seu foco, guardando todas as informações dos posts realizados na plataforma. Essa é apenas uma recomendação!
+Primeiro, você irá criar uma tabela para os usuários que desejam se cadastrar na aplicação. Após isso, criará também uma tabela de Categorias para seus Posts e por fim a tabela de Posts será seu foco, guardando todas as informações dos posts realizados na plataforma. Essa é apenas uma recomendação!
 
 ---
 
@@ -73,7 +73,7 @@ Primeiro, você irá criar uma tabela para os usuários que desejam se cadastrar
 
 Você deve desenvolver uma aplicação em `Node.js` usando o pacote `sequelize` para fazer um `CRUD` de posts.
 
-Para fazer um post é necessário usuário e login, portanto será trabalhada a **relação entre** `user` e `post`.
+Para fazer um post é necessário usuário e login, portanto será trabalhada a **relação entre** `user` e `post`. Também será necessário a utlização de categorias para seus posts, assim trabalhando a relação de `posts` para `categorias` e de `categorias` para `posts`.
  
 ### Data de Entrega
 
@@ -156,10 +156,14 @@ Vamos usar o Jest para executar os testes, use o comando a seguir para executar 
 npm test
 ```
 
-Caso queria executar só um arquivo de test use o seguinte comando, considerado que quer testar o arquivo `tests/req7-createPost.test.js`:
+Caso queria executar só um arquivo de test use o seguinte comando, considerado que quer testar o arquivo `tests/req07-createPost.test.js`:
 
 ```sh
 npm test tests/req7-createPost.test.js
+```
+ou
+```
+npm test req07
 ```
 
 
@@ -292,16 +296,16 @@ Alguns exemplos:
   ```json
   {
     "id": "83063123",
-    "name": "Escola"
+    "name": "News"
   }
   ```
 
-- Deve conter uma tabela chamada **PostsCategories**, contendo dados com a seguinte estrutura::
+- Deve conter uma tabela chamada **PostsCategories**, contendo dados com a seguinte estrutura:
 
   ```json
   {
-    "postId": "123",
-    "categoryId": "321"
+    "postId": "7706273476706534553",
+    "categoryId": "83063123"
   }
   ```
 
@@ -665,11 +669,12 @@ Se o token for inexistente o resultado retornado deverá ser conforme exibido ab
   ```json
   {
     "title": "Latest updates, August 1st",
-    "content": "The whole text for the blog post goes here in this key"
+    "content": "The whole text for the blog post goes here in this key",
+    "categoryIds": [1, 2]
   }
   ```
 
-- Caso o post não contenha o `title` e/ou o `content` a API deve retornar um erro de `status 400`.
+- Caso o post não contenha o `title`, `content` ou `categoryIds` a API deve retornar um erro de `status 400`.
 
 - A requisição deve ter o token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
@@ -698,6 +703,13 @@ Se não conter o campo `content` o resultado retornado deverá ser conforme exib
 Se não conter o campo `categoryId` o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
 
 ![blogpost sem categoryId](./public/semcampocategoryid.png)
+
+**[Será validado que não é possível cadastrar um blogpost com uma `categoryId` inexistente]**
+
+Se não conter o campo `categoryId` o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![blogpost categoryId invalida](./public/cadastrarpostcomcategoryidinvalida.png)
+
 
 **[Será validado que não é possível cadastrar um blogpost sem o token]**
 
@@ -730,7 +742,7 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
       "id": 1,
       "displayName": "Lewis Hamilton",
       "email": "lewishamilton@gmail.com",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg"
+      "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2017_Malaysia.jpg"
     },
     "categories": [
       {
@@ -850,7 +862,16 @@ Se editar um blogpost com sucesso o resultado retornado deverá ser conforme exi
 
 ![blogpost com token inválido](./public/editarpostcomsucesso.png)
 
+**[Será validado que não é possível editar as categorias de um blogpost]**
+
+Só será possível editar o título ou o conteúdo de um post.
+
+![editar com campo categorias](./public/editarpostcomcategorias.png)
+
+
 **[Será validado que não é possível editar um blogpost com outro usuário]**
+
+Somente o usuário que criou o post poderá edita-lo.
 
 ![blogpost com token inválido](./public/editarcomoutrousuario.png)
 
