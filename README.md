@@ -159,7 +159,7 @@ npm test
 Caso queria executar só um arquivo de test use o seguinte comando, considerado que quer testar o arquivo `tests/req07-createPost.test.js`:
 
 ```sh
-npm test tests/req7-createPost.test.js
+npm test tests/req07-createPost.test.js
 ```
 ou
 ```
@@ -256,7 +256,7 @@ module.exports = {
 
 `JWT_SECRET`
 
-**Também poderá ser utilizado esta variável de ambiente para o SECRET do JWT**
+**Também poderá ser utilizada esta variável de ambiente para o SECRET do JWT**
 
 ### Dicas
 
