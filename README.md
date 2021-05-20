@@ -706,7 +706,7 @@ Se não conter o campo `categoryId` o resultado retornado deverá ser conforme e
 
 **[Será validado que não é possível cadastrar um blogpost com uma `categoryId` inexistente]**
 
-Se não conter o campo `categoryId` o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+Se o campo `categoryId` tiver uma categoria inexistente, o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
 
 ![blogpost categoryId invalida](./public/cadastrarpostcomcategoryidinvalida.png)
 
