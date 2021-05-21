@@ -284,7 +284,7 @@ Alguns exemplos:
 
   ```json
   {
-    "id": "401465483996",
+    "id": 1,
     "displayName": "Brett Wiltshire",
     "email": "brett@email.com", // tem quer ser único
     "password": "123456",
@@ -295,7 +295,7 @@ Alguns exemplos:
 
   ```json
   {
-    "id": "83063123",
+    "id": 18,
     "name": "News"
   }
   ```
@@ -304,8 +304,8 @@ Alguns exemplos:
 
   ```json
   {
-    "postId": "7706273476706534553",
-    "categoryId": "83063123"
+    "postId": 50,
+    "categoryId": 20
   }
   ```
 
@@ -313,14 +313,16 @@ Alguns exemplos:
 
   ```json
   {
-    "id": "7706273476706534553",
+    "id": 21,
     "title": "Latest updates, August 1st",
     "content": "The whole text for the blog post goes here in this key",
-    "userId": "401465483996", // esse é o id que referência usuário que é o autor do post
+    "userId": 14, // esse é o id que referência usuário que é o autor do post
     "published": "2011-08-01T19:58:00.000Z",
     "updated": "2011-08-01T19:58:51.947Z",
   }
   ```
+  
+  ** Os dados acima são fictícios, e estão aqui apenas como exemplo **  
 
   **OBS: Os testes irão rodar atráves do seu migrate usando os seguintes comandos:**
 
