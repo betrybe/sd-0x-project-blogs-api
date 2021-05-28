@@ -700,15 +700,15 @@ Se não conter o campo `content` o resultado retornado deverá ser conforme exib
 
 ![blogpost sem content](./public/semcampocontent.png)
 
-**[Será validado que não é possível cadastrar um blogpost sem o campo `categoryId`]**
+**[Será validado que não é possível cadastrar um blogpost sem o campo `categoryIds`]**
 
-Se não conter o campo `categoryId` o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+Se não conter o campo `categoryIds` o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
 
 ![blogpost sem categoryId](./public/semcampocategoryid.png)
 
-**[Será validado que não é possível cadastrar um blogpost com uma `categoryId` inexistente]**
+**[Será validado que não é possível cadastrar um blogpost com uma `categoryIds` inexistente]**
 
-Se o campo `categoryId` tiver uma categoria inexistente, o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+Se o campo `categoryIds` tiver uma categoria inexistente, o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
 
 ![blogpost categoryId invalida](./public/cadastrarpostcomcategoryidinvalida.png)
 
