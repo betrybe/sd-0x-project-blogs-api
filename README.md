@@ -14,36 +14,70 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
 # Sumário
 
+- [Boas vindas ao repositório do API de Blogs!](#boas-vindas-ao-repositório-do-api-de-blogs)
 - [Habilidades](#habilidades)
 - [Entregáveis](#entregáveis)
   - [O que deverá ser desenvolvido](#o-que-deverá-ser-desenvolvido)
   - [Desenvolvimento](#desenvolvimento)
-  - [Data de entrega](#data-de-entrega)
-- [Instruções para entregar seu projeto](#instruções-para-entregar-seu-projeto)
-  - [Antes de começar a desenvolver](#antes-de-começar-a-desenvolver)
-  - [Durante o desenvolvimento](#durante-o-desenvolvimento)
-  - [Execução de testes unitários](#execução-de-testes-unitários)
+    - [Data de Entrega](#data-de-entrega)
+- [Instruções para entregar seu projeto:](#instruções-para-entregar-seu-projeto)
+    - [ANTES DE COMEÇAR A DESENVOLVER:](#antes-de-começar-a-desenvolver)
+    - [DURANTE O DESENVOLVIMENTO](#durante-o-desenvolvimento)
+    - [Execução de testes unitários](#execução-de-testes-unitários)
 - [Como desenvolver](#como-desenvolver)
   - [Linter](#linter)
-- [Requisitos do projeto](#requisitos-do-projeto)
-  - [Antes de começar](#antes-de-começar)
-  - [Observações importantes](#-observações-importantes)
+- [Requisitos do projeto:](#requisitos-do-projeto)
+  - [Antes de começar:](#antes-de-começar)
+    - [⚠️ Leia-os atentamente e siga à risca o que for pedido. ⚠️](#️-leia-os-atentamente-e-siga-à-risca-o-que-for-pedido-️)
+    - [👀 Observações importantes:](#-observações-importantes)
+      - [Variáveis:](#variáveis)
+      - [Variável JWT (opcional):](#variável-jwt-opcional)
     - [Dicas](#dicas)
-  - [Lista de Requisitos](#lista-de-requisitos)
+      - [Status HTTP](#status-http)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados)
+  - [Lista de Requisitos:](#lista-de-requisitos)
     - [1 - Sua aplicação deve ter o endpoint POST `/user`](#1---sua-aplicação-deve-ter-o-endpoint-post-user)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados-1)
+    - [Além disso, as seguintes verificações serão feitas:](#além-disso-as-seguintes-verificações-serão-feitas)
     - [2 - Sua aplicação deve ter o endpoint POST `/login`](#2---sua-aplicação-deve-ter-o-endpoint-post-login)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados-2)
+    - [Além disso, as seguintes verificações serão feitas:](#além-disso-as-seguintes-verificações-serão-feitas-1)
     - [3 - Sua aplicação deve ter o endpoint GET `/user`](#3---sua-aplicação-deve-ter-o-endpoint-get-user)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados-3)
+    - [Além disso, as seguintes verificações serão feitas:](#além-disso-as-seguintes-verificações-serão-feitas-2)
     - [4 - Sua aplicação deve ter o endpoint GET `/user/:id`](#4---sua-aplicação-deve-ter-o-endpoint-get-userid)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados-4)
+    - [Além disso, as seguintes verificações serão feitas:](#além-disso-as-seguintes-verificações-serão-feitas-3)
     - [5 - Sua aplicação deve ter o endpoint POST `/categories`](#5---sua-aplicação-deve-ter-o-endpoint-post-categories)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados-5)
+    - [Além disso, as seguintes verificações serão feitas:](#além-disso-as-seguintes-verificações-serão-feitas-4)
     - [6 - Sua aplicação deve ter o endpoint GET `/categories`](#6---sua-aplicação-deve-ter-o-endpoint-get-categories)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados-6)
     - [7 - Sua aplicação deve ter o endpoint POST `/post`](#7---sua-aplicação-deve-ter-o-endpoint-post-post)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados-7)
+    - [Além disso, as seguintes verificações serão feitas:](#além-disso-as-seguintes-verificações-serão-feitas-5)
     - [8 - Sua aplicação deve ter o endpoint GET `/post`](#8---sua-aplicação-deve-ter-o-endpoint-get-post)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados-8)
+    - [Além disso, as seguintes verificações serão feitas:](#além-disso-as-seguintes-verificações-serão-feitas-6)
     - [9 - Sua aplicação deve ter o endpoint GET `post/:id`](#9---sua-aplicação-deve-ter-o-endpoint-get-postid)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados-9)
+    - [Além disso, as seguintes verificações serão feitas:](#além-disso-as-seguintes-verificações-serão-feitas-7)
     - [10 - Sua aplicação deve ter o endpoint PUT `/post/:id`](#10---sua-aplicação-deve-ter-o-endpoint-put-postid)
-    - [Requisitos Bônus](#requisitos-bônus)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados-10)
+    - [Além disso, as seguintes verificações serão feitas:](#além-disso-as-seguintes-verificações-serão-feitas-8)
+  - [Requisitos Bônus](#requisitos-bônus)
     - [11 - Sua aplicação deve ter o endpoint DELETE `post/:id`](#11---sua-aplicação-deve-ter-o-endpoint-delete-postid)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados-11)
+    - [Além disso, as seguintes verificações serão feitas:](#além-disso-as-seguintes-verificações-serão-feitas-9)
     - [12 - Sua aplicação deve ter o endpoint DELETE `/user/me`](#12---sua-aplicação-deve-ter-o-endpoint-delete-userme)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados-12)
+    - [Além disso, as seguintes verificações serão feitas:](#além-disso-as-seguintes-verificações-serão-feitas-10)
     - [13 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`](#13---sua-aplicação-deve-ter-o-endpoint-get-postsearchqsearchterm)
+      - [Os seguintes pontos serão avaliados:](#os-seguintes-pontos-serão-avaliados-13)
+    - [Além disso, as seguintes verificações serão feitas:](#além-disso-as-seguintes-verificações-serão-feitas-11)
+    - [14 - Crie testes de integração que cubram no mínimo 30 porcento dos arquivos em src com um mínimo de 50 linhas cobertas](#14---crie-testes-de-integração-que-cubram-no-mínimo-30-porcento-dos-arquivos-em-src-com-um-mínimo-de-50-linhas-cobertas)
+  - [Depois de terminar o desenvolvimento](#depois-de-terminar-o-desenvolvimento)
+    - [Revisando um pull request](#revisando-um-pull-request)
 - [Avisos Finais](#avisos-finais)
 
 # Habilidades 
@@ -1043,6 +1077,22 @@ Se não contém o token o resultado retornado deverá ser conforme exibido abaix
 Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
 ![blogpost com token inválido](./public/buscarpostcomtokeninvalido.png)
+
+### 14 - Crie testes de integração que cubram no mínimo 30 porcento dos arquivos em src com um mínimo de 50 linhas cobertas
+
+- Os testes de integração devem ser criados na pasta `./integration-tests`, essa pasta **não pode ser renomeada ou removida**;
+
+- O arquivo `change.me.test.js` pode ser alterado, renomeado ou removido;
+
+- Os testes devem ser criados usando o instrumental e boas práticas apresentado nos conteúdos de testes do course;
+
+- Para rodar os testes, utilize o comando `npm run dev:test`;
+
+- Para visualizar a cobertura, utilize o comando `npm run dev:test:coverage`;
+
+**Além disso, as seguintes verificações serão feitas:**
+
+- **[Será validado que o teste cobre o valor esperado]**
 
 --- 
 

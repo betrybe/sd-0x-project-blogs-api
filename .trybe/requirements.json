@@ -42,7 +42,7 @@
     },
     {
       "description": "11 - Sua aplicação deve ter o endpoint DELETE `post/:id`",
-      "bonus": true
+      "bonus": false
     },
     {
       "description": "12 - Sua aplicação deve ter o endpoint DELETE `/user/me`",
@@ -50,6 +50,10 @@
     },
     {
       "description": "13 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`",
+      "bonus": true
+    },
+    {
+      "description": "14 - Crie testes de integração que cubram no mínimo 30 porcento dos arquivos em src com um mínimo de 50 linhas cobertas",
       "bonus": true
     }
   ]
