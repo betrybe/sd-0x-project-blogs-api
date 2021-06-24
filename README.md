@@ -194,7 +194,7 @@ Você também pode instalar o plugin do `ESLint` no `VSCode`, bastar ir em exten
 
 ### 👀 Observações importantes:
 
-Em cada requisito você encontrara uma imagem de um protótipo de como sua aplicação deve ficar. Estilo da página não será avaliado.
+Em cada requisito você encontrará uma imagem de um protótipo de como sua aplicação deve ficar. Estilo da página não será avaliado.
 
 O não cumprimento de um requisito, total ou parcialmente, impactará em sua avaliação.
 
@@ -322,7 +322,7 @@ Alguns exemplos:
   }
   ```
   
-  ** Os dados acima são fictícios, e estão aqui apenas como exemplo **  
+  **Os dados acima são fictícios, e estão aqui apenas como exemplo**  
 
   **OBS: Os testes irão rodar atráves do seu migrate usando os seguintes comandos:**
 
@@ -334,7 +334,7 @@ Alguns exemplos:
 
   **Então preste bastante atenção se estiver errado o avaliador não irá funcionar**
 
-  **Haverá um arquivo na pasta `/seeders` dentro dela irá conter as querys para inserir no banco `não remova ela o avaliador irá usar ela`.
+  **Haverá um arquivo na pasta `/seeders` dentro dela irá conter as querys para inserir no banco `não remova ela o avaliador irá usar ela`.**
 
 ## Lista de Requisitos:
 
