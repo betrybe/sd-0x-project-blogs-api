@@ -1,5 +1,6 @@
 module.exports = {
   exclude: [
+    'sequencer.js',
     'nyc.config.js',
     '**/*.{test,spec}.js',
     'config/*',
