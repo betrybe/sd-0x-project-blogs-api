@@ -1,15 +1,4 @@
 module.exports = {
-  exclude: [
-    'sequencer.js',
-    'nyc.config.js',
-    '**/*.{test,spec}.js',
-    'config/*',
-    'migrations/*',
-    'seeders/*',
-    'models/index.js',
-    '.github',
-    '.idea',
-    '.trybe',
-    'public/*',
-  ],
+  include: ['src/**/*.js'],
+  exclude: ['**/*.{test,spec}.js'],
 };

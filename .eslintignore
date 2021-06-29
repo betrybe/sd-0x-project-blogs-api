@@ -1,6 +1,7 @@
 sequencer.js
+nyc.config.js
 /tests
-/migrations/
-/seeders/
-/models/index.js
-/integration-tests/
+/src/database/migrations/*
+/src/database/seeders/*
+/src/database/models/index.js
+/src/integration-tests/*

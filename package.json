@@ -2,7 +2,7 @@
   "name": "blogs-api",
   "version": "0.1.0",
   "private": true,
-  "main": "./index.js",
+  "main": "./src/api/server.js",
   "dependencies": {
     "dotenv": "8.2.0",
     "express": "4.17.1",
@@ -15,7 +15,7 @@
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate $",
     "start": "node .",
     "dev": "nodemon .",
-    "dev:test": "mocha ./integration-tests/**/*$NAME*.{test,spec}.js --exit",
+    "dev:test": "mocha ./src/integration-tests/**/*$NAME*.{test,spec}.js --exit",
     "dev:test:coverage": "nyc --all npm run dev:test",
     "dev:test:coverage:json": "nyc --all --reporter=json-summary npm run dev:test",
     "drop": "npx sequelize-cli db:drop $",
