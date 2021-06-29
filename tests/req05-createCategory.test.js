@@ -10,7 +10,7 @@ describe('5 - Sua aplicação deve ter o endpoint POST `/categories`', () => {
     shell.exec('npx sequelize-cli db:seed:all $');
   });
 
-  it('Será validado que é possivel cadastrar uma categoria com sucesso', async () => {
+  it('Será validado que é possível cadastrar uma categoria com sucesso', async () => {
     let token;
     await frisby
       .post(`${url}/login`,
@@ -44,7 +44,7 @@ describe('5 - Sua aplicação deve ter o endpoint POST `/categories`', () => {
       });
   });
 
-  it('Será validado que não é possivel cadastrar uma categoria sem o campo name', async () => {
+  it('Será validado que não é possível cadastrar uma categoria sem o campo name', async () => {
     let token;
     await frisby
       .post(`${url}/login`,

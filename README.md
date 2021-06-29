@@ -18,18 +18,22 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 - [Entregáveis](#entregáveis)
   - [O que deverá ser desenvolvido](#o-que-deverá-ser-desenvolvido)
   - [Desenvolvimento](#desenvolvimento)
-  - [Data de entrega](#data-de-entrega)
-- [Instruções para entregar seu projeto](#instruções-para-entregar-seu-projeto)
-  - [Antes de começar a desenvolver](#antes-de-começar-a-desenvolver)
-  - [Durante o desenvolvimento](#durante-o-desenvolvimento)
-  - [Execução de testes unitários](#execução-de-testes-unitários)
+    - [Data de Entrega](#data-de-entrega)
+- [Instruções para entregar seu projeto:](#instruções-para-entregar-seu-projeto)
+    - [ANTES DE COMEÇAR A DESENVOLVER:](#antes-de-começar-a-desenvolver)
+    - [DURANTE O DESENVOLVIMENTO](#durante-o-desenvolvimento)
+    - [Execução de testes unitários](#execução-de-testes-unitários)
 - [Como desenvolver](#como-desenvolver)
   - [Linter](#linter)
-- [Requisitos do projeto](#requisitos-do-projeto)
-  - [Antes de começar](#antes-de-começar)
-  - [Observações importantes](#-observações-importantes)
+- [Requisitos do projeto:](#requisitos-do-projeto)
+  - [Antes de começar:](#antes-de-começar)
+    - [⚠️ Leia-os atentamente e siga à risca o que for pedido. ⚠️](#️-leia-os-atentamente-e-siga-à-risca-o-que-for-pedido-️)
+    - [👀 Observações importantes:](#-observações-importantes)
+      - [Variáveis:](#variáveis)
+      - [Variável JWT (opcional):](#variável-jwt-opcional)
     - [Dicas](#dicas)
-  - [Lista de Requisitos](#lista-de-requisitos)
+      - [Status HTTP](#status-http)
+  - [Lista de Requisitos:](#lista-de-requisitos)
     - [1 - Sua aplicação deve ter o endpoint POST `/user`](#1---sua-aplicação-deve-ter-o-endpoint-post-user)
     - [2 - Sua aplicação deve ter o endpoint POST `/login`](#2---sua-aplicação-deve-ter-o-endpoint-post-login)
     - [3 - Sua aplicação deve ter o endpoint GET `/user`](#3---sua-aplicação-deve-ter-o-endpoint-get-user)
@@ -40,10 +44,13 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
     - [8 - Sua aplicação deve ter o endpoint GET `/post`](#8---sua-aplicação-deve-ter-o-endpoint-get-post)
     - [9 - Sua aplicação deve ter o endpoint GET `post/:id`](#9---sua-aplicação-deve-ter-o-endpoint-get-postid)
     - [10 - Sua aplicação deve ter o endpoint PUT `/post/:id`](#10---sua-aplicação-deve-ter-o-endpoint-put-postid)
-    - [Requisitos Bônus](#requisitos-bônus)
+  - [Requisitos Bônus](#requisitos-bônus)
     - [11 - Sua aplicação deve ter o endpoint DELETE `post/:id`](#11---sua-aplicação-deve-ter-o-endpoint-delete-postid)
     - [12 - Sua aplicação deve ter o endpoint DELETE `/user/me`](#12---sua-aplicação-deve-ter-o-endpoint-delete-userme)
     - [13 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`](#13---sua-aplicação-deve-ter-o-endpoint-get-postsearchqsearchterm)
+    - [14 - Crie testes de integração que cubram no mínimo 30 porcento dos arquivos em src com um mínimo de 50 linhas cobertas](#14---crie-testes-de-integração-que-cubram-no-mínimo-30-porcento-dos-arquivos-em-src-com-um-mínimo-de-50-linhas-cobertas)
+  - [Depois de terminar o desenvolvimento](#depois-de-terminar-o-desenvolvimento)
+    - [Revisando um pull request](#revisando-um-pull-request)
 - [Avisos Finais](#avisos-finais)
 
 # Habilidades 
@@ -63,9 +70,9 @@ Lembre-se que você pode consultar nosso conteúdo sobre [Git & GitHub](https://
 
 ## O que deverá ser desenvolvido
 
-Você vai arquiteturar, desenvolver uma API de um CRUD posts de blog (com o sequelize). Começando pela API, você vai desenvolver alguns endpoints (seguindo os princípios do REST) que estarão conectados ao seu banco de dados. Lembre-se de aplicar os princípios SOLID!
+Você vai desenvolver uma API de um CRUD posts de blog (com o `Sequelize`). Começando pela API, você vai desenvolver alguns endpoints (seguindo os princípios do REST) que estarão conectados ao seu banco de dados. Lembre-se de aplicar os princípios SOLID!
 
-Primeiro, você irá criar uma tabela para os usuários que desejam se cadastrar na aplicação. Após isso, criará também uma tabela de Categorias para seus Posts e por fim a tabela de Posts será seu foco, guardando todas as informações dos posts realizados na plataforma. Essa é apenas uma recomendação!
+Primeiro, você irá criar uma tabela para as pessoas usuárias que desejam se cadastrar na aplicação. Após isso, criará também uma tabela de Categorias para seus Posts e por fim a tabela de Posts será seu foco, guardando todas as informações dos posts realizados na plataforma. Essa é apenas uma recomendação!
 
 ---
 
@@ -73,7 +80,7 @@ Primeiro, você irá criar uma tabela para os usuários que desejam se cadastrar
 
 Você deve desenvolver uma aplicação em `Node.js` usando o pacote `sequelize` para fazer um `CRUD` de posts.
 
-Para fazer um post é necessário usuário e login, portanto será trabalhada a **relação entre** `user` e `post`. Também será necessário a utlização de categorias para seus posts, assim trabalhando a relação de `posts` para `categorias` e de `categorias` para `posts`.
+Para fazer um post é necessário usuário e login, portanto será trabalhada a **relação entre** `user` e `post`. Também será necessário a utilização de categorias para seus posts, assim trabalhando a relação de `posts` para `categorias` e de `categorias` para `posts`.
  
 ### Data de Entrega
 
@@ -198,19 +205,22 @@ Em cada requisito você encontrará uma imagem de um protótipo de como sua apli
 
 O não cumprimento de um requisito, total ou parcialmente, impactará em sua avaliação.
 
-Há um arquivo `index.js` no repositório. Não remova, nele, o seguinte trecho de código:
+Há um arquivo `src/app/app.js` no repositório. Não o remova, nele também há o seguinte trecho de código que não deve ser alterado:
 
 ```javascript
-app.get('/', (request, response) => {
+app.get('/', (_request, response) => {
   response.send();
 });
 ```
+Há também um arquivo `src/app/server.js` utilizado para rodar o servidor
+
+O projeto também conta com um arquivo `.sequelizerc` na raiz com as configurações de pasta do orm. Quando você utilizar o comando de inicialização do sequelize, ele deve construir as pastas conforme definido nesse arquivo.
 
 **Você irá precisar configurar as variáveis globais do MySQL.** Você pode usar esse [Conteúdo de variáveis de ambiente com NodeJS](https://blog.rocketseat.com.br/variaveis-ambiente-nodejs/) como referência.
 
 **Faça essas configurações também para as variáveis de ambiente usadas nesses arquivo:**
 
-`sd-0x-project-blogs-api/config/config.js`
+`sd-0x-project-blogs-api/src/database/config/config.js`
 
 ```
 module.exports = {
@@ -240,7 +250,7 @@ module.exports = {
 
 **(Neste arquivo e obrigatório deixar o nome do database como `"database": 'blogs_api'`)**
 
-**É essencial usar essas 3 variávies no arquivo acima:**
+**É essencial usar essas 3 variáveis no arquivo acima:**
 
 #### Variáveis:
 
@@ -276,7 +286,7 @@ Alguns exemplos:
 
 ---
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - O seu projeto deverá usar um `ORM` para criar e atualizar o seu banco. A clonagem do projeto seguida de um comando de migrate deve deixá-lo em sua forma esperada.
 
@@ -324,9 +334,9 @@ Alguns exemplos:
   
   **Os dados acima são fictícios, e estão aqui apenas como exemplo**  
 
-  **OBS: Os testes irão rodar atráves do seu migrate usando os seguintes comandos:**
+  **OBS: Os testes irão rodar através do seu migrate usando os seguintes comandos:**
 
-  "drop": "npx sequelize-cli db:drop $" -- Dropa o banco
+  "drop": "npx sequelize-cli db:drop $" -- Remove o banco
 
   "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate $" -- Cria o banco e gera as tabelas
 
@@ -334,13 +344,13 @@ Alguns exemplos:
 
   **Então preste bastante atenção se estiver errado o avaliador não irá funcionar**
 
-  **Haverá um arquivo na pasta `/seeders` dentro dela irá conter as querys para inserir no banco `não remova ela o avaliador irá usar ela`.**
+  **Haverá um arquivo na pasta `/src/database/seeders` dentro dela irá conter as `queries` para inserir no banco `não remova ela o avaliador irá usar ela`.**
 
 ## Lista de Requisitos:
 
 ### 1 - Sua aplicação deve ter o endpoint POST `/user`
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - O endpoint deve ser capaz de adicionar um novo user a sua tabela no banco de dados;
 
@@ -377,9 +387,9 @@ Alguns exemplos:
   ```
   _O token anterior é fictício_
 
-### Além disso, as seguintes verificações serão feitas:
+**Além disso, as seguintes verificações serão feitas:**
 
-**[Será validado que é possível cadastrar um usuário com sucesso]**
+**[Será validado que é possível cadastrar pessoa usuária com sucesso]**
 
 Se o usuário for criado com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `201`:
 
@@ -427,7 +437,7 @@ Se o usuário não tiver campo "password" o resultado retornado deverá ser conf
 ![Senha Obrigatória](./public/semsenha.png)
 (As contrabarras `\` estão escapando as aspas de dentro da string)
 
-**[Validar que não é possível cadastrar um usuário com email já existente]**
+**[Validar que não é possível cadastrar pessoa usuária com email já existente]**
 
 Se o usuário cadastrar o campo "email" com um email que já existe, o resultado retornado deverá ser conforme exibido abaixo, com um status http `409`:
 
@@ -435,7 +445,7 @@ Se o usuário cadastrar o campo "email" com um email que já existe, o resultado
 
 ### 2 - Sua aplicação deve ter o endpoint POST `/login`
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - O corpo da requisição deverá seguir o formato abaixo:
 
@@ -446,7 +456,7 @@ Se o usuário cadastrar o campo "email" com um email que já existe, o resultado
   }
   ```
 
-- Caso algum desses campos seja inválido ou não exista um usuário correspondente no banco de dados, retorne um código de status 400 com o corpo `{ message: "Campos inválidos" }`.
+- Caso algum desses campos seja inválido ou não exista pessoa usuária correspondente no banco de dados, retorne um código de status 400 com o corpo `{ message: "Campos inválidos" }`.
 
 - Caso esteja tudo certo com o login, a resposta deve ser um token `JWT`, no seguinte formato:
 
@@ -457,7 +467,7 @@ Se o usuário cadastrar o campo "email" com um email que já existe, o resultado
   ```
   _O token anterior é fictício_
 
-### Além disso, as seguintes verificações serão feitas:
+**Além disso, as seguintes verificações serão feitas:**
 
 **[Será validado que é possível fazer login com sucesso]**
 
@@ -493,7 +503,7 @@ Se o login tiver o campo "password" em branco o resultado retornado deverá ser 
 ![Senha em branco](./public/senhabrancologin.png)
 (As contrabarras `\` estão escapando as aspas de dentro da string)
 
-**[Será validado que não é possível fazer login com um usuário que não existe]**
+**[Será validado que não é possível fazer login com pessoa usuária que não existe]**
 
 Se o login for com usuário inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
 
@@ -501,7 +511,7 @@ Se o login for com usuário inexistente o resultado retornado deverá ser confor
 
 ### 3 - Sua aplicação deve ter o endpoint GET `/user`
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - Deve listar todos os **Users** e retorná-los na seguinte estrutura:
 
@@ -518,21 +528,21 @@ Se o login for com usuário inexistente o resultado retornado deverá ser confor
 
 - A requisição deve ter token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
-### Além disso, as seguintes verificações serão feitas:
+**Além disso, as seguintes verificações serão feitas:**
 
-**[Será validado que é possível listar todos os usuários]**
+**[Será validado que é possível listar todos as pessoas usuárias]**
 
-Ao listar usuários com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+Ao listar pessoas usuárias com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
 
-![Listar usuários](./public/listarusuarios.png)
+![Listar pessoas usuárias](./public/listarusuarios.png)
 
-**[Será validado que não é possível listar usuários sem o token na requisição]**
+**[Será validado que não é possível listar pessoas usuárias sem o token na requisição]**
 
 Se o token for inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
 ![Token Vazio](./public/tokenvazio.png)
 
-**[Será validado que não é possível listar usuários com o token inválido]**
+**[Será validado que não é possível listar pessoas usuárias com o token inválido]**
 
 Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
@@ -540,7 +550,7 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ### 4 - Sua aplicação deve ter o endpoint GET `/user/:id`
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - Retorna os detalhes do usuário baseado no `id` da rota. Os dados devem ter o seguinte formato:
 
@@ -555,35 +565,35 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 - A requisição deve ter token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
-### Além disso, as seguintes verificações serão feitas:
+**Além disso, as seguintes verificações serão feitas:**
 
-**[Será validado que é possível listar um usuario específico com sucesso]**
+**[Será validado que é possível listar pessoa usuária específico com sucesso]**
 
-Ao listar um usuário com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+Ao listar pessoa usuária com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
 
-![Listar um usuário](./public/listarumusuario.png)
+![Listar pessoa usuária](./public/listarumusuario.png)
 
-**[Será validado que não é possível listar um usuário inexistente]**
+**[Será validado que não é possível listar pessoa usuária inexistente]**
 
 Se o usuário for inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `404`:
 
-![Listar um usuário inexistente](./public/usuarioinexistente.png)
+![Listar pessoa usuária inexistente](./public/usuarioinexistente.png)
 
 **[Será validado que não é possível listar um determinado usuário sem o token na requisição]**
 
 Se o token for inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
-![Listar um usuário sem token](./public/semtokenumusuario.png)
+![Listar pessoa usuária sem token](./public/semtokenumusuario.png)
 
 **[Será validado que não é possível listar um determinado usuário com o token inválido]**
 
 Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
-![Listar um usuário com token inválido](./public/tokeninvalidoumusuario.png)
+![Listar pessoa usuária com token inválido](./public/tokeninvalidoumusuario.png)
 
 ### 5 - Sua aplicação deve ter o endpoint POST `/categories`
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - Esse endpoint deve receber uma _Categoria_ no corpo da requisição e criá-la no banco. O corpo da requisição deve ter a seguinte estrutura:
 
@@ -597,7 +607,7 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 - A requisição deve ter o token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
-### Além disso, as seguintes verificações serão feitas:
+**Além disso, as seguintes verificações serão feitas:**
 
 **[Será validado que é possível cadastrar uma categoria com sucesso]**
 
@@ -624,7 +634,7 @@ Se o token for inexistente o resultado retornado deverá ser conforme exibido ab
 
 ### 6 - Sua aplicação deve ter o endpoint GET `/categories`
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - Esse endpoint deve listar todas as Categorias e retorná-las na seguinte estrutura:
 
@@ -664,7 +674,7 @@ Se o token for inexistente o resultado retornado deverá ser conforme exibido ab
 
 ### 7 - Sua aplicação deve ter o endpoint POST `/post`
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - Esse endpoint deve receber um _BlogPost_ no corpo da requisição e criá-lo no banco. O corpo da requisição deve ter a seguinte estrutura:
 
@@ -680,7 +690,7 @@ Se o token for inexistente o resultado retornado deverá ser conforme exibido ab
 
 - A requisição deve ter o token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
-### Além disso, as seguintes verificações serão feitas:
+**Além disso, as seguintes verificações serão feitas:**
 
 **[Será validado que é possível cadastrar um blogpost com sucesso]**
 
@@ -727,7 +737,7 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ### 8 - Sua aplicação deve ter o endpoint GET `/post`
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - Esse endpoint deve listar todos os _BlogPosts_ e retorná-los na seguinte estrutura:
 
@@ -756,7 +766,7 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 ]
 ```
 
-### Além disso, as seguintes verificações serão feitas:
+**Além disso, as seguintes verificações serão feitas:**
 
 **[Será validado que é possível listar blogpost com sucesso]**
 
@@ -778,7 +788,7 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ### 9 - Sua aplicação deve ter o endpoint GET `post/:id`
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - Retorna um **BlogPost** com o `id` especificado. O retorno deve ter os seguinte formato:
 
@@ -805,7 +815,7 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 }
 ```
 
-### Além disso, as seguintes verificações serão feitas:
+**Além disso, as seguintes verificações serão feitas:**
 
 **[Será validado que é possível listar um blogpost com sucesso]**
 
@@ -835,7 +845,7 @@ Se o id do post for inválido o resultado retornado deverá ser conforme exibido
 
 ### 10 - Sua aplicação deve ter o endpoint PUT `/post/:id`
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - O endpoint deve receber um **BlogPost** que irá sobrescrever o original com o `id` especificado na URL. Só deve ser permitido para o usuário que criou o **BlogPost**.
 
@@ -856,7 +866,7 @@ Se o id do post for inválido o resultado retornado deverá ser conforme exibido
 
 - Caso o post não contenha o `title` e/ou o `content` a API deve retornar um erro de `status 400`.
 
-### Além disso, as seguintes verificações serão feitas:
+**Além disso, as seguintes verificações serão feitas:**
 
 **[Será validado que é possível editar um blogpost com sucesso]**
 
@@ -905,7 +915,7 @@ Se não conter o campo `content` o resultado retornado deverá ser conforme exib
 
 ### 11 - Sua aplicação deve ter o endpoint DELETE `post/:id`
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - Deleta o post com o `id` especificado. Só deve ser permitido para o usuário que criou o **BlogPost**.
 
@@ -915,7 +925,7 @@ Se não conter o campo `content` o resultado retornado deverá ser conforme exib
 
 - Caso o post referido não exista, deve-se retornar um código de `status 404`.
 
-### Além disso, as seguintes verificações serão feitas:
+**Além disso, as seguintes verificações serão feitas:**
 
 **[Será validado que é possível deletar um blogpost com sucesso]**
 
@@ -949,25 +959,25 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ### 12 - Sua aplicação deve ter o endpoint DELETE `/user/me`
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - Utilizando o token de autenticação nos headers, o usuário correspondente deve ser apagado.
 
-### Além disso, as seguintes verificações serão feitas:
+**Além disso, as seguintes verificações serão feitas:**
 
 **[Será validado que é possível excluir meu usuário com sucesso]**
 
-Ao deletar um usuário com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `204`:
+Ao deletar pessoa usuária com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `204`:
 
 ![Deletar com sucesso](./public/deletarcomsucesso.png)
 
-**[Será validado que não é possivel excluir meu usuário com token inválido]**
+**[Será validado que não é possível excluir meu usuário com token inválido]**
 
 Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
 ![Deletar com token inválido](./public/deletarcomtokeninvalido.png)
 
-**[Será validado que não é possivel excluir meu usuário sem o token]**
+**[Será validado que não é possível excluir meu usuário sem o token]**
 
 Se não conter o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
@@ -975,7 +985,7 @@ Se não conter o token o resultado retornado deverá ser conforme exibido abaixo
 
 ### 13 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`
 
-#### Os seguintes pontos serão avaliados:
+**Os seguintes pontos serão avaliados:**
 
 - Retorna uma array de **BlogPosts** que contenham em seu título, ou conteúdo, o termo pesquisado no `queryParam` da URL. O retorno deve ter o seguinte formato:
 
@@ -1006,7 +1016,7 @@ Se não conter o token o resultado retornado deverá ser conforme exibido abaixo
 
 - Caso nenhum **BlogPost** satisfaça a busca, retorne um array vazio.
 
-### Além disso, as seguintes verificações serão feitas:
+**Além disso, as seguintes verificações serão feitas:**
 
 **[Será validado que é possível buscar um blogpost pelo `title`]**
 
@@ -1043,6 +1053,22 @@ Se não contém o token o resultado retornado deverá ser conforme exibido abaix
 Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
 ![blogpost com token inválido](./public/buscarpostcomtokeninvalido.png)
+
+### 14 - Crie testes de integração que cubram no mínimo 30 porcento dos arquivos em src com um mínimo de 50 linhas cobertas
+
+- Os testes de integração devem ser criados na pasta `./src/integration-tests`, essa pasta **não pode ser renomeada ou removida**;
+
+- O arquivo `change.me.test.js` pode ser alterado, renomeado ou removido;
+
+- Os testes devem ser criados usando o instrumental e boas práticas apresentado nos conteúdos de testes do course;
+
+- Para rodar os testes, utilize o comando `npm run dev:test`;
+
+- Para visualizar a cobertura, utilize o comando `npm run dev:test:coverage`;
+
+**Além disso, as seguintes verificações serão feitas:**
+
+- **[Será validado que o teste cobre o valor esperado]**
 
 --- 
 
