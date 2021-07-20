@@ -3,7 +3,7 @@ const shell = require('shelljs');
 
 const url = 'http://localhost:3000';
 
-describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
+describe('2 - Sua aplicação deve ter o endpoint POST `/login`', () => {
   beforeEach(async () => {
     shell.exec('npx sequelize-cli db:drop');
     shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate $');
@@ -94,7 +94,7 @@ describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
       .then((response) => {
         const { body } = response;
         const result = JSON.parse(body);
-        expect(result.message).toBe('Campos inválidos');
+        expect(result.message).toBe('Invalid fields');
       });
   });
 });

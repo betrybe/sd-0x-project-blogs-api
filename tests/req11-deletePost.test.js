@@ -3,14 +3,14 @@ const shell = require('shelljs');
 
 const url = 'http://localhost:3000';
 
-describe('Sua aplicação deve ter o endpoint GET `/user/:id`', () => {
+describe('11 - Sua aplicação deve ter o endpoint DELETE `post/:id`', () => {
   beforeEach(() => {
-    shell.exec('npx sequelize-cli db:drop');
+    shell.exec('npx sequelize-cli db:drop $');
     shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate $');
     shell.exec('npx sequelize-cli db:seed:all $');
   });
 
-  it('Será validado que é possível listar um usuario específico com sucesso', async () => {
+  it('Será validado que é possível deletar um blogpost com sucesso', async () => {
     let token;
     await frisby
       .post(`${url}/login`,
@@ -34,19 +34,43 @@ describe('Sua aplicação deve ter o endpoint GET `/user/:id`', () => {
           },
         },
       })
-      .get(`${url}/user/1`)
+      .delete(`${url}/post/1`)
+      .expect('status', 204);
+  });
+
+  it('Será validado que não é possível deletar um blogpost com outro usuário', async () => {
+    let token;
+    await frisby
+      .post(`${url}/login`,
+        {
+          email: 'MichaelSchumacher@gmail.com',
+          password: '123456',
+        })
       .expect('status', 200)
       .then((response) => {
         const { body } = response;
         const result = JSON.parse(body);
-        expect(result.id).toBe(1);
-        expect(result.displayName).toBe('Lewis Hamilton');
-        expect(result.email).toBe('lewishamilton@gmail.com');
-        expect(result.image).toBe('https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg');
+        token = result.token;
+      });
+
+    await frisby
+      .setup({
+        request: {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+          },
+        },
+      })
+      .delete(`${url}/post/1`)
+      .expect('status', 401)
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Unauthorized user');
       });
   });
 
-  it('Será validado que não é possível listar um usuário inexistente', async () => {
+  it('Será validado que não é possível deletar um blogpost inexistente', async () => {
     let token;
     await frisby
       .post(`${url}/login`,
@@ -70,16 +94,15 @@ describe('Sua aplicação deve ter o endpoint GET `/user/:id`', () => {
           },
         },
       })
-      .get(`${url}/user/9999`)
+      .delete(`${url}/post/111`)
       .expect('status', 404)
       .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Usuário não existe');
+        const { json } = response;
+        expect(json.message).toBe('Post does not exist');
       });
   });
 
-  it('Será validado que não é possível listar um determinado usuário sem o token na requisição', async () => {
+  it('Será validado que não é possível deletar um blogpost sem o token', async () => {
     await frisby
       .setup({
         request: {
@@ -89,29 +112,29 @@ describe('Sua aplicação deve ter o endpoint GET `/user/:id`', () => {
           },
         },
       })
-      .get(`${url}/user/1`)
+      .delete(`${url}/post/1`)
       .expect('status', 401)
-      .then((responseSales) => {
-        const { json } = responseSales;
-        expect(json.message).toBe('Token não encontrado');
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Token not found');
       });
   });
 
-  it('Será validado que não é possível listar um determinado usuário com o token inválido', async () => {
+  it('Será validado que não é possível deletar um blogpost com o token inválido', async () => {
     await frisby
       .setup({
         request: {
           headers: {
-            Authorization: 'mo3183bfbahaf',
+            Authorization: 'kwngu4425h2',
             'Content-Type': 'application/json',
           },
         },
       })
-      .get(`${url}/user/1`)
+      .delete(`${url}/post/1`)
       .expect('status', 401)
-      .then((responseSales) => {
-        const { json } = responseSales;
-        expect(json.message).toBe('Token expirado ou inválido');
+      .then((response) => {
+        const { json } = response;
+        expect(json.message).toBe('Expired or invalid token');
       });
   });
 });

@@ -1,3 +1,9 @@
+### Termos e acordos
+
+Ao iniciar este projeto, você concorda com as diretrizes do Código de Ética e Conduta e do Manual da Pessoa Estudante da Trybe.
+
+---
+
 # Boas vindas ao repositório do API de Blogs!
 
 Você já usa o GitHub diariamente para desenvolver os exercícios, certo? Agora, para desenvolver os projetos, você deverá seguir as instruções a seguir. Fique atento a cada passo, e se tiver qualquer dúvida, nos envie por Slack! #vqv 🚀
@@ -6,12 +12,86 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
 ---
 
-## Instruções para entregar seu projeto:
+# Sumário
+
+- [Habilidades](#habilidades)
+- [Entregáveis](#entregáveis)
+  - [O que deverá ser desenvolvido](#o-que-deverá-ser-desenvolvido)
+  - [Desenvolvimento](#desenvolvimento)
+  - [Data de entrega](#data-de-entrega)
+- [Instruções para entregar seu projeto](#instruções-para-entregar-seu-projeto)
+  - [Antes de começar a desenvolver](#antes-de-começar-a-desenvolver)
+  - [Durante o desenvolvimento](#durante-o-desenvolvimento)
+  - [Execução de testes unitários](#execução-de-testes-unitários)
+- [Como desenvolver](#como-desenvolver)
+  - [Linter](#linter)
+- [Requisitos do projeto](#requisitos-do-projeto)
+  - [Antes de começar](#antes-de-começar)
+  - [Observações importantes](#-observações-importantes)
+    - [Dicas](#dicas)
+  - [Lista de Requisitos](#lista-de-requisitos)
+    - [1 - Sua aplicação deve ter o endpoint POST `/user`](#1---sua-aplicação-deve-ter-o-endpoint-post-user)
+    - [2 - Sua aplicação deve ter o endpoint POST `/login`](#2---sua-aplicação-deve-ter-o-endpoint-post-login)
+    - [3 - Sua aplicação deve ter o endpoint GET `/user`](#3---sua-aplicação-deve-ter-o-endpoint-get-user)
+    - [4 - Sua aplicação deve ter o endpoint GET `/user/:id`](#4---sua-aplicação-deve-ter-o-endpoint-get-userid)
+    - [5 - Sua aplicação deve ter o endpoint POST `/categories`](#5---sua-aplicação-deve-ter-o-endpoint-post-categories)
+    - [6 - Sua aplicação deve ter o endpoint GET `/categories`](#6---sua-aplicação-deve-ter-o-endpoint-get-categories)
+    - [7 - Sua aplicação deve ter o endpoint POST `/post`](#7---sua-aplicação-deve-ter-o-endpoint-post-post)
+    - [8 - Sua aplicação deve ter o endpoint GET `/post`](#8---sua-aplicação-deve-ter-o-endpoint-get-post)
+    - [9 - Sua aplicação deve ter o endpoint GET `post/:id`](#9---sua-aplicação-deve-ter-o-endpoint-get-postid)
+    - [10 - Sua aplicação deve ter o endpoint PUT `/post/:id`](#10---sua-aplicação-deve-ter-o-endpoint-put-postid)
+    - [Requisitos Bônus](#requisitos-bônus)
+    - [11 - Sua aplicação deve ter o endpoint DELETE `post/:id`](#11---sua-aplicação-deve-ter-o-endpoint-delete-postid)
+    - [12 - Sua aplicação deve ter o endpoint DELETE `/user/me`](#12---sua-aplicação-deve-ter-o-endpoint-delete-userme)
+    - [13 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`](#13---sua-aplicação-deve-ter-o-endpoint-get-postsearchqsearchterm)
+- [Avisos Finais](#avisos-finais)
+
+# Habilidades 
+
+Nesse projeto, você vai construir um back-end usando `ORM` com o pacote `sequelize` do `npm`, e será capaz de:
+ - Criar e associar tabelas usando `models` do `sequelize`
+ - Construir endpoints para consumir os models que criar 
+ - Fazer um `CRUD` com o `ORM`
+
+# Entregáveis
+
+Para entregar o seu projeto você deverá criar um Pull Request neste repositório.
+
+Lembre-se que você pode consultar nosso conteúdo sobre [Git & GitHub](https://course.betrybe.com/intro/git/) sempre que precisar!
+
+---
+
+## O que deverá ser desenvolvido
+
+Você vai arquiteturar, desenvolver uma API de um CRUD posts de blog (com o sequelize). Começando pela API, você vai desenvolver alguns endpoints (seguindo os princípios do REST) que estarão conectados ao seu banco de dados. Lembre-se de aplicar os princípios SOLID!
+
+Primeiro, você irá criar uma tabela para os usuários que desejam se cadastrar na aplicação. Após isso, criará também uma tabela de Categorias para seus Posts e por fim a tabela de Posts será seu foco, guardando todas as informações dos posts realizados na plataforma. Essa é apenas uma recomendação!
+
+---
+
+## Desenvolvimento
+
+Você deve desenvolver uma aplicação em `Node.js` usando o pacote `sequelize` para fazer um `CRUD` de posts.
+
+Para fazer um post é necessário usuário e login, portanto será trabalhada a **relação entre** `user` e `post`. Também será necessário a utlização de categorias para seus posts, assim trabalhando a relação de `posts` para `categorias` e de `categorias` para `posts`.
+ 
+### Data de Entrega
+
+  - Projeto individual.
+
+  - Serão `X` dias de projeto.
+
+  - Data de entrega para avaliação final do projeto: `DD/MM/YYYY - 14:00h`.
+
+---
+
+# Instruções para entregar seu projeto:
+
 
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
 1. Clone o repositório
-  * `git clone https://github.com/betrybe/sd-0x-project-blogs-api.git`.
+  * `git clone https://github.com/tryber/sd-0x-project-blogs-api.git`.
   * Entre na pasta do repositório que você acabou de clonar:
     * `cd sd-0x-project-blogs-api`
 
@@ -53,33 +133,68 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
 ---
 
-# Entregáveis
+### DURANTE O DESENVOLVIMENTO
 
-Para entregar o seu projeto você deverá criar um Pull Request neste repositório.
+* Faça `commits` das alterações que você fizer no código regularmente
 
-Lembre-se que você pode consultar nosso conteúdo sobre [Git & GitHub](https://course.betrybe.com/intro/git/) sempre que precisar!
+* Lembre-se de sempre após um (ou alguns) `commits` atualizar o repositório remoto
 
----
-
-## O que deverá ser desenvolvido
-
-Você vai arquiteturar, desenvolver uma API de um CRUD posts de blog (com o sequelize). Começando pela API, você vai desenvolver alguns endpoints (seguindo os principios do REST) que estarão conectados ao seu banco de dados. Lembre-se de aplicar os princípios SOLID!
-
-Primeiro, você irá criar uma tabela para os usuários que desejam se cadastrar na aplicação. Após isso, a tabela blogPost será seu foco, guardando todas as informações dos posts realizados na plataforma. Essa é apenas uma recomendação!
-
----
-
-### Data de Entrega
-
-O projeto tem até a seguinte data: `DD/MM/YYYY - 14:00h`. Para ser entregue a avaliação final.
+* Os comandos que você utilizará com mais frequência são:
+  1. `git status` _(para verificar o que está em vermelho - fora do stage - e o que está em verde - no stage)_
+  2. `git add` _(para adicionar arquivos ao stage do Git)_
+  3. `git commit` _(para criar um commit com os arquivos que estão no stage do Git)_
+  4. `git push -u nome-da-branch` _(para enviar o commit para o repositório remoto na primeira vez que fizer o `push` de uma nova branch)_
+  5. `git push` _(para enviar o commit para o repositório remoto após o passo anterior)_
 
 ---
 
-## Requisitos Obrigatórios:
+### Execução de testes unitários
 
-## ⚠️ Leia-os atentamente e siga à risca o que for pedido. ⚠️
+Vamos usar o Jest para executar os testes, use o comando a seguir para executar todos os testes: 
+
+```sh
+npm test
+```
+
+Caso queria executar só um arquivo de test use o seguinte comando, considerado que quer testar o arquivo `tests/req07-createPost.test.js`:
+
+```sh
+npm test tests/req07-createPost.test.js
+```
+ou
+```
+npm test req07
+```
+
+
+---
+
+# Como desenvolver
+
+## Linter
+
+Para garantir a qualidade do código, usaremos o [ESLint](https://eslint.org/) para fazer a sua análise estática.
+
+Este projeto já vem com as dependências relacionadas ao _linter_ configuradas nos arquivos `package.json` nos seguintes caminhos:
+
+- `sd-0x-project-blogs-api/package.json`
+
+Para poder rodar os `ESLint` em um projeto basta executar o comando `npm install` dentro do projeto e depois `npm run lint`. Se a análise do `ESLint` encontrar problemas no seu código, tais problemas serão mostrados no seu terminal. Se não houver problema no seu código, nada será impresso no seu terminal.
+
+Você também pode instalar o plugin do `ESLint` no `VSCode`, bastar ir em extensions e baixar o [plugin `ESLint`](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+
+⚠ PULL REQUESTS COM ISSUES DE LINTER NÃO SERÃO AVALIADAS. ATENTE-SE PARA RESOLVÊ-LAS ANTES DE FINALIZAR O DESENVOLVIMENTO! ⚠
+
+---
+# Requisitos do projeto:
+
+## Antes de começar:
+
+### ⚠️ Leia-os atentamente e siga à risca o que for pedido. ⚠️
 
 ### 👀 Observações importantes:
+
+Em cada requisito você encontrará uma imagem de um protótipo de como sua aplicação deve ficar. Estilo da página não será avaliado.
 
 O não cumprimento de um requisito, total ou parcialmente, impactará em sua avaliação.
 
@@ -99,26 +214,26 @@ app.get('/', (request, response) => {
 
 ```
 module.exports = {
-  "development": {
-    "username": process.env.MYSQL_USER,
-    "password": process.env.MYSQL_PASSWORD, 
-    "database": 'blogs_api', 
-    "host": process.env.HOSTNAME,
-    "dialect": 'mysql',
+  development: {
+    username: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: 'blogs_api',
+    host: process.env.HOSTNAME,
+    dialect: 'mysql',
   },
-  "test": {
-    "username": process.env.MYSQL_USER,
-    "password": process.env.MYSQL_PASSWORD,
-    "database": 'blogs_api',
-    "host": process.env.HOSTNAME,
-    "dialect": "mysql",
+  test: {
+    username: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: 'blogs_api',
+    host: process.env.HOSTNAME,
+    dialect: 'mysql',
   },
-  "production": {
-    "username": process.env.MYSQL_USER,
-    "password": process.env.MYSQL_PASSWORD,
-    "database": 'blogs_api',
-    "host": process.env.HOSTNAME,
-    "dialect": 'mysql',
+  production: {
+    username: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: 'blogs_api',
+    host: process.env.HOSTNAME,
+    dialect: 'mysql',
   },
 };
 ```
@@ -127,7 +242,7 @@ module.exports = {
 
 **É essencial usar essas 3 variávies no arquivo acima:**
 
-Variáveis:
+#### Variáveis:
 
 `host: process.env.HOSTNAME`
 
@@ -137,34 +252,77 @@ Variáveis:
 
 **Com elas que iremos conseguir conectar ao banco do avaliador automático**
 
+#### Variável JWT (opcional):
+
+`JWT_SECRET`
+
+**Também poderá ser utilizada esta variável de ambiente para o SECRET do JWT**
+
+### Dicas
+
+#### Status HTTP
+
+Tenha em mente que todas as "respostas" devem respeitar os [status do protocolo HTTP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status) com base no que o REST prega.
+
+Alguns exemplos:
+
+  - Requisições que precisam de token mas não o receberam devem retornar um código de `status 401`;
+
+  - Requisições que não seguem o formato pedido pelo servidor devem retornar um código de `status 400`;
+
+  - Um problema inesperado no servidor deve retornar um código de `status 500`;
+
+  - Um acesso ao criar um recurso, no nosso caso usuário ou post, deve retornar um código de `status 201`.
+
+---
+
 #### Os seguintes pontos serão avaliados:
 
 - O seu projeto deverá usar um `ORM` para criar e atualizar o seu banco. A clonagem do projeto seguida de um comando de migrate deve deixá-lo em sua forma esperada.
 
-- Deve conter uma tabela chamada **Users**, contendo os seguinte dados:
+- Deve conter uma tabela chamada **Users**, contendo dados com a seguinte estrutura::
 
   ```json
   {
-    "id": "401465483996",
+    "id": 1,
     "displayName": "Brett Wiltshire",
     "email": "brett@email.com", // tem quer ser único
     "password": "123456",
     "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
   }
   ```
-
-- Deve conter uma tabela chamada **BlogPosts**, contendo os seguinte dados:
+- Deve conter uma tabela chamada **Categories**, contendo dados com a seguinte estrutura::
 
   ```json
   {
-    "id": "7706273476706534553",
+    "id": 18,
+    "name": "News"
+  }
+  ```
+
+- Deve conter uma tabela chamada **PostsCategories**, contendo dados com a seguinte estrutura:
+
+  ```json
+  {
+    "postId": 50,
+    "categoryId": 20
+  }
+  ```
+
+- Deve conter uma tabela chamada **BlogPosts**, contendo dados com a seguinte estrutura::
+
+  ```json
+  {
+    "id": 21,
     "title": "Latest updates, August 1st",
     "content": "The whole text for the blog post goes here in this key",
-    "user_id": "401465483996", // esse é o id que referência usuário que é o autor do post
+    "userId": 14, // esse é o id que referência usuário que é o autor do post
     "published": "2011-08-01T19:58:00.000Z",
     "updated": "2011-08-01T19:58:51.947Z",
   }
   ```
+  
+  **Os dados acima são fictícios, e estão aqui apenas como exemplo**  
 
   **OBS: Os testes irão rodar atráves do seu migrate usando os seguintes comandos:**
 
@@ -176,7 +334,9 @@ Variáveis:
 
   **Então preste bastante atenção se estiver errado o avaliador não irá funcionar**
 
-  **Haverá um arquivo na pasta `/seeders` dentro dela irá conter as querys para inserir no banco `não remova ela o avaliador irá usar ela`.
+  **Haverá um arquivo na pasta `/seeders` dentro dela irá conter as querys para inserir no banco `não remova ela o avaliador irá usar ela`.**
+
+## Lista de Requisitos:
 
 ### 1 - Sua aplicação deve ter o endpoint POST `/user`
 
@@ -190,7 +350,7 @@ Variáveis:
   {
     "displayName": "Brett Wiltshire",
     "email": "brett@email.com",
-    "password": 123456,
+    "password": "123456",
     "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
   }
   ```
@@ -204,7 +364,7 @@ Variáveis:
 
   ```json
   {
-    "message": "Usuário já existe"
+    "message": "User already registered"
   }
   ```
 
@@ -212,9 +372,10 @@ Variáveis:
 
   ```json
   {
-    "token": "token-aqui"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjo1LCJkaXNwbGF5TmFtZSI6InVzdWFyaW8gZGUgdGVzdGUiLCJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsImltYWdlIjoibnVsbCJ9LCJpYXQiOjE2MjAyNDQxODcsImV4cCI6MTYyMDY3NjE4N30.Roc4byj6mYakYqd9LTCozU1hd9k_Vw5IWKGL4hcCVG8"
   }
   ```
+  _O token anterior é fictício_
 
 ### Além disso, as seguintes verificações serão feitas:
 
@@ -291,9 +452,10 @@ Se o usuário cadastrar o campo "email" com um email que já existe, o resultado
 
   ```json
   {
-    "token": "token-aqui"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjo1LCJkaXNwbGF5TmFtZSI6InVzdWFyaW8gZGUgdGVzdGUiLCJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsImltYWdlIjoibnVsbCJ9LCJpYXQiOjE2MjAyNDQxODcsImV4cCI6MTYyMDY3NjE4N30.Roc4byj6mYakYqd9LTCozU1hd9k_Vw5IWKGL4hcCVG8"
   }
   ```
+  _O token anterior é fictício_
 
 ### Além disso, as seguintes verificações serão feitas:
 
@@ -419,33 +581,88 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ![Listar um usuário com token inválido](./public/tokeninvalidoumusuario.png)
 
-### 5 - Sua aplicação deve ter o endpoint DELETE `/user/me`
+### 5 - Sua aplicação deve ter o endpoint POST `/categories`
 
 #### Os seguintes pontos serão avaliados:
 
-- Utilizando o token de autenticação nos headers, o usuário correspondente deve ser apagado.
+- Esse endpoint deve receber uma _Categoria_ no corpo da requisição e criá-la no banco. O corpo da requisição deve ter a seguinte estrutura:
+
+ ```json
+  {
+    "name": "Inovação"
+  }
+  ```
+
+- Caso a Categoria não contenha o `name` a API deve retornar um erro de `status 400`.
+
+- A requisição deve ter o token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
 ### Além disso, as seguintes verificações serão feitas:
 
-**[Será validado que é possível excluir meu usuário com sucesso]**
+**[Será validado que é possível cadastrar uma categoria com sucesso]**
 
-Ao deletar um usuário com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `204`:
+Se cadastrar uma categoria com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `201`:
 
-![Deletar com sucesso](./public/deletarcomsucesso.png)
+![Criar categoria com sucesso](./public/cadastrarCategoria.png)
 
-**[Será validado que não é possivel excluir meu usuário com token inválido]**
+**[Será validado que não é possível cadastrar uma categoria sem o campo name]**
+
+Se ao tentar cadastrar uma categoria sem o campo name o resultado retornado deverá ser conformo exibido abaixo, com um status http 400:
+![Criar categoria com sucesso](./public/cadastrarCategoriaSemName.png)
+
+**[Será validado que não é possível cadastrar uma determinada categoria com o token inválido]**
 
 Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
-![Deletar com token inválido](./public/deletarcomtokeninvalido.png)
+![Cadastrar uma categoria com token inválido](./public/cadastrarcategoriacomtokeninvalido.png)
 
-**[Será validado que não é possivel excluir meu usuário sem o token]**
+**[Será validado que não é possível cadastrar uma determinada categoria sem o token na requisição]**
 
-Se não conter o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+Se o token for inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
 
-![Deletar sem token](./public/deletarsemtoken.png)
+![Cadastrar uma categoria sem token](./public/cadastrarcategoriasemtoken.png)
 
-### 6 - Sua aplicação deve ter o endpoint POST `/post`
+### 6 - Sua aplicação deve ter o endpoint GET `/categories`
+
+#### Os seguintes pontos serão avaliados:
+
+- Esse endpoint deve listar todas as Categorias e retorná-las na seguinte estrutura:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Escola"
+  },
+  {
+    "id": 2,
+    "name": "Inovação"
+  }
+]
+```
+
+Além disso, as seguintes verificações serão feitas:
+[Será validado que é possível listar todas as categoria com sucesso]
+
+Se buscar todas as categorias com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http 200:
+
+![Buscar todas as categoria com sucesso](./public/buscartodascategoriascomsucesso.png)
+
+
+**[Será validado que não é possível listar as categorias com o token inválido]**
+
+Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![Buscar uma categoria com token inválido](./public/buscarcategoriacomtokeninvalido.png)
+
+**[Será validado que não é possível cadastrar uma determinada categoria sem o token na requisição]**
+
+Se o token for inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![Buscar uma categoria sem token](./public/buscarcategoriasemtoken.png)
+
+
+### 7 - Sua aplicação deve ter o endpoint POST `/post`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -454,11 +671,12 @@ Se não conter o token o resultado retornado deverá ser conforme exibido abaixo
   ```json
   {
     "title": "Latest updates, August 1st",
-    "content": "The whole text for the blog post goes here in this key"
+    "content": "The whole text for the blog post goes here in this key",
+    "categoryIds": [1, 2]
   }
   ```
 
-- Caso o post não contenha o `title` e/ou o `content` a API deve retornar um erro de `status 400`.
+- Caso o post não contenha o `title`, `content` ou `categoryIds` a API deve retornar um erro de `status 400`.
 
 - A requisição deve ter o token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
@@ -482,6 +700,19 @@ Se não conter o campo `content` o resultado retornado deverá ser conforme exib
 
 ![blogpost sem content](./public/semcampocontent.png)
 
+**[Será validado que não é possível cadastrar um blogpost sem o campo `categoryIds`]**
+
+Se não conter o campo `categoryIds` o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![blogpost sem categoryId](./public/semcampocategoryid.png)
+
+**[Será validado que não é possível cadastrar um blogpost com uma `categoryIds` inexistente]**
+
+Se o campo `categoryIds` tiver uma categoria inexistente, o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+
+![blogpost categoryId invalida](./public/cadastrarpostcomcategoryidinvalida.png)
+
+
 **[Será validado que não é possível cadastrar um blogpost sem o token]**
 
 Se não conter o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
@@ -494,29 +725,36 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ![blogpost com token inválido](./public/criarposttokeninvalido.png)
 
-### 7 - Sua aplicação deve ter o endpoint GET `/post`
+### 8 - Sua aplicação deve ter o endpoint GET `/post`
 
 #### Os seguintes pontos serão avaliados:
 
 - Esse endpoint deve listar todos os _BlogPosts_ e retorná-los na seguinte estrutura:
 
-  ```json
-  [
-    {
-      "id": "7706273476706534553",
-      "published": "2011-08-01T19:58:00.000Z",
-      "updated": "2011-08-01T19:58:51.947Z",
-      "title": "Latest updates, August 1st",
-      "content": "The whole text for the blog post goes here in this key",
-      "user": { // esse usuário é o autor do post
-        "id": "401465483996",
-        "displayName": "Brett Wiltshire",
-        "email": "brett@email.com",
-        "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
+```json
+[
+  {
+    "id": 1,
+    "title": "Post do Ano",
+    "content": "Melhor post do ano",
+    "userId": 1,
+    "published": "2011-08-01T19:58:00.000Z",
+    "updated": "2011-08-01T19:58:51.000Z",
+    "user": {
+      "id": 1,
+      "displayName": "Lewis Hamilton",
+      "email": "lewishamilton@gmail.com",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2017_Malaysia.jpg"
+    },
+    "categories": [
+      {
+        "id": 1,
+        "name": "Inovação"
       }
-    }
-  ]
-  ```
+    ]
+  }
+]
+```
 
 ### Além disso, as seguintes verificações serão feitas:
 
@@ -538,27 +776,34 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ![blogpost com token inválido](./public/listarposttokeninvalido.png)
 
-### 8 - Sua aplicação deve ter o endpoint GET `post/:id`
+### 9 - Sua aplicação deve ter o endpoint GET `post/:id`
 
 #### Os seguintes pontos serão avaliados:
 
 - Retorna um **BlogPost** com o `id` especificado. O retorno deve ter os seguinte formato:
 
-  ```json
+```json
   {
-    "id": "7706273476706534553",
-    "published": "2011-08-01T19:58:00.000Z",
-    "updated": "2011-08-01T19:58:51.947Z",
-    "title": "Latest updates, August 1st",
-    "content": "The whole text for the blog post goes here in this key",
-    "user": { // esse usuário é o autor do post
-      "id": "401465483996",
-      "displayName": "Brett Wiltshire",
-      "email": "brett@email.com",
-      "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png",
+  "id": 1,
+  "title": "Post do Ano",
+  "content": "Melhor post do ano",
+  "userId": 1,
+  "published": "2011-08-01T19:58:00.000Z",
+  "updated": "2011-08-01T19:58:51.000Z",
+  "user": {
+    "id": 1,
+    "displayName": "Lewis Hamilton",
+    "email": "lewishamilton@gmail.com",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg"
+  },
+  "categories": [
+    {
+      "id": 1,
+      "name": "Inovação"
     }
-  }
-  ```
+  ]
+}
+```
 
 ### Além disso, as seguintes verificações serão feitas:
 
@@ -586,11 +831,15 @@ Se o id do post for inválido o resultado retornado deverá ser conforme exibido
 
 ![Listar um post inexistente](./public/listarumpostinexistente.png)
 
-### 9 - Sua aplicação deve ter o endpoint PUT `/post/:id`
+
+
+### 10 - Sua aplicação deve ter o endpoint PUT `/post/:id`
 
 #### Os seguintes pontos serão avaliados:
 
 - O endpoint deve receber um **BlogPost** que irá sobrescrever o original com o `id` especificado na URL. Só deve ser permitido para o usuário que criou o **BlogPost**.
+
+- A(s) categoria(s) do post **não** podem ser editadas, somente o `title` e `content`.
 
 - O corpo da requisição deve ter a seguinte estrutura:
 
@@ -615,7 +864,16 @@ Se editar um blogpost com sucesso o resultado retornado deverá ser conforme exi
 
 ![blogpost com token inválido](./public/editarpostcomsucesso.png)
 
+**[Será validado que não é possível editar as categorias de um blogpost]**
+
+Só será possível editar o título ou o conteúdo de um post.
+
+![editar com campo categorias](./public/editarpostcomcategorias.png)
+
+
 **[Será validado que não é possível editar um blogpost com outro usuário]**
+
+Somente o usuário que criou o post poderá edita-lo.
 
 ![blogpost com token inválido](./public/editarcomoutrousuario.png)
 
@@ -643,69 +901,7 @@ Se não conter o campo `content` o resultado retornado deverá ser conforme exib
 
 ![blogpost com token inválido](./public/editarsemcontent.png)
 
-### 10  - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`
-
-#### Os seguintes pontos serão avaliados:
-
-- Retorna uma array de **BlogPosts** que contenham em seu título, ou conteúdo, o termo pesquisado no `queryParam` da URL. O retorno deve ter o seguinte formato:
-
-  ```json
-  [
-    {
-      "id": "7706273476706534553",
-      "published": "2011-08-01T19:58:00.000Z",
-      "updated": "2011-08-01T19:58:51.947Z",
-      "title": "Latest updates, August 1st",
-      "content": "The whole text for the blog post goes here in this key",
-      "user": { // esse usuário é o autor do post
-        "id": "401465483996",
-        "displayName": "Brett Wiltshire",
-        "email": "brett@email.com",
-        "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
-      }
-    }
-  ]
-  ```
-
-- Caso nenhum **BlogPost** satisfaça a busca, retorne um array vazio.
-
-### Além disso, as seguintes verificações serão feitas:
-
-**[Será validado que é possível buscar um blogpost pelo `title`]**
-
-Se a buscar for pelo `title` o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
-
-![blogpost com token inválido](./public/buscarpostpelotitle.png)
-
-**[Será validado que é possível buscar um blogpost pelo `content`]**
-
-Se a buscar for pelo `content` o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
-
-![blogpost com token inválido](./public/buscarpostpelocontent.png)
-
-**[Será validado que é possível buscar todos os blogpost quando passa a busca vazia']**
-
-Se a buscar for vazia o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
-
-![blogpost com token inválido](./public/listarpostcampovazio.png)
-
-**[Será validado que é possível buscar um blogpost inexistente e retornar array vazio]**
-
-Se a buscar um post inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
-
-![blogpost com token inválido](./public/listarumpostquenaoexiste.png)
-
-**[Será validado que não é possível buscar um blogpost sem o token]**
-
-Se não contém o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
-
-![blogpost com token inválido](./public/buscarpostsemtoken.png)
-
-**[Será validado que não é possível buscar um blogpost com o token inválido]**
-
-Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
-
-![blogpost com token inválido](./public/buscarpostcomtokeninvalido.png)
+## Requisitos Bônus
 
 ### 11 - Sua aplicação deve ter o endpoint DELETE `post/:id`
 
@@ -751,57 +947,132 @@ Se o token for inválido o resultado retornado deverá ser conforme exibido abai
 
 ![blogpost com token inválido](./public/deletarpostcomtokeninvalido.png)
 
-## Dicas
+### 12 - Sua aplicação deve ter o endpoint DELETE `/user/me`
 
-### Status HTTP
+#### Os seguintes pontos serão avaliados:
 
-Tenha em mente que todas as "respostas" devem respeitar os [status do protocolo HTTP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status) com base no que o REST prega.
+- Utilizando o token de autenticação nos headers, o usuário correspondente deve ser apagado.
 
-Alguns exemplos:
+### Além disso, as seguintes verificações serão feitas:
 
-  - Requisições que precisam de token mas não o receberam devem retornar um código de `status 401`;
+**[Será validado que é possível excluir meu usuário com sucesso]**
 
-  - Requisições que não seguem o formato pedido pelo servidor devem retornar um código de `status 400`;
+Ao deletar um usuário com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http `204`:
 
-  - Um problema inesperado no servidor deve retornar um código de `status 500`;
+![Deletar com sucesso](./public/deletarcomsucesso.png)
 
-  - Um acesso ao criar um recurso, no nosso caso usuário ou post, deve retornar um código de `status 201`.
+**[Será validado que não é possivel excluir meu usuário com token inválido]**
+
+Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![Deletar com token inválido](./public/deletarcomtokeninvalido.png)
+
+**[Será validado que não é possivel excluir meu usuário sem o token]**
+
+Se não conter o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![Deletar sem token](./public/deletarsemtoken.png)
+
+### 13 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTerm`
+
+#### Os seguintes pontos serão avaliados:
+
+- Retorna uma array de **BlogPosts** que contenham em seu título, ou conteúdo, o termo pesquisado no `queryParam` da URL. O retorno deve ter o seguinte formato:
+
+```json
+[
+  {
+    "id": 2,
+    "title": "Vamos que vamos",
+    "content": "Foguete não tem ré",
+    "userId": 1,
+    "published": "2011-08-01T19:58:00.000Z",
+    "updated": "2011-08-01T19:58:51.000Z",
+    "user": {
+      "id": 1,
+      "displayName": "Lewis Hamilton",
+      "email": "lewishamilton@gmail.com",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg"
+    },
+    "categories": [
+      {
+        "id": 2,
+        "name": "Escola"
+      }
+    ]
+  }
+]
+  ```
+
+- Caso nenhum **BlogPost** satisfaça a busca, retorne um array vazio.
+
+### Além disso, as seguintes verificações serão feitas:
+
+**[Será validado que é possível buscar um blogpost pelo `title`]**
+
+Se a buscar for pelo `title` o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+
+![blogpost com token inválido](./public/buscarpostpelotitle.png)
+
+**[Será validado que é possível buscar um blogpost pelo `content`]**
+
+Se a buscar for pelo `content` o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+
+![blogpost com token inválido](./public/buscarpostpelocontent.png)
+
+**[Será validado que é possível buscar todos os blogpost quando passa a busca vazia']**
+
+Se a buscar for vazia o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+
+![blogpost com token inválido](./public/listarpostcampovazio.png)
+
+**[Será validado que é possível buscar um blogpost inexistente e retornar array vazio]**
+
+Se a buscar um post inexistente o resultado retornado deverá ser conforme exibido abaixo, com um status http `200`:
+
+![blogpost com token inválido](./public/listarumpostquenaoexiste.png)
+
+**[Será validado que não é possível buscar um blogpost sem o token]**
+
+Se não contém o token o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/buscarpostsemtoken.png)
+
+**[Será validado que não é possível buscar um blogpost com o token inválido]**
+
+Se o token for inválido o resultado retornado deverá ser conforme exibido abaixo, com um status http `401`:
+
+![blogpost com token inválido](./public/buscarpostcomtokeninvalido.png)
+
+--- 
+
+## Depois de terminar o desenvolvimento
+
+Para **"entregar"** seu projeto, siga os passos a seguir:
+
+* Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas
+  * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**
+  * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**
+  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-0x`
+
+Se ainda houver alguma dúvida sobre como entregar seu projeto, [aqui tem um video explicativo](https://vimeo.com/362189205).
+
+⚠ Lembre-se que garantir que todas as _issues_ comentadas pelo **Lint** estão resolvidas! ⚠
 
 ---
 
-### DURANTE O DESENVOLVIMENTO
+### Revisando um pull request
 
-* Faça `commits` das alterações que você fizer no código regularmente
+À medida que você e as outras pessoas que estudam na Trybe forem entregando os projetos, vocês receberão um alerta via Slack para também fazer a revisão dos Pull Requests dos seus colegas. Fiquem atentos às mensagens do "Pull Reminders" no Slack!
 
-* Lembre-se de sempre após um (ou alguns) `commits` atualizar o repositório remoto
+Use o material que você já viu sobre [Code Review](https://course.betrybe.com/real-life-engineer/code-review/) para te ajudar a revisar os projetos que chegaram para você.
 
-* Os comandos que você utilizará com mais frequência são:
-  1. `git status` _(para verificar o que está em vermelho - fora do stage - e o que está em verde - no stage)_
-  2. `git add` _(para adicionar arquivos ao stage do Git)_
-  3. `git commit` _(para criar um commit com os arquivos que estão no stage do Git)_
-  4. `git push -u nome-da-branch` _(para enviar o commit para o repositório remoto na primeira vez que fizer o `push` de uma nova branch)_
-  5. `git push` _(para enviar o commit para o repositório remoto após o passo anterior)_
+# Avisos Finais
 
----
+Ao finalizar e submeter o projeto, não se esqueça de avaliar sua experiência preenchendo o formulário. Leva menos de 3 minutos!
 
-### DEPOIS DE TERMINAR O DESENVOLVIMENTO (OPCIONAL)
+Link: [FORMULÁRIO DE AVALIAÇÃO DE PROJETO](https://be-trybe.typeform.com/to/ZTeR4IbH)
 
-Para sinalizar que o seu projeto está pronto para o _"Code Review"_ dos seus colegas, faça o seguinte:
-
-* Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas:
-
-  * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**;
-
-  * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**;
-
-  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-0x`.
-
-Caso tenha alguma dúvida, [aqui tem um video explicativo](https://vimeo.com/362189205).
+O avaliador automático não necessariamente avalia seu projeto na ordem em que os requisitos aparecem no readme. Isso acontece para deixar o processo de avaliação mais rápido. Então, não se assuste se isso acontecer, ok?
 
 ---
-
-### REVISANDO UM PULL REQUEST
-
-Use o conteúdo sobre [Code Review](https://course.betrybe.com/real-life-engineer/code-review/) para te ajudar a revisar os _Pull Requests_.
-
-#VQV
